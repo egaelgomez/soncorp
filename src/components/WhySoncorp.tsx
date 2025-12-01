@@ -46,7 +46,7 @@ const WhySoncorp = () => {
           {benefits.map((benefit, index) => (
             <Card
               key={index}
-              className={`border-border bg-card hover:shadow-lg transition-smooth ${
+              className={`border-border bg-card hover:shadow-md transition-smooth ${
                 index >= 3 ? 'md:col-span-1 lg:col-start-2 lg:last:col-start-auto' : ''
               }`}
             >
@@ -68,11 +68,11 @@ const WhySoncorp = () => {
         </div>
 
         {/* Testimonial-style section */}
-        <div className="bg-primary text-primary-foreground rounded-2xl p-8 md:p-12 text-center">
+        <div className="bg-primary text-primary-foreground rounded-2xl p-8 md:p-12 text-center shadow-lg">
           <p className="text-xl md:text-2xl font-semibold mb-4 italic">
             "Trabajar con Soncorp transformó completamente nuestra forma de atender clientes. En 6 meses aumentamos nuestras ventas en un 45%"
           </p>
-          <p className="text-primary-foreground/80">
+          <p className="text-primary-foreground/90">
             — María González, Directora General de Soluciones Tech MX
           </p>
         </div>

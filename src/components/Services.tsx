@@ -74,28 +74,28 @@ const Services = () => {
           {services.map((service, index) => (
             <Card
               key={index}
-              className="border-border hover:shadow-lg transition-smooth hover:-translate-y-1 bg-card"
+              className="border-border hover:shadow-md transition-smooth hover:-translate-y-1 bg-card"
             >
               <CardContent className="p-5 md:p-6">
-                <div className="bg-accent/10 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                  <service.icon className="h-7 w-7 text-accent" />
+                <div className="bg-secondary/10 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                  <service.icon className="h-7 w-7 text-secondary" />
                 </div>
                 <h3 className="text-xl font-semibold text-primary mb-4">
                   {service.title}
                 </h3>
                 
                 {service.painPoints && (
-                  <div className="bg-destructive/5 border-l-4 border-destructive/30 rounded-r-lg p-4 mb-5">
+                  <div className="bg-muted/50 border-l-4 border-muted-foreground/30 rounded-r-lg p-4 mb-5">
                     <div className="flex items-center gap-2 mb-3">
-                      <AlertTriangle className="h-5 w-5 text-destructive" />
-                      <h4 className="font-semibold text-destructive text-sm">
+                      <AlertTriangle className="h-5 w-5 text-muted-foreground" />
+                      <h4 className="font-semibold text-primary text-sm">
                         {service.painPointsTitle}
                       </h4>
                     </div>
                     <ul className="space-y-2">
                       {service.painPoints.map((point, pointIndex) => (
-                        <li key={pointIndex} className="text-sm text-muted-foreground flex items-start">
-                          <X className="h-4 w-4 text-destructive/70 mr-2 mt-0.5 flex-shrink-0" />
+                        <li key={pointIndex} className="text-sm text-foreground flex items-start">
+                          <X className="h-4 w-4 text-muted-foreground mr-2 mt-0.5 flex-shrink-0" />
                           <span>{point}</span>
                         </li>
                       ))}
@@ -112,14 +112,14 @@ const Services = () => {
                 <ul className="space-y-2 mb-5">
                   {service.bullets.map((bullet, bulletIndex) => (
                     <li key={bulletIndex} className="text-muted-foreground leading-relaxed flex items-start">
-                      <span className="text-accent mr-2 mt-1 flex-shrink-0">•</span>
+                      <span className="text-secondary mr-2 mt-1 flex-shrink-0">•</span>
                       <span>{bullet}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="flex items-start gap-2 bg-accent/10 rounded-lg p-3 mt-4">
-                  <Check className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                  <p className="text-sm font-medium text-accent leading-relaxed">
+                <div className="flex items-start gap-2 bg-secondary/10 rounded-lg p-3 mt-4">
+                  <Check className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
+                  <p className="text-sm font-medium text-secondary leading-relaxed">
                     {service.benefit}
                   </p>
                 </div>

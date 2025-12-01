@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import soncorpLogo from "@/assets/soncorp-logo.png";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,9 +35,13 @@ const Navigation = () => {
           {/* Logo */}
           <button
             onClick={() => scrollToSection("inicio")}
-            className="text-2xl md:text-3xl font-bold text-primary hover:text-accent transition-smooth"
+            className="flex-shrink-0 transition-smooth hover:opacity-80"
           >
-            Soncorp
+            <img 
+              src={soncorpLogo} 
+              alt="Soncorp - Consultoría para PYMEs" 
+              className="h-8 md:h-10 w-auto"
+            />
           </button>
 
           {/* Desktop Navigation */}
@@ -61,7 +66,7 @@ const Navigation = () => {
             </button>
             <Button
               onClick={() => scrollToSection("contacto")}
-              className="bg-secondary hover:bg-secondary/90"
+              className="bg-secondary hover:bg-accent-hover text-secondary-foreground"
             >
               Contacto
             </Button>
@@ -101,7 +106,7 @@ const Navigation = () => {
               </button>
               <Button
                 onClick={() => scrollToSection("contacto")}
-                className="bg-secondary hover:bg-secondary/90 w-full"
+                className="bg-secondary hover:bg-accent-hover text-secondary-foreground w-full"
               >
                 Contacto
               </Button>

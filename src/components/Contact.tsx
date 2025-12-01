@@ -130,10 +130,10 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Contact Info Cards */}
           <div className="lg:col-span-1 space-y-4">
-            <Card className="border-border bg-card">
+            <Card className="border-border bg-card shadow-sm">
               <CardContent className="p-6 flex items-start gap-4">
-                <div className="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Mail className="h-6 w-6 text-accent" />
+                <div className="bg-secondary/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Mail className="h-6 w-6 text-secondary" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-primary mb-1">Email</h3>
@@ -142,10 +142,10 @@ const Contact = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-border bg-card">
+            <Card className="border-border bg-card shadow-sm">
               <CardContent className="p-6 flex items-start gap-4">
-                <div className="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Phone className="h-6 w-6 text-accent" />
+                <div className="bg-secondary/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Phone className="h-6 w-6 text-secondary" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-primary mb-1">Teléfono</h3>
@@ -154,10 +154,10 @@ const Contact = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-border bg-card">
+            <Card className="border-border bg-card shadow-sm">
               <CardContent className="p-6 flex items-start gap-4">
-                <div className="bg-accent/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MapPin className="h-6 w-6 text-accent" />
+                <div className="bg-secondary/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <MapPin className="h-6 w-6 text-secondary" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-primary mb-1">Ubicación</h3>
@@ -168,7 +168,7 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <Card className="lg:col-span-2 border-border bg-card">
+          <Card className="lg:col-span-2 border-border bg-card shadow-sm">
             <CardContent className="p-5 md:p-6 lg:p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -249,7 +249,7 @@ const Contact = () => {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full md:w-auto bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8"
+                  className="w-full md:w-auto bg-secondary hover:bg-accent-hover text-secondary-foreground px-8"
                 >
                   {isSubmitting ? (
                     <>
