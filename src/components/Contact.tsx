@@ -108,6 +108,7 @@ const Contact = () => {
         <div className="max-w-md mx-auto mb-12">
           <Button
             onClick={handleWhatsAppClick}
+            aria-label="Contactar por WhatsApp para respuesta rápida"
             className="w-full h-auto py-4 px-6 bg-[#25D366] hover:bg-[#20BA5A] text-white text-base md:text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
             size="lg"
           >
@@ -168,7 +169,7 @@ const Contact = () => {
 
           {/* Contact Form */}
           <Card className="lg:col-span-2 border-border bg-card">
-            <CardContent className="p-6 md:p-8">
+            <CardContent className="p-5 md:p-6 lg:p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>

@@ -121,4 +121,8 @@ All colors MUST be HSL.
   .transition-smooth {
     transition: var(--transition-smooth);
   }
+
+  .section-padding {
+    @apply py-16 md:py-20 lg:py-24;
+  }
 }

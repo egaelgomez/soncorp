@@ -31,7 +31,7 @@ const benefits = [
 
 const WhySoncorp = () => {
   return (
-    <section id="por-que-soncorp" className="py-20 bg-background">
+    <section id="por-que-soncorp" className="section-padding bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
@@ -46,7 +46,9 @@ const WhySoncorp = () => {
           {benefits.map((benefit, index) => (
             <Card
               key={index}
-              className="border-border bg-card hover:shadow-lg transition-smooth"
+              className={`border-border bg-card hover:shadow-lg transition-smooth ${
+                index >= 3 ? 'md:col-span-1 lg:col-start-2 lg:last:col-start-auto' : ''
+              }`}
             >
               <CardContent className="p-6 flex gap-4">
                 <div className="bg-secondary/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">

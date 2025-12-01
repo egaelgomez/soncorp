@@ -24,6 +24,7 @@ const Navigation = () => {
 
   return (
     <nav
+      aria-label="Menú de navegación principal"
       className={`fixed top-0 left-0 right-0 z-50 transition-smooth ${
         isScrolled ? "bg-background/95 backdrop-blur-sm shadow-md" : "bg-transparent"
       }`}

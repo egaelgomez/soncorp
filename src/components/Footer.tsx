@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-2xl font-bold mb-4">Soncorp</h3>
+            <p className="text-2xl font-bold mb-4">Soncorp</p>
             <p className="text-primary-foreground/80 mb-4">
               Consultoría especializada para PYMEs mexicanas. Transformamos negocios con estrategias comprobadas.
             </p>
@@ -17,7 +17,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
+            <p className="text-lg font-semibold mb-4">Enlaces Rápidos</p>
             <ul className="space-y-2">
               <li>
                 <button
@@ -68,7 +68,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Contacto</h4>
+            <p className="text-lg font-semibold mb-4">Contacto</p>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <Mail className="h-5 w-5 mt-0.5 flex-shrink-0" />
