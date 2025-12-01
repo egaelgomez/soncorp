@@ -1,26 +1,31 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle, Award, Users, Zap } from "lucide-react";
+import { Layers, MessageCircle, Briefcase, Wallet, Target } from "lucide-react";
 
 const benefits = [
   {
-    icon: Award,
-    title: "Experiencia Comprobada",
-    description: "Más de 10 años asesorando PYMEs en México con resultados medibles y casos de éxito documentados.",
+    icon: Layers,
+    title: "Enfoque integral",
+    description: "Cliente, procesos, tecnología y marketing: todo en un solo lugar. No necesitas contratar 4 proveedores diferentes.",
   },
   {
-    icon: Users,
-    title: "Enfoque Personalizado",
-    description: "Cada negocio es único. Diseñamos estrategias a la medida de tus necesidades, recursos y objetivos.",
+    icon: MessageCircle,
+    title: "Lenguaje claro",
+    description: "Te explicamos las cosas sin tecnicismos innecesarios. Entenderás cada paso y cada decisión que tomamos juntos.",
   },
   {
-    icon: Zap,
-    title: "Resultados Rápidos",
-    description: "Implementamos soluciones que empiezan a generar resultados visibles desde las primeras semanas.",
+    icon: Briefcase,
+    title: "Experiencia práctica",
+    description: "Conocemos la realidad de las PYMEs mexicanas y también los estándares de empresas grandes. Lo mejor de ambos mundos.",
   },
   {
-    icon: CheckCircle,
-    title: "Metodología Probada",
-    description: "Utilizamos frameworks y herramientas de consultoría reconocidas internacionalmente adaptadas a México.",
+    icon: Wallet,
+    title: "Planes ajustados a tu presupuesto",
+    description: "Empezamos con lo que hoy puedes invertir. Crecemos contigo, sin compromisos que no puedas cumplir.",
+  },
+  {
+    icon: Target,
+    title: "Pensado para resultados",
+    description: "Priorizamos acciones que impactan directamente en ventas, servicio al cliente y reputación. Nada de teoría sin aplicación.",
   },
 ];
 
@@ -37,7 +42,7 @@ const WhySoncorp = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
           {benefits.map((benefit, index) => (
             <Card
               key={index}
