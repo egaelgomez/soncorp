@@ -3,35 +3,84 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle, Lock, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  name: z.string()
+    .trim()
+    .min(2, "El nombre debe tener al menos 2 caracteres")
+    .max(100, "El nombre no puede exceder 100 caracteres"),
+  email: z.string()
+    .trim()
+    .email("Por favor ingresa un correo válido")
+    .max(255, "El email no puede exceder 255 caracteres"),
+  company: z.string()
+    .trim()
+    .max(100, "El nombre de empresa no puede exceder 100 caracteres")
+    .optional(),
+  message: z.string()
+    .trim()
+    .min(10, "El mensaje debe tener al menos 10 caracteres")
+    .max(1000, "El mensaje no puede exceder 1000 caracteres"),
+});
+
+const WHATSAPP_NUMBER = "5215512345678"; // Placeholder
+const WHATSAPP_MESSAGE = encodeURIComponent(
+  "Hola, me interesa una consultoría inicial para mi negocio. ¿Podrían darme más información?"
+);
 
 const Contact = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
     company: "",
     message: "",
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrors({});
+    
+    // Validar con Zod
+    const result = contactSchema.safeParse(formData);
+    
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      result.error.errors.forEach((err) => {
+        if (err.path[0]) {
+          fieldErrors[err.path[0] as string] = err.message;
+        }
+      });
+      setErrors(fieldErrors);
+      return;
+    }
+    
+    setIsSubmitting(true);
     
     // Simulación de envío (aquí se conectaría con un backend real)
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
     toast({
       title: "¡Mensaje enviado!",
-      description: "Nos pondremos en contacto contigo pronto.",
+      description: "Gracias por contactarnos. Te responderemos en menos de 24 horas.",
     });
     
     setFormData({
       name: "",
       email: "",
-      phone: "",
       company: "",
       message: "",
     });
+    setIsSubmitting(false);
+  };
+
+  const handleWhatsAppClick = () => {
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`, "_blank");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -46,11 +95,35 @@ const Contact = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Contáctanos
+            ¿Listo para Mejorar tu Negocio?
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Agenda una consulta gratuita y descubre cómo podemos ayudar a tu negocio a crecer
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Solicita tu consultoría o diagnóstico inicial sin compromiso. 
+            Analizamos tu situación actual y te damos recomendaciones concretas 
+            para mejorar tu atención al cliente, procesos o ventas.
           </p>
+        </div>
+
+        {/* WhatsApp CTA */}
+        <div className="max-w-md mx-auto mb-12">
+          <Button
+            onClick={handleWhatsAppClick}
+            className="w-full h-auto py-4 px-6 bg-[#25D366] hover:bg-[#20BA5A] text-white text-base md:text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+            size="lg"
+          >
+            <MessageCircle className="h-6 w-6 mr-3" />
+            <div className="text-left">
+              <div>Escríbenos por WhatsApp</div>
+              <div className="text-xs font-normal opacity-90">Respuesta en menos de 24 horas</div>
+            </div>
+          </Button>
+        </div>
+
+        {/* Separador */}
+        <div className="flex items-center gap-4 max-w-2xl mx-auto mb-12">
+          <div className="flex-1 h-px bg-border"></div>
+          <span className="text-muted-foreground text-sm">o déjanos un mensaje</span>
+          <div className="flex-1 h-px bg-border"></div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -110,8 +183,11 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Juan Pérez"
-                      className="w-full"
+                      className={errors.name ? "border-destructive" : ""}
                     />
+                    {errors.name && (
+                      <p className="text-destructive text-xs mt-1">{errors.name}</p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
@@ -125,40 +201,30 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="juan@empresa.com"
-                      className="w-full"
+                      className={errors.email ? "border-destructive" : ""}
                     />
+                    {errors.email && (
+                      <p className="text-destructive text-xs mt-1">{errors.email}</p>
+                    )}
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
-                      Teléfono
-                    </label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="+52 55 1234 5678"
-                      className="w-full"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">
-                      Empresa
-                    </label>
-                    <Input
-                      id="company"
-                      name="company"
-                      type="text"
-                      value={formData.company}
-                      onChange={handleChange}
-                      placeholder="Mi Empresa S.A."
-                      className="w-full"
-                    />
-                  </div>
+                <div>
+                  <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">
+                    Empresa (opcional)
+                  </label>
+                  <Input
+                    id="company"
+                    name="company"
+                    type="text"
+                    value={formData.company}
+                    onChange={handleChange}
+                    placeholder="Mi Empresa S.A."
+                    className={errors.company ? "border-destructive" : ""}
+                  />
+                  {errors.company && (
+                    <p className="text-destructive text-xs mt-1">{errors.company}</p>
+                  )}
                 </div>
 
                 <div>
@@ -172,16 +238,35 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Cuéntanos sobre tu negocio y cómo podemos ayudarte..."
-                    className="w-full min-h-[120px]"
+                    className={`w-full min-h-[120px] ${errors.message ? "border-destructive" : ""}`}
                   />
+                  {errors.message && (
+                    <p className="text-destructive text-xs mt-1">{errors.message}</p>
+                  )}
                 </div>
 
                 <Button
                   type="submit"
+                  disabled={isSubmitting}
                   className="w-full md:w-auto bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8"
                 >
-                  Enviar Mensaje
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Enviando...
+                    </>
+                  ) : (
+                    "Enviar Mensaje"
+                  )}
                 </Button>
+
+                <div className="flex items-start gap-2 text-xs text-muted-foreground mt-4">
+                  <Lock className="h-4 w-4 flex-shrink-0 mt-0.5" />
+                  <p>
+                    Tu información será utilizada únicamente para contactarte sobre los servicios de Soncorp. 
+                    No compartimos tus datos con terceros.
+                  </p>
+                </div>
               </form>
             </CardContent>
           </Card>
