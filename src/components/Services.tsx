@@ -1,10 +1,19 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Headphones, TrendingUp, Monitor, Target, Check } from "lucide-react";
+import { Headphones, TrendingUp, Monitor, Target, Check, AlertTriangle, X } from "lucide-react";
 
 const services = [
   {
     icon: Headphones,
     title: "Atención al Cliente y Customer Experience",
+    painPointsTitle: "¿Cómo afecta una mala atención al cliente a tu negocio?",
+    painPoints: [
+      "Ventas perdidas por respuestas lentas o atención fría",
+      "Clientes que se van con la competencia por sentirse ignorados",
+      "Reseñas negativas en internet que espantan a nuevos clientes",
+      "Más quejas y retrabajo para tu equipo",
+      "Desgaste y estrés constante para ti como dueño o director",
+      "Mala reputación que tarda años en reconstruirse",
+    ],
     bullets: [
       "Diagnóstico de la experiencia actual de tu cliente",
       "Implementación de protocolos de atención y seguimiento",
@@ -74,6 +83,32 @@ const Services = () => {
                 <h3 className="text-xl font-semibold text-primary mb-4">
                   {service.title}
                 </h3>
+                
+                {service.painPoints && (
+                  <div className="bg-destructive/5 border-l-4 border-destructive/30 rounded-r-lg p-4 mb-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <AlertTriangle className="h-5 w-5 text-destructive" />
+                      <h4 className="font-semibold text-destructive text-sm">
+                        {service.painPointsTitle}
+                      </h4>
+                    </div>
+                    <ul className="space-y-2">
+                      {service.painPoints.map((point, pointIndex) => (
+                        <li key={pointIndex} className="text-sm text-muted-foreground flex items-start">
+                          <X className="h-4 w-4 text-destructive/70 mr-2 mt-0.5 flex-shrink-0" />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {service.painPoints && (
+                  <p className="text-sm font-medium text-primary mb-3">
+                    Lo que hacemos por ti:
+                  </p>
+                )}
+                
                 <ul className="space-y-2 mb-5">
                   {service.bullets.map((bullet, bulletIndex) => (
                     <li key={bulletIndex} className="text-muted-foreground leading-relaxed flex items-start">
