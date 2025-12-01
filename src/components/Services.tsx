@@ -1,36 +1,50 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, TrendingUp, Settings, Headphones, BarChart3, Target } from "lucide-react";
+import { Headphones, TrendingUp, Monitor, Target, Check } from "lucide-react";
 
 const services = [
   {
     icon: Headphones,
-    title: "Atención al Cliente",
-    description: "Mejoramos la experiencia de tus clientes con estrategias de servicio excepcional que aumentan la fidelización y las recomendaciones.",
+    title: "Atención al Cliente y Customer Experience",
+    bullets: [
+      "Diagnóstico de la experiencia actual de tu cliente",
+      "Implementación de protocolos de atención y seguimiento",
+      "Capacitación a tu equipo en servicio al cliente",
+      "Diseño de encuestas de satisfacción y métricas NPS",
+    ],
+    benefit: "Menos quejas, más clientes que regresan y te recomiendan",
   },
   {
     icon: TrendingUp,
-    title: "Estrategias de Crecimiento",
-    description: "Diseñamos planes de expansión personalizados para escalar tu negocio de forma sostenible y rentable.",
+    title: "Consultoría de Negocios e Inversión",
+    bullets: [
+      "Análisis financiero y diagnóstico de rentabilidad",
+      "Planes de crecimiento y expansión a nuevos mercados",
+      "Asesoría para búsqueda de inversión o crédito",
+      "Optimización de estructura de costos y márgenes",
+    ],
+    benefit: "Decisiones más inteligentes que protegen y hacen crecer tu capital",
   },
   {
-    icon: Settings,
-    title: "Optimización de Procesos",
-    description: "Identificamos y eliminamos ineficiencias para reducir costos y aumentar la productividad de tu equipo.",
-  },
-  {
-    icon: Users,
-    title: "Desarrollo Organizacional",
-    description: "Fortalecemos tu equipo con capacitación y estructuras que mejoran el clima laboral y los resultados.",
-  },
-  {
-    icon: BarChart3,
-    title: "Análisis y Diagnóstico",
-    description: "Evaluamos tu negocio con herramientas especializadas para detectar oportunidades de mejora e inversión.",
+    icon: Monitor,
+    title: "Servicios de IT y Soporte por Tickets",
+    bullets: [
+      "Mesa de ayuda y soporte técnico por tickets",
+      "Administración de infraestructura y servidores",
+      "Implementación de herramientas de productividad",
+      "Seguridad informática y respaldos",
+    ],
+    benefit: "Menos estrés técnico, más tiempo para tu negocio",
   },
   {
     icon: Target,
-    title: "Marketing y Ventas",
-    description: "Implementamos estrategias de marketing digital y ventas que generan más leads y aumentan tus conversiones.",
+    title: "Marketing y Automatización",
+    bullets: [
+      "Estrategias de marketing digital y redes sociales",
+      "Automatización de procesos de venta y seguimiento",
+      "Campañas de email marketing y nutrición de leads",
+      "Análisis de métricas y optimización de conversiones",
+    ],
+    benefit: "Más leads calificados y ventas sin duplicar esfuerzos",
   },
 ];
 
@@ -47,7 +61,7 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {services.map((service, index) => (
             <Card
               key={index}
@@ -57,12 +71,23 @@ const Services = () => {
                 <div className="bg-accent/10 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
                   <service.icon className="h-7 w-7 text-accent" />
                 </div>
-                <h3 className="text-xl font-semibold text-primary mb-3">
+                <h3 className="text-xl font-semibold text-primary mb-4">
                   {service.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {service.description}
-                </p>
+                <ul className="space-y-2 mb-5">
+                  {service.bullets.map((bullet, bulletIndex) => (
+                    <li key={bulletIndex} className="text-muted-foreground leading-relaxed flex items-start">
+                      <span className="text-accent mr-2 mt-1 flex-shrink-0">•</span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex items-start gap-2 bg-accent/10 rounded-lg p-3 mt-4">
+                  <Check className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                  <p className="text-sm font-medium text-accent leading-relaxed">
+                    {service.benefit}
+                  </p>
+                </div>
               </CardContent>
             </Card>
           ))}
