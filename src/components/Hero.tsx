@@ -24,13 +24,19 @@ const Hero = () => {
 
           {/* Main heading */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 animate-in fade-in slide-in-from-bottom-5 duration-700 delay-100">
-            Transformamos tu Negocio con{" "}
-            <span className="text-accent">Estrategias Comprobadas</span>
+            Consultoría integral para PYMEs que quieren{" "}
+            <span className="text-accent">mejorar su atención al cliente</span>{" "}
+            y hacer crecer su negocio
           </h1>
 
           {/* Subheading */}
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
-            Mejoramos tu atención al cliente, optimizamos procesos y aceleramos el crecimiento de tu PYME con soluciones personalizadas y resultados medibles.
+          <p className="text-lg md:text-xl text-muted-foreground mb-4 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
+            En Soncorp te ayudamos a transformar la experiencia de tus clientes, optimizar tus procesos operativos y de TI, e impulsar tu crecimiento con estrategias de marketing y desarrollo de negocios que generan resultados medibles.
+          </p>
+
+          {/* Target audience text */}
+          <p className="text-sm text-muted-foreground/80 mb-8 max-w-xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-700 delay-250">
+            Diseñado especialmente para dueños y directores de PYMEs que buscan resultados tangibles.
           </p>
 
           {/* CTA Buttons */}
@@ -40,7 +46,7 @@ const Hero = () => {
               size="lg"
               className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8"
             >
-              Agenda una Consulta Gratuita
+              Agenda una Consultoría
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button
@@ -52,7 +58,7 @@ const Hero = () => {
               }}
               className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
             >
-              Conoce Nuestros Servicios
+              Ver Servicios
             </Button>
           </div>
 
