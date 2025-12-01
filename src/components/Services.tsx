@@ -59,7 +59,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="servicios" className="py-20 bg-muted/30">
+    <section id="servicios" className="section-padding bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
@@ -76,7 +76,7 @@ const Services = () => {
               key={index}
               className="border-border hover:shadow-lg transition-smooth hover:-translate-y-1 bg-card"
             >
-              <CardContent className="p-6">
+              <CardContent className="p-5 md:p-6">
                 <div className="bg-accent/10 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
                   <service.icon className="h-7 w-7 text-accent" />
                 </div>

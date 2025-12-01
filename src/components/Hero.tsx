@@ -23,7 +23,7 @@ const Hero = () => {
           </div>
 
           {/* Main heading */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 animate-in fade-in slide-in-from-bottom-5 duration-700 delay-100">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight animate-in fade-in slide-in-from-bottom-5 duration-700 delay-100">
             Consultoría integral para PYMEs que quieren{" "}
             <span className="text-accent">mejorar su atención al cliente</span>{" "}
             y hacer crecer su negocio
@@ -63,7 +63,7 @@ const Hero = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 md:gap-8 mt-16 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 mt-16 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500">
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-accent mb-1">+150</div>
               <div className="text-sm md:text-base text-muted-foreground">PYMEs Asesoradas</div>
