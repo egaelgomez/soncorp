@@ -91,7 +91,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contacto" className="py-20 bg-muted/30">
+    <section id="contacto" className="py-20 bg-muted">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
@@ -130,7 +130,7 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Contact Info Cards */}
           <div className="lg:col-span-1 space-y-4">
-            <Card className="border-border bg-card shadow-sm">
+            <Card className="border-border bg-card hover:border-secondary/50 transition-smooth">
               <CardContent className="p-6 flex items-start gap-4">
                 <div className="bg-secondary/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Mail className="h-6 w-6 text-secondary" />
@@ -142,7 +142,7 @@ const Contact = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-border bg-card shadow-sm">
+            <Card className="border-border bg-card hover:border-secondary/50 transition-smooth">
               <CardContent className="p-6 flex items-start gap-4">
                 <div className="bg-secondary/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Phone className="h-6 w-6 text-secondary" />
@@ -154,7 +154,7 @@ const Contact = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-border bg-card shadow-sm">
+            <Card className="border-border bg-card hover:border-secondary/50 transition-smooth">
               <CardContent className="p-6 flex items-start gap-4">
                 <div className="bg-secondary/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
                   <MapPin className="h-6 w-6 text-secondary" />
@@ -168,12 +168,12 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <Card className="lg:col-span-2 border-border bg-card shadow-sm">
+          <Card className="lg:col-span-2 border-border bg-card">
             <CardContent className="p-5 md:p-6 lg:p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                    <label htmlFor="name" className="block text-sm font-medium text-primary mb-2">
                       Nombre completo *
                     </label>
                     <Input
@@ -184,14 +184,14 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Juan Pérez"
-                      className={errors.name ? "border-destructive" : ""}
+                      className={`bg-muted border-border focus:border-secondary ${errors.name ? "border-destructive" : ""}`}
                     />
                     {errors.name && (
                       <p className="text-destructive text-xs mt-1">{errors.name}</p>
                     )}
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-primary mb-2">
                       Email *
                     </label>
                     <Input
@@ -202,7 +202,7 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="juan@empresa.com"
-                      className={errors.email ? "border-destructive" : ""}
+                      className={`bg-muted border-border focus:border-secondary ${errors.email ? "border-destructive" : ""}`}
                     />
                     {errors.email && (
                       <p className="text-destructive text-xs mt-1">{errors.email}</p>
@@ -211,7 +211,7 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor="company" className="block text-sm font-medium text-primary mb-2">
                     Empresa (opcional)
                   </label>
                   <Input
@@ -221,7 +221,7 @@ const Contact = () => {
                     value={formData.company}
                     onChange={handleChange}
                     placeholder="Mi Empresa S.A."
-                    className={errors.company ? "border-destructive" : ""}
+                    className={`bg-muted border-border focus:border-secondary ${errors.company ? "border-destructive" : ""}`}
                   />
                   {errors.company && (
                     <p className="text-destructive text-xs mt-1">{errors.company}</p>
@@ -229,7 +229,7 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor="message" className="block text-sm font-medium text-primary mb-2">
                     Mensaje *
                   </label>
                   <Textarea
@@ -239,7 +239,7 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Cuéntanos sobre tu negocio y cómo podemos ayudarte..."
-                    className={`w-full min-h-[120px] ${errors.message ? "border-destructive" : ""}`}
+                    className={`w-full min-h-[120px] bg-muted border-border focus:border-secondary resize-none ${errors.message ? "border-destructive" : ""}`}
                   />
                   {errors.message && (
                     <p className="text-destructive text-xs mt-1">{errors.message}</p>
@@ -249,7 +249,7 @@ const Contact = () => {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full md:w-auto bg-secondary hover:bg-accent-hover text-secondary-foreground px-8"
+                  className="w-full md:w-auto bg-secondary hover:bg-accent-hover text-secondary-foreground px-8 font-semibold"
                 >
                   {isSubmitting ? (
                     <>
