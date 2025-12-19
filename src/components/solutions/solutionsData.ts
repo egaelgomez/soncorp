@@ -1,4 +1,4 @@
-import { Headphones, TrendingUp, Monitor, Megaphone, LucideIcon } from "lucide-react";
+import { HeartHandshake, TrendingUp, Monitor, Megaphone, LucideIcon } from "lucide-react";
 
 export interface FAQItem {
   question: string;
@@ -42,10 +42,10 @@ export const solutions: Solution[] = [
   {
     id: "cx",
     slug: "customer-experience",
-    icon: Headphones,
-    title: "Customer Experience (CX)",
-    result: "Experiencias consistentes que aumentan lealtad y reducen fricción.",
-    chips: ["Diagnóstico CX", "Estándares + entrenamiento", "Métricas NPS/CSAT"],
+    icon: HeartHandshake,
+    title: "Atención al Cliente",
+    result: "Clientes que regresan, recomiendan y confían en tu marca.",
+    chips: ["Diagnóstico", "Entrenamiento", "Métricas"],
     headline: "Diseñamos experiencias consistentes que reducen fricción y aumentan confianza y lealtad.",
     heroBullets: [
       "Estandarización de atención y experiencia",
