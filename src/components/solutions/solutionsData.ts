@@ -135,31 +135,31 @@ export const solutions: Solution[] = [
   },
   {
     id: "business",
-    slug: "negocio-finanzas-inversion",
+    slug: "consultoria-de-negocios",
     icon: TrendingUp,
-    title: "Negocio, Finanzas e Inversión",
-    result: "Decisiones con números: rentabilidad, costos y crecimiento.",
-    chips: ["Diagnóstico financiero", "Plan de crecimiento", "Prep. inversión"],
-    headline: "Claridad financiera y estrategia para crecer con decisiones respaldadas por datos.",
+    title: "Consultoría de Negocios",
+    result: "Crece con estrategia, orden y ejecución medible.",
+    chips: ["Estrategia", "Procesos", "Ventas"],
+    headline: "Impulsamos el crecimiento rentable de tu empresa con estrategia, procesos y ejecución.",
     heroBullets: [
-      "Diagnóstico y rentabilidad",
-      "Estrategia de crecimiento",
-      "Preparación para inversión/crédito"
+      "Aumento en ventas e ingreso",
+      "Procesos más eficientes",
+      "Prioridades claras para impactar resultados"
     ],
     audiences: ["PyME", "Mid-market", "Enterprise"],
     problems: [
-      "Márgenes bajos o desconocidos",
-      "Costos desordenados o sin control",
-      "Crecimiento sin estrategia clara",
-      "Falta de claridad para invertir o pedir crédito",
-      "Falta de prioridades ejecutables"
+      "Ventas estancadas o impredecibles",
+      "Prospectos se pierden por falta de seguimiento",
+      "Operación desordenada y retrabajo",
+      "Equipo sin claridad de prioridades",
+      "Falta de métricas y control"
     ],
     benefits: [
-      "Visibilidad de números clave",
-      "Priorización de acciones con impacto",
-      "Mejor estructura de costos y precios",
-      "Plan realista por etapas",
-      "Decisiones más rápidas y seguras"
+      "Aumento en ventas e ingreso",
+      "Mejor conversión y seguimiento comercial",
+      "Operación más eficiente y predecible",
+      "Equipo alineado con responsabilidades claras",
+      "Decisiones más rápidas con indicadores simples"
     ],
     scope: [
       {
