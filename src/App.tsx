@@ -10,6 +10,7 @@ import ServicioDetalle from "./pages/ServicioDetalle";
 import CustomerExperiencePage from "./pages/CustomerExperiencePage";
 import ConsultoriaDeNegociosPage from "./pages/ConsultoriaDeNegociosPage";
 import ConsultoriaTIPage from "./pages/ConsultoriaTIPage";
+import MarketingAutomatizacionPage from "./pages/MarketingAutomatizacionPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/servicios/consultoria-de-negocios" element={<ConsultoriaDeNegociosPage />} />
             <Route path="/servicios/negocio-finanzas-inversion" element={<Navigate to="/servicios/consultoria-de-negocios" replace />} />
             <Route path="/servicios/mesa-ingenieria-ti-por-tickets" element={<ConsultoriaTIPage />} />
+            <Route path="/servicios/marketing-automatizacion" element={<MarketingAutomatizacionPage />} />
             <Route path="/servicios/:slug" element={<ServicioDetalle />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

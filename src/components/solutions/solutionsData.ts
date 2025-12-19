@@ -325,9 +325,9 @@ export const solutions: Solution[] = [
     slug: "marketing-automatizacion",
     icon: Megaphone,
     title: "Marketing & Automatización",
-    result: "Más leads con seguimiento automatizado y medible.",
-    chips: ["Contenido + campañas", "Automatización", "Optimización métricas"],
-    headline: "Más visibilidad y leads con campañas y automatización del seguimiento.",
+    result: "Genera más leads y ventas con campañas + automatización.",
+    chips: ["Campañas", "Automatización", "Métricas"],
+    headline: "Genera más leads y ventas con campañas + automatización del seguimiento.",
     heroBullets: [
       "Contenido y campañas en redes",
       "Automatización (ManyChat/flows)",
