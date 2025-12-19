@@ -4,44 +4,38 @@ const whyCards = [
   {
     icon: Target,
     title: "Marco probado",
-    headline: "CX con metodología Six Pillars + estándares operativos.",
-    bullets: ["Diagnóstico + journeys", "Playbooks de resolución"],
-    chip: "Six Pillars",
+    headline: "Metodología + estándares operativos.",
+    chips: ["Six Pillars", "SLAs"],
   },
   {
     icon: BarChart3,
     title: "Resultados medibles",
-    headline: "KPIs desde el día 1 para demostrar avance.",
-    bullets: ["NPS/CSAT/CES", "SLAs, MTTR, backlog"],
-    chip: "Dashboards",
+    headline: "KPIs para demostrar avance.",
+    chips: ["NPS/CSAT", "MTTR"],
   },
   {
     icon: Wrench,
     title: "Ejecución hands-on",
-    headline: "Implementamos con tu equipo, no solo recomendamos.",
-    bullets: ["SOPs + training", "Governance y seguimiento"],
-    chip: "SOPs",
+    headline: "Implementamos contigo, no solo consultamos.",
+    chips: ["Playbooks", "Training"],
   },
   {
     icon: Layers,
-    title: "Enfoque integral",
-    headline: "CX + TI + Marketing + Finanzas: menos proveedores.",
-    bullets: ["Un plan conectado", "Prioridades claras"],
-    chip: "Integral",
+    title: "Visión integral",
+    headline: "CX + TI + Marketing + Finanzas.",
+    chips: ["Menos proveedores"],
   },
   {
     icon: Clock,
     title: "Capacidad flexible",
-    headline: "Soporte por tickets y bolsa de horas para escalar.",
-    bullets: ["Multitecnología", "Operación por SLAs"],
-    chip: "SLAs",
+    headline: "Bolsa de horas para escalar rápido.",
+    chips: ["Ticket-based"],
   },
   {
     icon: Zap,
-    title: "Automatización inteligente",
-    headline: "Automatizamos lo repetitivo para liberar tiempo.",
-    bullets: ["ManyChat/flows", "Optimización continua"],
-    chip: "Automation",
+    title: "Automatización",
+    headline: "Menos trabajo repetitivo, más velocidad.",
+    chips: ["Flows", "Bots"],
   },
 ];
 
@@ -59,8 +53,8 @@ const WhySoncorp = () => {
           </p>
         </div>
 
-        {/* 6 Cards Grid: 2x3 on desktop, 2x3 on tablet, 1 col on mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+        {/* 6 Cards Grid: 3 cols desktop, 2 cols tablet, 1 col mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 max-w-5xl mx-auto">
           {whyCards.map((card, index) => {
             const Icon = card.icon;
             return (
@@ -68,16 +62,14 @@ const WhySoncorp = () => {
                 key={index}
                 className="group relative p-6 rounded-xl bg-card border border-border hover:border-secondary/40 transition-all duration-300 hover:shadow-lg hover:shadow-secondary/5 hover:-translate-y-0.5"
               >
-                {/* Icon & Title row */}
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-secondary/10 group-hover:bg-secondary/20 transition-colors">
-                    <Icon className="h-5 w-5 text-secondary" />
+                {/* Icon & Title */}
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-secondary/10 group-hover:bg-secondary/20 transition-colors">
+                    <Icon className="h-4 w-4 text-secondary" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {card.title}
-                    </h3>
-                  </div>
+                  <h3 className="text-base font-semibold text-foreground">
+                    {card.title}
+                  </h3>
                 </div>
 
                 {/* Headline */}
@@ -85,24 +77,16 @@ const WhySoncorp = () => {
                   {card.headline}
                 </p>
 
-                {/* Bullets */}
-                <ul className="space-y-2 mb-5">
-                  {card.bullets.map((bullet, idx) => (
-                    <li
+                {/* Chips */}
+                <div className="flex flex-wrap gap-2">
+                  {card.chips.map((chip, idx) => (
+                    <span
                       key={idx}
-                      className="flex items-center gap-2 text-sm text-muted-foreground"
+                      className="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full bg-muted text-muted-foreground border border-border"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-secondary flex-shrink-0" />
-                      {bullet}
-                    </li>
+                      {chip}
+                    </span>
                   ))}
-                </ul>
-
-                {/* Chip */}
-                <div className="pt-4 border-t border-border">
-                  <span className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-muted text-muted-foreground border border-border">
-                    {card.chip}
-                  </span>
                 </div>
               </article>
             );
