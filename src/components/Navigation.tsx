@@ -27,7 +27,7 @@ const Navigation = () => {
     <nav
       aria-label="Menú de navegación principal"
       className={`fixed top-0 left-0 right-0 z-50 transition-smooth ${
-        isScrolled ? "bg-background/95 backdrop-blur-sm shadow-md" : "bg-transparent"
+        isScrolled ? "bg-background/95 backdrop-blur-md border-b border-border shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -48,25 +48,25 @@ const Navigation = () => {
           <div className="hidden md:flex items-center gap-8">
             <button
               onClick={() => scrollToSection("inicio")}
-              className="text-foreground hover:text-accent transition-smooth font-medium"
+              className="text-foreground/80 hover:text-secondary transition-smooth font-medium"
             >
               Inicio
             </button>
             <button
               onClick={() => scrollToSection("servicios")}
-              className="text-foreground hover:text-accent transition-smooth font-medium"
+              className="text-foreground/80 hover:text-secondary transition-smooth font-medium"
             >
               Servicios
             </button>
             <button
               onClick={() => scrollToSection("por-que-soncorp")}
-              className="text-foreground hover:text-accent transition-smooth font-medium"
+              className="text-foreground/80 hover:text-secondary transition-smooth font-medium"
             >
               ¿Por qué Soncorp?
             </button>
             <Button
               onClick={() => scrollToSection("contacto")}
-              className="bg-secondary hover:bg-accent-hover text-secondary-foreground"
+              className="bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold"
             >
               Contacto
             </Button>
@@ -75,7 +75,7 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-foreground hover:text-accent transition-smooth"
+            className="md:hidden text-foreground hover:text-secondary transition-smooth"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -84,29 +84,29 @@ const Navigation = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-background border-t border-border">
+          <div className="md:hidden bg-card/95 backdrop-blur-md border-t border-border">
             <div className="flex flex-col gap-4 p-4">
               <button
                 onClick={() => scrollToSection("inicio")}
-                className="text-left text-foreground hover:text-accent transition-smooth font-medium py-2"
+                className="text-left text-foreground/80 hover:text-secondary transition-smooth font-medium py-2"
               >
                 Inicio
               </button>
               <button
                 onClick={() => scrollToSection("servicios")}
-                className="text-left text-foreground hover:text-accent transition-smooth font-medium py-2"
+                className="text-left text-foreground/80 hover:text-secondary transition-smooth font-medium py-2"
               >
                 Servicios
               </button>
               <button
                 onClick={() => scrollToSection("por-que-soncorp")}
-                className="text-left text-foreground hover:text-accent transition-smooth font-medium py-2"
+                className="text-left text-foreground/80 hover:text-secondary transition-smooth font-medium py-2"
               >
                 ¿Por qué Soncorp?
               </button>
               <Button
                 onClick={() => scrollToSection("contacto")}
-                className="bg-secondary hover:bg-accent-hover text-secondary-foreground w-full"
+                className="bg-secondary text-secondary-foreground hover:bg-accent-hover w-full font-semibold"
               >
                 Contacto
               </Button>

@@ -59,7 +59,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="servicios" className="section-padding bg-muted/30">
+    <section id="servicios" className="section-padding bg-muted">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
@@ -74,7 +74,7 @@ const Services = () => {
           {services.map((service, index) => (
             <Card
               key={index}
-              className="border-border hover:shadow-md transition-smooth hover:-translate-y-1 bg-card"
+              className="border-border hover:border-secondary/50 transition-smooth hover:-translate-y-1 bg-card hover:shadow-lg hover:shadow-secondary/5"
             >
               <CardContent className="p-5 md:p-6">
                 <div className="bg-secondary/10 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
@@ -85,7 +85,7 @@ const Services = () => {
                 </h3>
                 
                 {service.painPoints && (
-                  <div className="bg-muted/50 border-l-4 border-muted-foreground/30 rounded-r-lg p-4 mb-5">
+                  <div className="bg-muted/80 border-l-4 border-secondary/30 rounded-r-lg p-4 mb-5">
                     <div className="flex items-center gap-2 mb-3">
                       <AlertTriangle className="h-5 w-5 text-muted-foreground" />
                       <h4 className="font-semibold text-primary text-sm">
@@ -94,8 +94,8 @@ const Services = () => {
                     </div>
                     <ul className="space-y-2">
                       {service.painPoints.map((point, pointIndex) => (
-                        <li key={pointIndex} className="text-sm text-foreground flex items-start">
-                          <X className="h-4 w-4 text-muted-foreground mr-2 mt-0.5 flex-shrink-0" />
+                        <li key={pointIndex} className="text-sm text-muted-foreground flex items-start">
+                          <X className="h-4 w-4 text-muted-foreground/60 mr-2 mt-0.5 flex-shrink-0" />
                           <span>{point}</span>
                         </li>
                       ))}

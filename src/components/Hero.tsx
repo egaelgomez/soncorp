@@ -10,14 +10,14 @@ const Hero = () => {
   };
 
   return (
-    <section id="inicio" className="relative min-h-screen flex items-center pt-16 md:pt-20 bg-background">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-muted/50 to-background"></div>
+    <section id="inicio" className="relative min-h-screen flex items-center pt-16 md:pt-20 hero-gradient">
+      {/* Background gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/30"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-4 py-2 rounded-full mb-6 border border-secondary/20 animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-4 py-2 rounded-full mb-6 border border-secondary/30 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <TrendingUp className="h-4 w-4" />
             <span className="text-sm font-medium">Consultoría Especializada para PYMEs</span>
           </div>
@@ -25,7 +25,7 @@ const Hero = () => {
           {/* Main heading */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight animate-in fade-in slide-in-from-bottom-5 duration-700 delay-100">
             Consultoría integral para PYMEs que quieren{" "}
-            <span className="text-secondary">mejorar su atención al cliente</span>{" "}
+            <span className="text-secondary silver-text-glow">mejorar su atención al cliente</span>{" "}
             y hacer crecer su negocio
           </h1>
 
@@ -44,7 +44,7 @@ const Hero = () => {
             <Button
               onClick={scrollToContact}
               size="lg"
-              className="bg-secondary hover:bg-accent-hover text-secondary-foreground px-8"
+              className="bg-secondary hover:bg-accent-hover text-secondary-foreground px-8 silver-glow font-semibold"
             >
               Agenda una Consultoría
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -56,7 +56,7 @@ const Hero = () => {
                 const element = document.getElementById("servicios");
                 if (element) element.scrollIntoView({ behavior: "smooth" });
               }}
-              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+              className="border-2 border-secondary/50 text-secondary hover:bg-secondary/10 hover:border-secondary"
             >
               Ver Servicios
             </Button>
