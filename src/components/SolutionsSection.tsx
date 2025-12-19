@@ -1,9 +1,15 @@
 import { ArrowRight, Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
 import { solutions } from "./solutions/solutionsData";
 import Chip from "./solutions/Chip";
 import { Button } from "./ui/button";
 
 const SolutionsSection = () => {
+  const scrollToContact = () => {
+    const element = document.getElementById("contacto");
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section id="servicios" className="section-padding bg-muted/20">
       <div className="container mx-auto px-4">
@@ -43,19 +49,20 @@ const SolutionsSection = () => {
 
                 {/* Chips */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                {solution.chips.map((chip, idx) => (
+                  {solution.chips.map((chip, idx) => (
                     <Chip key={idx}>{chip}</Chip>
                   ))}
                 </div>
 
                 {/* CTA */}
-                <button
+                <Link
+                  to={`/servicios/${solution.slug}`}
                   className="inline-flex items-center gap-1.5 text-sm font-medium text-secondary hover:text-secondary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded"
                   aria-label={`Ver detalles de ${solution.title}`}
                 >
                   Ver detalles
                   <ArrowRight className="h-3.5 w-3.5" />
-                </button>
+                </Link>
               </article>
             );
           })}
@@ -68,13 +75,15 @@ const SolutionsSection = () => {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button size="lg" className="gap-2">
+          <Button size="lg" className="gap-2" onClick={scrollToContact}>
             <Calendar className="h-4 w-4" />
             Agendar llamada
           </Button>
-          <Button variant="outline" size="lg" className="gap-2">
-            Ver todos los servicios
-            <ArrowRight className="h-4 w-4" />
+          <Button variant="outline" size="lg" className="gap-2" asChild>
+            <Link to="/servicios">
+              Ver todos los servicios
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </Button>
         </div>
       </div>
