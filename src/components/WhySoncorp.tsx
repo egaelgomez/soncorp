@@ -1,31 +1,47 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Layers, MessageCircle, Briefcase, Wallet, Target } from "lucide-react";
+import { Target, BarChart3, Wrench, Layers, Clock, Zap } from "lucide-react";
 
-const benefits = [
+const whyCards = [
+  {
+    icon: Target,
+    title: "Marco probado",
+    headline: "CX con metodología Six Pillars + estándares operativos.",
+    bullets: ["Diagnóstico + journeys", "Playbooks de resolución"],
+    chip: "Six Pillars",
+  },
+  {
+    icon: BarChart3,
+    title: "Resultados medibles",
+    headline: "KPIs desde el día 1 para demostrar avance.",
+    bullets: ["NPS/CSAT/CES", "SLAs, MTTR, backlog"],
+    chip: "Dashboards",
+  },
+  {
+    icon: Wrench,
+    title: "Ejecución hands-on",
+    headline: "Implementamos con tu equipo, no solo recomendamos.",
+    bullets: ["SOPs + training", "Governance y seguimiento"],
+    chip: "SOPs",
+  },
   {
     icon: Layers,
     title: "Enfoque integral",
-    description: "Cliente, procesos, tecnología y marketing: todo en un solo lugar. No necesitas contratar 4 proveedores diferentes.",
+    headline: "CX + TI + Marketing + Finanzas: menos proveedores.",
+    bullets: ["Un plan conectado", "Prioridades claras"],
+    chip: "Integral",
   },
   {
-    icon: MessageCircle,
-    title: "Lenguaje claro",
-    description: "Te explicamos las cosas sin tecnicismos innecesarios. Entenderás cada paso y cada decisión que tomamos juntos.",
+    icon: Clock,
+    title: "Capacidad flexible",
+    headline: "Soporte por tickets y bolsa de horas para escalar.",
+    bullets: ["Multitecnología", "Operación por SLAs"],
+    chip: "SLAs",
   },
   {
-    icon: Briefcase,
-    title: "Experiencia práctica",
-    description: "Conocemos la realidad de las PYMEs mexicanas y también los estándares de empresas grandes. Lo mejor de ambos mundos.",
-  },
-  {
-    icon: Wallet,
-    title: "Planes ajustados a tu presupuesto",
-    description: "Empezamos con lo que hoy puedes invertir. Crecemos contigo, sin compromisos que no puedas cumplir.",
-  },
-  {
-    icon: Target,
-    title: "Pensado para resultados",
-    description: "Priorizamos acciones que impactan directamente en ventas, servicio al cliente y reputación. Nada de teoría sin aplicación.",
+    icon: Zap,
+    title: "Automatización inteligente",
+    headline: "Automatizamos lo repetitivo para liberar tiempo.",
+    bullets: ["ManyChat/flows", "Optimización continua"],
+    chip: "Automation",
   },
 ];
 
@@ -33,48 +49,64 @@ const WhySoncorp = () => {
   return (
     <section id="por-que-soncorp" className="section-padding bg-background">
       <div className="container mx-auto px-4">
+        {/* Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            ¿Por qué Elegir Soncorp?
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            ¿Por qué elegir Soncorp?
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Somos el socio estratégico que tu PYME necesita para alcanzar el siguiente nivel
+            Método, ejecución y métricas. No teoría.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
-          {benefits.map((benefit, index) => (
-            <Card
-              key={index}
-              className={`border-border bg-card hover:border-secondary/50 hover:shadow-lg hover:shadow-secondary/5 transition-smooth ${
-                index >= 3 ? 'md:col-span-1 lg:col-start-2 lg:last:col-start-auto' : ''
-              }`}
-            >
-              <CardContent className="p-6 flex gap-4">
-                <div className="bg-secondary/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <benefit.icon className="h-6 w-6 text-secondary" />
+        {/* 6 Cards Grid: 2x3 on desktop, 2x3 on tablet, 1 col on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+          {whyCards.map((card, index) => {
+            const Icon = card.icon;
+            return (
+              <article
+                key={index}
+                className="group relative p-6 rounded-xl bg-card border border-border hover:border-secondary/40 transition-all duration-300 hover:shadow-lg hover:shadow-secondary/5 hover:-translate-y-0.5"
+              >
+                {/* Icon & Title row */}
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-secondary/10 group-hover:bg-secondary/20 transition-colors">
+                    <Icon className="h-5 w-5 text-secondary" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {card.title}
+                    </h3>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-primary mb-2">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {benefit.description}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
 
-        {/* Testimonial-style section */}
-        <div className="bg-card border border-secondary/30 rounded-2xl p-8 md:p-12 text-center silver-glow">
-          <p className="text-xl md:text-2xl font-semibold mb-4 italic text-primary">
-            "Trabajar con Soncorp transformó completamente nuestra forma de atender clientes. En 6 meses aumentamos nuestras ventas en un 45%"
-          </p>
-          <p className="text-secondary font-medium">
-            — María González, Directora General de Soluciones Tech MX
-          </p>
+                {/* Headline */}
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                  {card.headline}
+                </p>
+
+                {/* Bullets */}
+                <ul className="space-y-2 mb-5">
+                  {card.bullets.map((bullet, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-center gap-2 text-sm text-muted-foreground"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-secondary flex-shrink-0" />
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Chip */}
+                <div className="pt-4 border-t border-border">
+                  <span className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-muted text-muted-foreground border border-border">
+                    {card.chip}
+                  </span>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
