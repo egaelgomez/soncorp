@@ -31,52 +31,13 @@ const Hero = () => {
 
           {/* Subheading */}
           <p className="text-lg md:text-xl text-muted-foreground mb-4 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
-            En Soncorp te ayudamos a transformar la experiencia de tus clientes, optimizar tus procesos operativos y de TI, e impulsar tu crecimiento con estrategias de marketing y desarrollo de negocios que generan resultados medibles.
+            En Soncorp le ayudamos a transformar la experiencia de sus clientes, optimizar sus procesos operativos y de TI, e impulsar su crecimiento con estrategias de marketing y desarrollo de negocios orientadas a resultados.
           </p>
 
           {/* Target audience text */}
           <p className="text-sm text-muted-foreground/80 mb-8 max-w-xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-700 delay-250">
-            Diseñado especialmente para dueños y directores de PYMEs que buscan resultados tangibles.
+            Para dueños y directores de empresas que buscan resultados tangibles.
           </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-in fade-in slide-in-from-bottom-7 duration-700 delay-300">
-            <Button
-              onClick={scrollToContact}
-              size="lg"
-              className="bg-secondary hover:bg-accent-hover text-secondary-foreground px-8 silver-glow font-semibold"
-            >
-              Agenda una Consultoría
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => {
-                const element = document.getElementById("servicios");
-                if (element) element.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="border-2 border-secondary/50 text-secondary hover:bg-secondary/10 hover:border-secondary"
-            >
-              Ver Servicios
-            </Button>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 mt-16 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500">
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-secondary mb-1">+150</div>
-              <div className="text-sm md:text-base text-muted-foreground">PYMEs Asesoradas</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-secondary mb-1">95%</div>
-              <div className="text-sm md:text-base text-muted-foreground">Satisfacción</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-secondary mb-1">+40%</div>
-              <div className="text-sm md:text-base text-muted-foreground">Crecimiento Promedio</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

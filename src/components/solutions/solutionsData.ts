@@ -43,8 +43,8 @@ export const solutions: Solution[] = [
     id: "cx",
     slug: "customer-experience",
     icon: HeartHandshake,
-    title: "Atención al Cliente",
-    result: "Clientes que regresan, recomiendan y confían en tu marca.",
+    title: "Customer Experience",
+    result: "Mejore la retención, satisfacción y recomendación de sus clientes.",
     chips: ["Diagnóstico", "Entrenamiento", "Métricas"],
     headline: "Diseñamos experiencias consistentes que reducen fricción y aumentan confianza y lealtad.",
     heroBullets: [

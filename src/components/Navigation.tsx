@@ -58,6 +58,12 @@ const Navigation = () => {
             >
               Servicios
             </button>
+            <a
+              href="/servicios/customer-experience"
+              className="text-foreground/80 hover:text-secondary transition-smooth font-medium"
+            >
+              Soncorp CX
+            </a>
             <button
               onClick={() => scrollToSection("por-que-soncorp")}
               className="text-foreground/80 hover:text-secondary transition-smooth font-medium"
@@ -98,6 +104,13 @@ const Navigation = () => {
               >
                 Servicios
               </button>
+              <a
+                href="/servicios/customer-experience"
+                className="text-left text-foreground/80 hover:text-secondary transition-smooth font-medium py-2 block"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Soncorp CX
+              </a>
               <button
                 onClick={() => scrollToSection("por-que-soncorp")}
                 className="text-left text-foreground/80 hover:text-secondary transition-smooth font-medium py-2"
