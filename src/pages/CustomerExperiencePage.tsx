@@ -19,6 +19,12 @@ import {
   Star,
   HandshakeIcon,
   ChevronRight,
+  BookOpen,
+  MessageCircle,
+  Handshake,
+  ArrowDownToLine,
+  RefreshCw,
+  Network,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -58,6 +64,8 @@ const faqItems = [
   { question: "¿Ofrecen capacitación en atención al cliente y Customer Experience?", answer: "Sí. La capacitación y el desarrollo de cultura de servicio son parte fundamental de nuestro enfoque de Experiencia del Cliente." },
   { question: "¿Cómo se define el alcance de un proyecto de CX?", answer: "En la asesoría inicial capturamos su situación actual, objetivos y recursos disponibles. Con esa información se presenta una propuesta de alcance y honorarios." },
   { question: "¿Cuál es la inversión en consultoría de Customer Experience?", answer: "Los honorarios se definen según el alcance y complejidad de cada proyecto. Después de la asesoría inicial se presenta una propuesta formal." },
+  { question: "¿Incluye capacitación para personal de atención al cliente?", answer: "Sí. Nuestro enfoque incluye entrenamiento y coaching para las personas que tienen contacto directo con clientes. Trabajamos guiones, estándares, manejo de objeciones, empatía y comunicación profesional, adaptados a los canales y contexto de su organización." },
+  { question: "¿También aplica para cliente interno (áreas que se atienden entre sí)?", answer: "Sí. La coordinación entre áreas impacta directamente en la experiencia del cliente externo. Incluimos entrenamiento en comunicación inter-áreas, reducción de handoffs innecesarios y estándares de colaboración interna." },
 ];
 
 const faqSchema = {
@@ -279,7 +287,7 @@ const CustomerExperiencePage = () => {
             Qué hacemos: más allá de la atención al cliente
           </h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-            La atención al cliente es fundamental, pero la Experiencia del Cliente (CX) va más allá: conecta procesos, personas, métricas y cultura para transformar cada interacción de forma sostenible.
+            La atención al cliente es fundamental, pero la Experiencia del Cliente (CX) va más allá: conecta procesos, personas, métricas y cultura para transformar cada interacción de forma sostenible. La atención al cliente es parte de la Experiencia del Cliente; por ello, además de procesos y medición, trabajamos con entrenamiento y estándares de atención.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {solutions.map((s, idx) => {
@@ -382,8 +390,64 @@ const CustomerExperiencePage = () => {
         </div>
       </section>
 
-      {/* PAQUETES */}
+      {/* ENTRENAMIENTO */}
       <section className="py-20 bg-muted/20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 bg-secondary/10 px-4 py-1.5 rounded-full border border-secondary/20 mb-6">
+                <GraduationCap className="h-4 w-4 text-secondary" />
+                <span className="text-xs font-medium text-secondary uppercase tracking-wider">Capacitación</span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                Entrenamiento para equipos de contacto con clientes
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Capacitación y coaching para fortalecer habilidades, consistencia y criterios de atención en cada interacción, tanto con cliente externo como interno.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                { icon: BookOpen, title: "Guiones y estándares de servicio", desc: "Tono, protocolos y escalamiento definidos para cada canal y punto de contacto." },
+                { icon: MessageCircle, title: "Manejo de objeciones y conversaciones difíciles", desc: "Técnicas para responder con profesionalismo y convertir situaciones complejas en oportunidades." },
+                { icon: Handshake, title: "Empatía y comunicación profesional", desc: "Habilidades para la interacción presencial, telefónica y por chat con enfoque en el cliente." },
+                { icon: RefreshCw, title: "Resolución y recuperación del servicio", desc: "Service recovery: cómo actuar cuando algo falla para restaurar la confianza del cliente." },
+                { icon: ArrowDownToLine, title: "Reducción de esfuerzo del cliente", desc: "Simplificación de pasos y handoffs para que el cliente resuelva con menos fricción." },
+                { icon: Network, title: "Coordinación inter-áreas (cliente interno)", desc: "Estándares de colaboración entre departamentos para evitar fricción y mejorar la experiencia global." },
+              ].map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <div key={idx} className="p-5 rounded-xl bg-card border border-border/50 hover:border-secondary/30 transition-colors group">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-9 h-9 rounded-lg bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
+                        <Icon className="h-4 w-4 text-secondary" />
+                      </div>
+                      <h3 className="font-semibold text-foreground text-sm">{item.title}</h3>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="text-center mt-10">
+              <Button
+                size="lg"
+                onClick={() => {
+                  trackEvent("cta_click", "cx_training_cta_click");
+                  document.getElementById("cta-final")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="gap-2 bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold"
+              >
+                Solicitar información de entrenamiento
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PAQUETES */}
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center">
             Opciones de servicio
@@ -393,9 +457,9 @@ const CustomerExperiencePage = () => {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl mx-auto">
             {[
-              { name: "Diagnóstico CX", desc: "Punto de partida rápido. Evaluación inicial de la experiencia actual, identificación de oportunidades y recomendaciones prioritarias.", tag: "Punto de partida" },
-              { name: "Plan CX", desc: "Ruta de mejora estructurada. Priorización de acciones, estándares de servicio y hoja de ruta con hitos claros.", tag: "Ruta de mejora" },
-              { name: "Acompañamiento CX", desc: "Implementación guiada por etapas. Ejecución junto a su equipo, capacitación, medición y mejora continua.", tag: "Implementación" },
+              { name: "Diagnóstico CX", desc: "Evaluación inicial de la experiencia actual, identificación de oportunidades, recomendaciones prioritarias e identificación de brechas de capacitación y consistencia.", tag: "Punto de partida" },
+              { name: "Plan CX", desc: "Priorización de acciones, estándares de servicio, hoja de ruta con hitos claros, plan de entrenamiento por roles y playbooks de atención.", tag: "Ruta de mejora" },
+              { name: "Acompañamiento CX", desc: "Implementación guiada por etapas junto a su equipo, coaching por etapas con observación y retroalimentación, medición y mejora continua.", tag: "Implementación" },
             ].map((pkg, idx) => (
               <div key={idx} className={`p-6 rounded-xl border transition-colors ${idx === 1 ? "bg-gradient-to-br from-secondary/15 to-secondary/5 border-secondary/30" : "bg-card border-border/50 hover:border-secondary/30"}`}>
                 <span className="inline-block text-xs font-medium text-secondary bg-secondary/10 px-3 py-1 rounded-full mb-4">{pkg.tag}</span>
@@ -517,14 +581,14 @@ const CustomerExperiencePage = () => {
                   </div>
                 </div>
                 <div>
-                  <label className={labelClass}>Principal reto *</label>
+                  <label className={labelClass}>¿Qué desea mejorar? *</label>
                   <select className={inputClass} value={formData.reto} onChange={(e) => updateField("reto", e.target.value)}>
                     <option value="">Seleccione</option>
-                    <option value="quejas">Quejas recurrentes / baja retención</option>
-                    <option value="inconsistencia">Inconsistencia en el servicio</option>
-                    <option value="metricas">Falta de métricas y medición</option>
-                    <option value="capacitacion">Capacitación y cultura de servicio</option>
-                    <option value="procesos">Procesos desordenados / retrabajo</option>
+                    <option value="atencion">Atención al cliente / servicio</option>
+                    <option value="procesos">Procesos y tiempos de respuesta</option>
+                    <option value="cliente-interno">Cliente interno (colaboración entre áreas)</option>
+                    <option value="metricas">Medición y métricas (NPS/CSAT/CES)</option>
+                    <option value="entrenamiento">Entrenamiento y estandarización</option>
                     <option value="otro">Otro</option>
                   </select>
                   {errors.reto && <p className={errorClass}>{errors.reto}</p>}
