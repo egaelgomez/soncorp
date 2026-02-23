@@ -1,62 +1,74 @@
 
 
-## Plan: Ajuste de terminologia CX + atencion al cliente en la landing
+## Plan: Optimizacion final de conversion y SEO en /servicios/customer-experience
 
 Archivo unico a modificar: `src/pages/CustomerExperiencePage.tsx`
 
 ---
 
-### Cambios puntuales (9 ediciones en el mismo archivo)
+### Cambios (4 ediciones puntuales)
 
-**1. Meta tags SEO (lineas 179-180)**
-- Title: `Consultoria en Experiencia del Cliente (Customer Experience) | Soncorp CX`
-- Description: incluir variantes "experiencia del cliente", "customer experience", "atencion al cliente", "mejora de atencion al cliente"
+**1. CTA de Entrenamiento - texto + scroll con preseleccion (lineas 433-444)**
 
-**2. Schema Organization (linea 78)**
-- Description: `Consultoria especializada en Experiencia del Cliente (Customer Experience, CX) y mejora de atencion al cliente para empresas en Mexico.`
+Cambiar el texto del boton de "Solicitar informacion de entrenamiento" a **"Agendar asesoria inicial de entrenamiento"**.
 
-**3. Breadcrumb (linea 196)**
-- Cambiar "Customer Experience" a "Experiencia del Cliente (CX)"
+Modificar el onClick para que, ademas de hacer scroll al formulario y disparar el tracking `cx_training_cta_click`, preseleccione automaticamente el dropdown "Que desea mejorar?" en el valor `"entrenamiento"` (Entrenamiento y estandarizacion).
 
-**4. H1 Hero (lineas 208-211)**
-- Cambiar a: `Experiencia del Cliente (Customer Experience, CX)` con "(Customer Experience, CX)" en color secondary
-- Agregar linea de aclaracion debajo del subtitulo: "La atencion al cliente es parte de la Experiencia del Cliente; nuestro enfoque es integral y abarca tanto al cliente interno como al externo."
+Implementacion: llamar `updateField("reto", "entrenamiento")` antes del scrollIntoView.
 
-**5. Seccion Problemas - H2 (linea 255)**
-- Cambiar a: "Problemas tipicos en la experiencia y atencion al cliente"
+**2. SEO en H2 - variantes de "atencion al cliente" (ya cubiertas)**
 
-**6. Seccion Que hacemos - H2 y parrafo (lineas 280-285)**
-- H2: "Que hacemos: mas alla de la atencion al cliente"
-- Parrafo: "La atencion al cliente es fundamental, pero la Experiencia del Cliente (CX) va mas alla: conecta procesos, personas, metricas y cultura para transformar cada interaccion de forma sostenible."
+Verificacion: los H2 actuales ya contienen las variantes necesarias:
+- Linea 262: "Problemas tipicos en la experiencia y atencion al cliente" (incluye "atencion al cliente")
+- Linea 287: "Que hacemos: mas alla de la atencion al cliente" (incluye "atencion al cliente")
+- Linea 482: "Preguntas frecuentes sobre Customer Experience"
 
-**7. Opciones de servicio - parrafo (linea 394)**
-- Cambiar "experiencia del cliente" a "Experiencia del Cliente (CX)"
+Las FAQ ya incluyen variantes de "atencion al cliente" en preguntas 2, 6, 9 y 10. **No se requieren cambios adicionales en H2 ni FAQ.**
 
-**8. FAQ - H2 (linea 420)**
-- Cambiar a: "Preguntas frecuentes sobre Customer Experience"
+**3. Formulario - verificacion de campos (maximo 6 visibles)**
 
-**9. FAQ - preguntas y respuestas (lineas 53-60)**
-- Incorporar variantes SEO en las preguntas:
-  - "La consultoria en Experiencia del Cliente sirve para PyMEs?"
-  - "Cuanto tiempo toma ver mejoras en la atencion al cliente y la experiencia?"
-  - "Trabajan la experiencia del cliente interno y externo?"
-  - "Que metricas de Customer Experience utilizan?" (respuesta menciona "atencion al cliente")
-  - "Se requiere software para mejorar la experiencia del cliente?"
-  - "Ofrecen capacitacion en atencion al cliente y Customer Experience?"
-  - "Como se define el alcance de un proyecto de CX?"
-  - "Cual es la inversion en consultoria de Customer Experience?"
+Campos actuales visibles:
+1. Nombre completo
+2. Empresa
+3. Rol / Cargo
+4. Email
+5. Telefono / WhatsApp
+6. Tamano de empresa
+7. Que desea mejorar?
+8. Mensaje (opcional)
+
+Son 8 campos, 2 mas del limite solicitado. Se hara:
+- **Mover "Rol / Cargo" a opcional** (quitar asterisco, remover validacion required en Zod: cambiar a `.optional().or(z.literal(""))`)
+- **Mover "Mensaje" a colapsable** con un enlace "Agregar mensaje (opcional)" que muestre/oculte el textarea. De esta forma solo 6 campos son visibles por defecto: Nombre, Empresa, Email, Telefono, Tamano, Que desea mejorar.
+
+Cambios en Zod schema (linea 50): `rol` pasa de `z.string().trim().min(1)` a `z.string().trim().max(100).optional().or(z.literal(""))`.
+
+Agregar un estado `showMessage` para controlar la visibilidad del campo Mensaje.
 
 ---
 
-### Resumen de terminos
+### Resumen de cambios
 
-| Donde | Termino principal | Termino secundario |
-|-------|------------------|--------------------|
-| H1 | Experiencia del Cliente (Customer Experience, CX) | -- |
-| Aclaracion bajo hero | -- | atencion al cliente |
-| Meta title | Experiencia del Cliente (Customer Experience) | -- |
-| Meta description | experiencia del cliente, customer experience | atencion al cliente, mejora de atencion al cliente |
-| H2 secciones | experiencia y atencion al cliente | CX |
-| FAQ | Customer Experience, CX | atencion al cliente |
+| Seccion | Cambio |
+|---------|--------|
+| CTA Entrenamiento | Texto "Agendar asesoria inicial de entrenamiento" + preseleccion dropdown |
+| SEO H2/FAQ | Sin cambios (ya cubiertos) |
+| Formulario | Rol pasa a opcional, Mensaje colapsable -> 6 campos visibles por defecto |
+| Zod schema | `rol` deja de ser required |
 
-No se modifican otros archivos. Tono formal "usted" mantenido. Sin promesas numericas.
+---
+
+### Detalle tecnico
+
+**Preseleccion del dropdown:**
+```
+onClick={() => {
+  trackEvent("cta_click", "cx_training_cta_click");
+  updateField("reto", "entrenamiento");
+  document.getElementById("cta-final")?.scrollIntoView({ behavior: "smooth" });
+}}
+```
+
+**Estado para Mensaje colapsable:**
+Se agrega `const [showMessage, setShowMessage] = useState(false);` y se envuelve el campo Mensaje en un condicional con un toggle link.
+
