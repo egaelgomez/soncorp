@@ -47,7 +47,7 @@ const WHATSAPP_MESSAGE = encodeURIComponent(
 const formSchema = z.object({
   nombre: z.string().trim().min(1, "Nombre requerido").max(100),
   empresa: z.string().trim().min(1, "Empresa requerida").max(100),
-  rol: z.string().trim().min(1, "Rol requerido").max(100),
+  rol: z.string().trim().max(100).optional().or(z.literal("")),
   email: z.string().trim().email("Email inválido").max(255),
   telefono: z.string().trim().min(1, "Teléfono requerido").max(20),
   tamano: z.string().min(1, "Seleccione tamaño"),
@@ -94,6 +94,7 @@ const CustomerExperiencePage = () => {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const scrollTracked = useRef(false);
 
@@ -434,11 +435,12 @@ const CustomerExperiencePage = () => {
                 size="lg"
                 onClick={() => {
                   trackEvent("cta_click", "cx_training_cta_click");
+                  updateField("reto", "entrenamiento");
                   document.getElementById("cta-final")?.scrollIntoView({ behavior: "smooth" });
                 }}
                 className="gap-2 bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold"
               >
-                Solicitar información de entrenamiento
+                Agendar asesoría inicial de entrenamiento
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>
@@ -554,9 +556,8 @@ const CustomerExperiencePage = () => {
                     {errors.empresa && <p className={errorClass}>{errors.empresa}</p>}
                   </div>
                   <div>
-                    <label className={labelClass}>Rol / Cargo *</label>
-                    <input className={inputClass} placeholder="Director, Gerente, etc." value={formData.rol} onChange={(e) => updateField("rol", e.target.value)} />
-                    {errors.rol && <p className={errorClass}>{errors.rol}</p>}
+                    <label className={labelClass}>Rol / Cargo</label>
+                    <input className={inputClass} placeholder="Director, Gerente, etc. (opcional)" value={formData.rol} onChange={(e) => updateField("rol", e.target.value)} />
                   </div>
                   <div>
                     <label className={labelClass}>Email *</label>
@@ -593,10 +594,16 @@ const CustomerExperiencePage = () => {
                   </select>
                   {errors.reto && <p className={errorClass}>{errors.reto}</p>}
                 </div>
-                <div>
-                  <label className={labelClass}>Mensaje (opcional)</label>
-                  <textarea className={`${inputClass} min-h-[80px] resize-none`} placeholder="Cuéntenos brevemente sobre su situación." value={formData.mensaje} onChange={(e) => updateField("mensaje", e.target.value)} />
-                </div>
+                {!showMessage ? (
+                  <button type="button" onClick={() => setShowMessage(true)} className="text-sm text-secondary hover:text-secondary/80 transition-colors underline underline-offset-2">
+                    + Agregar mensaje (opcional)
+                  </button>
+                ) : (
+                  <div>
+                    <label className={labelClass}>Mensaje (opcional)</label>
+                    <textarea className={`${inputClass} min-h-[80px] resize-none`} placeholder="Cuéntenos brevemente sobre su situación." value={formData.mensaje} onChange={(e) => updateField("mensaje", e.target.value)} />
+                  </div>
+                )}
                 <div className="flex flex-col sm:flex-row gap-4 pt-2">
                   <Button type="submit" size="lg" className="bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold flex-1">
                     Agendar asesoría inicial
