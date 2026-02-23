@@ -50,14 +50,14 @@ const formSchema = z.object({
 });
 
 const faqItems = [
-  { question: "¿Este servicio sirve para PyMEs?", answer: "Sí. Adaptamos el alcance y profundidad al tamaño y madurez de cada organización. Desde negocios con 5 empleados hasta corporativos con cientos." },
-  { question: "¿Cuánto tiempo toma ver mejoras?", answer: "Depende del alcance. Algunas mejoras operativas se notan en semanas; una transformación profunda de la experiencia puede tomar meses. Se definen hitos claros desde el inicio." },
-  { question: "¿Trabajan cliente interno y externo?", answer: "Sí. La experiencia del cliente externo depende directamente de la experiencia del cliente interno. Abordamos ambos de forma integral." },
-  { question: "¿Qué métricas utilizan?", answer: "Dependiendo del contexto: CSAT (satisfacción), NPS (recomendación), CES (esfuerzo), tiempos de respuesta, tasa de resolución al primer contacto, entre otros indicadores relevantes." },
-  { question: "¿Se requiere implementar algún software?", answer: "No necesariamente. Trabajamos con las herramientas que usted ya utiliza. Si se identifica la necesidad, recomendamos opciones adecuadas al presupuesto." },
-  { question: "¿Ofrecen capacitación para el equipo?", answer: "Sí. La capacitación y el desarrollo de cultura de servicio son parte fundamental de nuestro enfoque." },
-  { question: "¿Cómo se define el alcance del proyecto?", answer: "En la asesoría inicial capturamos su situación actual, objetivos y recursos disponibles. Con esa información se presenta una propuesta de alcance y honorarios." },
-  { question: "¿Cuál es la inversión?", answer: "Los honorarios se definen según el alcance y complejidad de cada proyecto. Después de la asesoría inicial se presenta una propuesta formal." },
+  { question: "¿La consultoría en Experiencia del Cliente sirve para PyMEs?", answer: "Sí. Adaptamos el alcance y profundidad al tamaño y madurez de cada organización. Desde negocios con 5 empleados hasta corporativos con cientos." },
+  { question: "¿Cuánto tiempo toma ver mejoras en la atención al cliente y la experiencia?", answer: "Depende del alcance. Algunas mejoras en la atención al cliente se notan en semanas; una transformación profunda de la experiencia puede tomar meses. Se definen hitos claros desde el inicio." },
+  { question: "¿Trabajan la experiencia del cliente interno y externo?", answer: "Sí. La experiencia del cliente externo depende directamente de la experiencia del cliente interno. Abordamos ambos de forma integral." },
+  { question: "¿Qué métricas de Customer Experience utilizan?", answer: "Dependiendo del contexto: CSAT (satisfacción), NPS (recomendación), CES (esfuerzo), tiempos de respuesta, tasa de resolución al primer contacto, entre otros indicadores relevantes para medir la atención al cliente y la experiencia global." },
+  { question: "¿Se requiere software para mejorar la experiencia del cliente?", answer: "No necesariamente. Trabajamos con las herramientas que usted ya utiliza. Si se identifica la necesidad, recomendamos opciones adecuadas al presupuesto." },
+  { question: "¿Ofrecen capacitación en atención al cliente y Customer Experience?", answer: "Sí. La capacitación y el desarrollo de cultura de servicio son parte fundamental de nuestro enfoque de Experiencia del Cliente." },
+  { question: "¿Cómo se define el alcance de un proyecto de CX?", answer: "En la asesoría inicial capturamos su situación actual, objetivos y recursos disponibles. Con esa información se presenta una propuesta de alcance y honorarios." },
+  { question: "¿Cuál es la inversión en consultoría de Customer Experience?", answer: "Los honorarios se definen según el alcance y complejidad de cada proyecto. Después de la asesoría inicial se presenta una propuesta formal." },
 ];
 
 const faqSchema = {
@@ -75,7 +75,7 @@ const orgSchema = {
   "@type": "Organization",
   name: "Soncorp",
   url: "https://soncorp.com.mx",
-  description: "Consultoría especializada en Customer Experience para empresas en México.",
+  description: "Consultoría especializada en Experiencia del Cliente (Customer Experience, CX) y mejora de atención al cliente para empresas en México.",
 };
 
 const CustomerExperiencePage = () => {
@@ -176,8 +176,8 @@ const CustomerExperiencePage = () => {
   return (
     <>
       <Helmet>
-        <title>Consultoría de Customer Experience | Soncorp CX</title>
-        <meta name="description" content="Mejore la experiencia de sus clientes con consultoría especializada en Customer Experience. Diagnóstico, medición, estándares de servicio y mejora continua para PyMEs y empresas." />
+        <title>Consultoría en Experiencia del Cliente (Customer Experience) | Soncorp CX</title>
+        <meta name="description" content="Consultoría en experiencia del cliente (customer experience) para empresas en México. Mejore la atención al cliente, retención y satisfacción con un enfoque integral de CX. Mejora de atención al cliente, diagnóstico, medición y acompañamiento." />
         <script type="application/ld+json">{JSON.stringify(orgSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
@@ -193,7 +193,7 @@ const CustomerExperiencePage = () => {
             <span>/</span>
             <Link to="/servicios" className="hover:text-secondary transition-colors">Servicios</Link>
             <span>/</span>
-            <span className="text-foreground">Customer Experience</span>
+            <span className="text-foreground">Experiencia del Cliente (CX)</span>
           </nav>
           <Link to="/servicios" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-secondary transition-colors mb-10">
             <ArrowLeft className="h-4 w-4" />
@@ -206,14 +206,18 @@ const CustomerExperiencePage = () => {
                 <HeartHandshake className="h-7 w-7 text-secondary" />
               </div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                Experiencia del Cliente que impulsa resultados
+                Experiencia del Cliente{" "}
+                <span className="text-secondary">(Customer Experience, CX)</span>
               </h1>
             </div>
 
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 max-w-3xl">
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-4 max-w-3xl">
               Fortalezca la retención, satisfacción y recomendación de sus clientes —externos e internos—
               mientras impulsa la eficiencia operativa de su organización. Un enfoque integral que conecta
               cada punto de contacto con resultados empresariales concretos.
+            </p>
+            <p className="text-sm md:text-base text-muted-foreground/80 italic mb-8 max-w-3xl">
+              La atención al cliente es parte de la Experiencia del Cliente; nuestro enfoque es integral y abarca tanto al cliente interno como al externo.
             </p>
 
             <ul className="space-y-3 mb-10 max-w-2xl">
@@ -247,7 +251,7 @@ const CustomerExperiencePage = () => {
       <section className="py-20 bg-muted/20">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center">
-            Problemas típicos que resolvemos
+            Problemas típicos en la experiencia y atención al cliente
           </h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
             Situaciones comunes en PyMEs y empresas que afectan la experiencia y retención de clientes.
@@ -272,11 +276,10 @@ const CustomerExperiencePage = () => {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center">
-            Qué hacemos: solución integral
+            Qué hacemos: más allá de la atención al cliente
           </h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-            No es solo "atención al cliente". Es un enfoque que conecta procesos, personas, métricas y cultura
-            para transformar la experiencia de forma sostenible.
+            La atención al cliente es fundamental, pero la Experiencia del Cliente (CX) va más allá: conecta procesos, personas, métricas y cultura para transformar cada interacción de forma sostenible.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {solutions.map((s, idx) => {
@@ -386,7 +389,7 @@ const CustomerExperiencePage = () => {
             Opciones de servicio
           </h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-            Tres niveles diseñados para distintas necesidades y etapas de madurez en experiencia del cliente.
+            Tres niveles diseñados para distintas necesidades y etapas de madurez en Experiencia del Cliente (CX).
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl mx-auto">
             {[
@@ -412,7 +415,7 @@ const CustomerExperiencePage = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-10 text-center">
-              Preguntas frecuentes
+              Preguntas frecuentes sobre Customer Experience
             </h2>
             <Accordion type="single" collapsible className="space-y-3">
               {faqItems.map((item, idx) => (
