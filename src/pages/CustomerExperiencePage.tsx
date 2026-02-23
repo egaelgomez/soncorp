@@ -211,15 +211,16 @@ const CustomerExperiencePage = () => {
             </div>
 
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 max-w-3xl">
-              Mejore la retención, satisfacción y recomendación de sus clientes con un enfoque integral
-              que abarca tanto al cliente externo como al interno, optimizando cada punto de contacto.
+              Fortalezca la retención, satisfacción y recomendación de sus clientes —externos e internos—
+              mientras impulsa la eficiencia operativa de su organización. Un enfoque integral que conecta
+              cada punto de contacto con resultados empresariales concretos.
             </p>
 
             <ul className="space-y-3 mb-10 max-w-2xl">
               {[
-                "Claridad desde el diagnóstico: sepa exactamente dónde están las oportunidades.",
-                "Acompañamiento experto en cada etapa, adaptado a su organización.",
-                "Enfoque integral: cliente interno y externo, procesos y cultura.",
+                "Diagnóstico integral: identifique oportunidades en la experiencia de su cliente externo y en la colaboración entre áreas.",
+                "Acompañamiento experto adaptado a su organización: desde la estrategia hasta la ejecución.",
+                "Resultados empresariales: mayor retención, mejor satisfacción, eficiencia operativa y equipos alineados.",
               ].map((bullet, i) => (
                 <li key={i} className="flex items-start gap-3 text-foreground/90">
                   <Check className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
