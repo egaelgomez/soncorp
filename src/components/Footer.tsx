@@ -1,7 +1,19 @@
 import { Mail, Phone, MapPin } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 import soncorpLogo from "@/assets/soncorp-logo.png";
 
 const Footer = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const scrollToSection = (id: string) => {
+    if (location.pathname === "/") {
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate(`/#${id}`);
+    }
+  };
   const currentYear = new Date().getFullYear();
 
   return (
