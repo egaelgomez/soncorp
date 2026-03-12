@@ -141,10 +141,6 @@ const CustomerExperiencePage = () => {
   { icon: Heart, title: "Empatía", desc: "Comprender la situación del cliente y actuar en consecuencia." }];
 
 
-  const inputClass = "w-full px-4 py-3 rounded-lg bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-secondary/60 transition-colors text-sm";
-  const labelClass = "block text-sm font-medium text-foreground mb-1.5";
-  const errorClass = "text-xs text-destructive mt-1";
-
   return (
     <>
       <Helmet>
