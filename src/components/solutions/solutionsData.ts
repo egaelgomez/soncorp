@@ -228,95 +228,99 @@ export const solutions: Solution[] = [
   },
   {
     id: "it",
-    slug: "mesa-ingenieria-ti-por-tickets",
+    slug: "consultoria-soluciones-ti",
     icon: Monitor,
-    title: "Consultoría TI por Tickets",
-    result: "Resuelve tickets críticos sin contratar especialistas full-time.",
-    chips: ["Bolsa de horas", "SLAs", "Multitecnología"],
-    headline: "Tu equipo TI ampliado bajo demanda con operación por SLA y confidencialidad.",
+    title: "Consultoría y Soluciones TI",
+    result: "Resuelva necesidades tecnológicas con consultoría, implementación y soporte especializado.",
+    chips: ["Consultoría", "Implementación", "Soporte especializado"],
+    headline: "Ayudamos a su empresa a resolver necesidades tecnológicas con consultoría, implementación y soporte especializado.",
     heroBullets: [
-      "Operación por tickets + SLAs",
-      "Soporte multitecnología",
-      "Reportes y mejora continua"
+      "Consultoría IT y arquitectura tecnológica",
+      "Sistemas empresariales, web y aplicaciones",
+      "Automatización, infraestructura, cloud y soporte"
     ],
     audiences: ["Negocio en crecimiento", "Mid-market", "Enterprise"],
-    techChips: ["ServiceNow", "Linux/Windows", "Azure", "Citrix", "Oracle", "Microsoft SQL", "IDM"],
+    techChips: ["ServiceNow", "Linux/Windows", "Azure", "Citrix", "Oracle", "Microsoft SQL", "Active Directory", "Sitios web", "Apps empresariales", "Integraciones"],
     problems: [
-      "Backlog de tickets crece sin control",
-      "No hay expertos internos para ciertas tecnologías",
-      "Costos de contratación fija son altos",
-      "Incidentes repetitivos sin mejora",
-      "Falta de SLAs y visibilidad del servicio"
+      "Falta de claridad sobre qué tecnología implementar",
+      "Sistemas o procesos manuales que frenan la operación",
+      "Necesidad de una página web o aplicación sin saber cómo estructurar el proyecto",
+      "Dependencia excesiva del equipo interno para iniciativas tecnológicas",
+      "Falta de especialistas para proyectos puntuales",
+      "Backlog de requerimientos técnicos y tickets sin resolver",
+      "Procesos desconectados entre áreas y herramientas",
+      "Necesidad de modernizar infraestructura o plataformas"
     ],
     benefits: [
-      "Escalas capacidad bajo demanda",
-      "Reduces presión del equipo interno",
-      "Priorización y orden del backlog",
-      "Mejor control operativo (SLA/tiempos)",
-      "Continuidad y documentación"
+      "Claridad tecnológica con consultoría especializada",
+      "Implementación de sistemas, web y apps alineados al negocio",
+      "Automatización de procesos para reducir trabajo manual",
+      "Infraestructura moderna y escalable (cloud, BD, servidores)",
+      "Soporte especializado bajo demanda sin inflar nómina",
+      "Un solo partner para múltiples necesidades tecnológicas"
     ],
     scope: [
       {
-        title: "Diagnóstico",
-        description: "Evaluación del backlog y prioridades",
-        bullets: ["Inventario de tickets", "Clasificación por urgencia"]
+        title: "Evaluación inicial",
+        description: "Diagnóstico de necesidades y contexto tecnológico",
+        bullets: ["Análisis de situación actual", "Identificación de oportunidades"]
       },
       {
-        title: "Plan / Propuesta",
-        description: "Definición de SLAs y bolsa de horas",
-        bullets: ["Acuerdo de servicio", "Prioridades claras"]
+        title: "Definición de alcance",
+        description: "Propuesta técnica y plan de acción",
+        bullets: ["Arquitectura y roadmap", "Presupuesto y tiempos"]
       },
       {
-        title: "Operación",
-        description: "Ejecución y resolución de tickets",
-        bullets: ["Atención por SLA", "Escalación definida"]
+        title: "Implementación o soporte",
+        description: "Ejecución del proyecto o servicio continuo",
+        bullets: ["Desarrollo e integración", "Soporte por tickets/SLA"]
       },
       {
-        title: "Medición",
-        description: "Reportes y mejora continua",
-        bullets: ["MTTR/SLA cumplimiento", "Análisis de tendencias"]
+        title: "Entrega y continuidad",
+        description: "Documentación y acompañamiento post-entrega",
+        bullets: ["Documentación técnica", "Capacitación y soporte"]
       }
     ],
     packages: [
       {
-        name: "Starter",
-        description: "Bolsa de horas para emergencias",
-        bullets: ["20 horas/mes", "SLA estándar", "1 tecnología"],
-        idealFor: "Empresas con soporte básico"
+        name: "Diagnóstico y consultoría",
+        description: "Evaluación tecnológica y plan de acción",
+        bullets: ["Diagnóstico de infraestructura y sistemas", "Roadmap tecnológico", "Recomendaciones priorizadas"],
+        idealFor: "Empresas que necesitan claridad tecnológica"
       },
       {
-        name: "Growth",
-        description: "Soporte continuo multitecnología",
-        bullets: ["60 horas/mes", "SLA prioritario", "Hasta 3 tecnologías"],
-        idealFor: "Empresas con equipo TI pequeño"
+        name: "Implementación y desarrollo",
+        description: "Ejecución de proyectos tecnológicos",
+        bullets: ["Desarrollo web y aplicaciones", "Implementación de sistemas", "Automatización e integraciones"],
+        idealFor: "Empresas con proyectos definidos"
       },
       {
-        name: "Enterprise",
-        description: "Mesa dedicada con SLAs premium",
-        bullets: ["Horas ilimitadas", "SLA crítico 24/7", "Multitecnología"],
-        idealFor: "Operaciones críticas"
+        name: "Soporte especializado",
+        description: "Capacidad técnica bajo demanda por tickets",
+        bullets: ["Bolsa de horas con SLA", "Multitecnología", "Reportes y mejora continua"],
+        idealFor: "Empresas que necesitan soporte continuo"
       }
     ],
     faq: [
       {
-        question: "¿Qué tecnologías soportan?",
-        answer: "ServiceNow, Linux, Windows Server, Azure, Citrix, bases de datos Oracle/SQL, gestión de identidades y más."
+        question: "¿Qué tipo de proyectos tecnológicos realizan?",
+        answer: "Consultoría IT, desarrollo de páginas web y aplicaciones, implementación de sistemas empresariales, automatización de procesos, infraestructura cloud y soporte técnico especializado."
       },
       {
-        question: "¿Cómo funcionan los SLAs?",
-        answer: "Definimos tiempos de respuesta y resolución según criticidad. Reportamos cumplimiento mensualmente."
+        question: "¿También ofrecen soporte por tickets o bolsa de horas?",
+        answer: "Sí, el soporte especializado por tickets es una de nuestras modalidades. Operamos con SLAs definidos, reportes periódicos y multitecnología."
       },
       {
-        question: "¿Puedo escalar horas en el mes?",
-        answer: "Sí, las horas adicionales se facturan al mismo precio o con descuento según volumen."
+        question: "¿Qué tecnologías cubren?",
+        answer: "ServiceNow, Linux, Windows Server, Azure, Citrix, Oracle, SQL Server, Active Directory, desarrollo web, aplicaciones empresariales e integraciones."
       },
       {
-        question: "¿Cómo se reportan los tickets?",
-        answer: "Dashboard en tiempo real + reporte semanal de avance y backlog."
+        question: "¿Pueden desarrollar una página web o aplicación para mi empresa?",
+        answer: "Sí, desde sitios corporativos hasta aplicaciones empresariales a medida, incluyendo integraciones con sus sistemas actuales."
       },
       {
-        question: "¿Trabajan con nuestro sistema de tickets?",
-        answer: "Sí, nos adaptamos a tu herramienta (ServiceNow, Jira, Freshdesk, etc.) o usamos la nuestra."
+        question: "¿Cómo inicia un proyecto con Soncorp?",
+        answer: "Con una evaluación inicial donde entendemos sus necesidades, definimos el alcance y le presentamos una propuesta técnica con tiempos y presupuesto."
       }
     ]
   },
