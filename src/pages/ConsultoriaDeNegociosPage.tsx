@@ -433,46 +433,17 @@ const ConsultoriaDeNegociosPage = () => {
                 </Button>
               </div>
               
-              {/* Simple Contact Form */}
-              <div className="p-8 rounded-2xl bg-card border border-border">
-                <h3 className="text-xl font-semibold text-foreground mb-6">
+              {/* Contact Form */}
+              <div className="max-w-2xl mx-auto">
+                <h3 className="text-xl font-semibold text-foreground mb-6 text-center">
                   O déjanos tus datos y te contactamos
                 </h3>
-                <form className="grid md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    placeholder="Nombre"
-                    className="px-4 py-3 rounded-lg bg-background border border-border focus:border-secondary focus:outline-none transition-colors" />
-                  
-                  <input
-                    type="text"
-                    placeholder="Empresa"
-                    className="px-4 py-3 rounded-lg bg-background border border-border focus:border-secondary focus:outline-none transition-colors" />
-                  
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    className="px-4 py-3 rounded-lg bg-background border border-border focus:border-secondary focus:outline-none transition-colors" />
-                  
-                  <input
-                    type="tel"
-                    placeholder="Teléfono"
-                    className="px-4 py-3 rounded-lg bg-background border border-border focus:border-secondary focus:outline-none transition-colors" />
-                  
-                  <textarea
-                    placeholder="Comentarios (opcional)"
-                    rows={3}
-                    className="md:col-span-2 px-4 py-3 rounded-lg bg-background border border-border focus:border-secondary focus:outline-none transition-colors resize-none" />
-                  
-                  <div className="md:col-span-2">
-                    <Button
-                      type="submit"
-                      className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground">
-                      
-                      Enviar
-                    </Button>
-                  </div>
-                </form>
+                <ContactForm
+                  challengeLabel="¿Qué necesita mejorar? *"
+                  challengeOptions={negociosChallengeOptions}
+                  submitLabel="Agendar llamada"
+                  serviceName="Consultoría de Negocios"
+                />
               </div>
             </div>
           </div>
