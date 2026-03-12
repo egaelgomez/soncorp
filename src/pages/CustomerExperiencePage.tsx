@@ -112,32 +112,7 @@ const CustomerExperiencePage = () => {
 
   const handleWhatsAppClick = () => {
     trackEvent("whatsapp_click", "cx_whatsapp");
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`, "_blank");
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const result = formSchema.safeParse(formData);
-    if (!result.success) {
-      const fieldErrors: Record<string, string> = {};
-      result.error.errors.forEach((err) => {
-        if (err.path[0]) fieldErrors[err.path[0] as string] = err.message;
-      });
-      setErrors(fieldErrors);
-      return;
-    }
-    setErrors({});
-    trackEvent("form_submit", "cx_landing_form");
-    setSubmitted(true);
-    toast({
-      title: "Solicitud recibida",
-      description: "Nos pondremos en contacto con usted a la brevedad."
-    });
-  };
-
-  const updateField = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
+    window.open(`https://wa.me/${CONTACT_INFO.whatsappNumber}?text=${encodeURIComponent("Hola, solicito una asesoría inicial de Soncorp CX. Me interesa mejorar la experiencia del cliente (interno/externo). ¿Podemos agendar una llamada?")}`, "_blank");
   };
 
   const problems = [
