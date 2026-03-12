@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Megaphone,
   ArrowLeft,
@@ -23,41 +21,25 @@ import {
   TrendingUp,
   BarChart3 } from
 "lucide-react";
-import { toast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { CONTACT_INFO } from "@/lib/constants";
+import ContactForm from "@/components/shared/ContactForm";
+
+const marketingChallengeOptions = [
+  { value: "leads", label: "Generar más leads" },
+  { value: "ventas", label: "Aumentar ventas" },
+  { value: "retencion", label: "Mejorar retención" },
+  { value: "automatizacion", label: "Automatizar seguimiento" },
+  { value: "presencia", label: "Presencia digital" },
+  { value: "otro", label: "Otro" },
+];
 
 const MarketingAutomatizacionPage = () => {
-  const [formData, setFormData] = useState({
-    nombre: "",
-    empresa: "",
-    contacto: "",
-    canal: "",
-    objetivo: ""
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    toast({
-      title: "¡Solicitud enviada!",
-      description: "Te contactaremos pronto para definir tu estrategia."
-    });
-    setFormData({ nombre: "", empresa: "", contacto: "", canal: "", objetivo: "" });
-    setIsSubmitting(false);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
   const scrollToForm = () => {
     document.getElementById("marketing-cta")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const openWhatsApp = () => {
-    window.open("https://wa.me/521234567890?text=Hola, me interesa saber más sobre Marketing y Automatización", "_blank");
+    window.open(`https://wa.me/${CONTACT_INFO.whatsappNumber}?text=${encodeURIComponent("Hola, me interesa saber más sobre Marketing y Automatización")}`, "_blank");
   };
 
   const problems = [
