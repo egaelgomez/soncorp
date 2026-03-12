@@ -188,7 +188,7 @@ export const solutions: Solution[] = [
         name: "Starter",
         description: "Claridad básica de números",
         bullets: ["Diagnóstico financiero", "Estructura de costos", "1 sesión estratégica"],
-        idealFor: "PyMEs que quieren orden"
+        idealFor: "Empresas que buscan orden"
       },
       {
         name: "Growth",
