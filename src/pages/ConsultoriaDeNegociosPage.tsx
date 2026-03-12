@@ -1,9 +1,19 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { ArrowLeft, TrendingUp, Check, Target, Users, Cog, BarChart3, Wrench, ArrowRight } from "lucide-react";
+import { ArrowLeft, TrendingUp, Check, Target, Users, Cog, BarChart3, Wrench, ArrowRight, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { CONTACT_INFO } from "@/lib/constants";
+import ContactForm from "@/components/shared/ContactForm";
+
+const negociosChallengeOptions = [
+  { value: "estrategia", label: "Planeación estratégica" },
+  { value: "ventas", label: "Estrategia comercial y ventas" },
+  { value: "procesos", label: "Optimización de procesos" },
+  { value: "estructura", label: "Organización y roles" },
+  { value: "otro", label: "Otro" },
+];
 
 const ConsultoriaDeNegociosPage = () => {
   const scrollToContact = () => {
