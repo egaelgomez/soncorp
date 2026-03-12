@@ -146,7 +146,7 @@ export const solutions: Solution[] = [
       "Procesos más eficientes",
       "Prioridades claras para impactar resultados"
     ],
-    audiences: ["PyME", "Mid-market", "Enterprise"],
+    audiences: ["Negocio en crecimiento", "Mid-market", "Enterprise"],
     problems: [
       "Ventas estancadas o impredecibles",
       "Prospectos se pierden por falta de seguimiento",
