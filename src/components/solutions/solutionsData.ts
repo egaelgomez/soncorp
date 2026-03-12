@@ -282,7 +282,7 @@ export const solutions: Solution[] = [
         name: "Starter",
         description: "Bolsa de horas para emergencias",
         bullets: ["20 horas/mes", "SLA estándar", "1 tecnología"],
-        idealFor: "PyMEs con soporte básico"
+        idealFor: "Empresas con soporte básico"
       },
       {
         name: "Growth",
