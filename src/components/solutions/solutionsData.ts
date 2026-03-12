@@ -239,7 +239,7 @@ export const solutions: Solution[] = [
       "Soporte multitecnología",
       "Reportes y mejora continua"
     ],
-    audiences: ["PyME", "Mid-market", "Enterprise"],
+    audiences: ["Negocio en crecimiento", "Mid-market", "Enterprise"],
     techChips: ["ServiceNow", "Linux/Windows", "Azure", "Citrix", "Oracle", "Microsoft SQL", "IDM"],
     problems: [
       "Backlog de tickets crece sin control",
