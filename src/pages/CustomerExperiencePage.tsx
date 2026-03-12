@@ -37,23 +37,8 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { useToast } from "@/hooks/use-toast";
-import { z } from "zod";
-
-const WHATSAPP_NUMBER = "5215512345678";
-const WHATSAPP_MESSAGE = encodeURIComponent(
-  "Hola, solicito una asesoría inicial de Soncorp CX. Me interesa mejorar la experiencia del cliente (interno/externo). ¿Podemos agendar una llamada?"
-);
-
-const formSchema = z.object({
-  nombre: z.string().trim().min(1, "Nombre requerido").max(100),
-  empresa: z.string().trim().min(1, "Empresa requerida").max(100),
-  rol: z.string().trim().max(100).optional().or(z.literal("")),
-  email: z.string().trim().email("Email inválido").max(255),
-  telefono: z.string().trim().min(1, "Teléfono requerido").max(20),
-  tamano: z.string().min(1, "Seleccione tamaño"),
-  reto: z.string().min(1, "Seleccione reto principal"),
-  mensaje: z.string().trim().max(1000).optional()
-});
+import { CONTACT_INFO } from "@/lib/constants";
+import ContactForm from "@/components/shared/ContactForm";
 
 const faqItems = [
 { question: "¿La consultoría en Experiencia del Cliente sirve para cualquier tipo de empresa?", answer: "Sí. Adaptamos el alcance y profundidad al tamaño y madurez de cada organización. Desde negocios con 5 empleados hasta corporativos con cientos." },
