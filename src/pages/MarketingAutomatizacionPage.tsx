@@ -5,11 +5,11 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { 
-  Megaphone, 
-  ArrowLeft, 
-  ChevronRight, 
-  X, 
+import {
+  Megaphone,
+  ArrowLeft,
+  ChevronRight,
+  X,
   CheckCircle2,
   MessageSquare,
   Clock,
@@ -21,8 +21,8 @@ import {
   Zap,
   Settings,
   TrendingUp,
-  BarChart3
-} from "lucide-react";
+  BarChart3 } from
+"lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { useState } from "react";
 
@@ -39,17 +39,17 @@ const MarketingAutomatizacionPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     toast({
       title: "¡Solicitud enviada!",
-      description: "Te contactaremos pronto para definir tu estrategia.",
+      description: "Te contactaremos pronto para definir tu estrategia."
     });
     setFormData({ nombre: "", empresa: "", contacto: "", canal: "", objetivo: "" });
     setIsSubmitting(false);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const scrollToForm = () => {
@@ -61,110 +61,110 @@ const MarketingAutomatizacionPage = () => {
   };
 
   const problems = [
-    "Pagas anuncios pero no convierten (no hay seguimiento real)",
-    "Leads que llegan y nadie responde a tiempo",
-    "Contenido inconsistente (publicas 'cuando se puede')",
-    "Mucho trabajo manual: mensajes, recordatorios, respuestas repetidas",
-    "No hay medición clara: no sabes qué funciona y qué no",
-    "Prospectos abandonan porque el proceso es lento o confuso"
-  ];
+  "Pagas anuncios pero no convierten (no hay seguimiento real)",
+  "Leads que llegan y nadie responde a tiempo",
+  "Contenido inconsistente (publicas 'cuando se puede')",
+  "Mucho trabajo manual: mensajes, recordatorios, respuestas repetidas",
+  "No hay medición clara: no sabes qué funciona y qué no",
+  "Prospectos abandonan porque el proceso es lento o confuso"];
+
 
   const benefits = [
-    { 
-      title: "Más leads calificados y más ventas", 
-      description: "Por seguimiento constante y automatizado",
-      large: true 
-    },
-    { 
-      title: "Menor desperdicio publicitario", 
-      description: "Mejor conversión de tu inversión en ads" 
-    },
-    { 
-      title: "Respuesta más rápida = más cierres", 
-      description: "Automatizamos el primer contacto" 
-    },
-    { 
-      title: "Ahorro de tiempo del equipo", 
-      description: "Automatizamos tareas repetitivas" 
-    },
-    { 
-      title: "Menos errores humanos", 
-      description: "En mensajes, recordatorios y segmentación" 
-    },
-    { 
-      title: "Resultados medibles", 
-      description: "Sabes qué campaña genera leads y cuál no" 
-    }
-  ];
+  {
+    title: "Más leads calificados y más ventas",
+    description: "Por seguimiento constante y automatizado",
+    large: true
+  },
+  {
+    title: "Menor desperdicio publicitario",
+    description: "Mejor conversión de tu inversión en ads"
+  },
+  {
+    title: "Respuesta más rápida = más cierres",
+    description: "Automatizamos el primer contacto"
+  },
+  {
+    title: "Ahorro de tiempo del equipo",
+    description: "Automatizamos tareas repetitivas"
+  },
+  {
+    title: "Menos errores humanos",
+    description: "En mensajes, recordatorios y segmentación"
+  },
+  {
+    title: "Resultados medibles",
+    description: "Sabes qué campaña genera leads y cuál no"
+  }];
+
 
   const automations = [
-    {
-      icon: MessageSquare,
-      title: "Captura y calificación de leads",
-      description: "Pregunta, clasifica y envía al equipo correcto.",
-      channels: ["WhatsApp", "IG", "Web"]
-    },
-    {
-      icon: Clock,
-      title: "Respuestas rápidas 24/7",
-      description: "FAQ + orientación + captura de datos.",
-      channels: ["WhatsApp", "Web"]
-    },
-    {
-      icon: Bot,
-      title: "Seguimiento automático",
-      description: "Recordatorios y mensajes para que no se enfríe el prospecto.",
-      channels: ["WhatsApp", "Email"]
-    },
-    {
-      icon: Calendar,
-      title: "Agendado / citas",
-      description: "Automatiza confirmaciones y recordatorios.",
-      channels: ["WhatsApp", "Email", "SMS"]
-    },
-    {
-      icon: ShoppingCart,
-      title: "Carrito abandonado / reactivación",
-      description: "Recupera oportunidades con mensajes oportunos.",
-      channels: ["WhatsApp", "Email"]
-    },
-    {
-      icon: Star,
-      title: "Reseñas y reputación",
-      description: "Pide reseñas a clientes satisfechos y mejora confianza.",
-      channels: ["WhatsApp", "Email"]
-    }
-  ];
+  {
+    icon: MessageSquare,
+    title: "Captura y calificación de leads",
+    description: "Pregunta, clasifica y envía al equipo correcto.",
+    channels: ["WhatsApp", "IG", "Web"]
+  },
+  {
+    icon: Clock,
+    title: "Respuestas rápidas 24/7",
+    description: "FAQ + orientación + captura de datos.",
+    channels: ["WhatsApp", "Web"]
+  },
+  {
+    icon: Bot,
+    title: "Seguimiento automático",
+    description: "Recordatorios y mensajes para que no se enfríe el prospecto.",
+    channels: ["WhatsApp", "Email"]
+  },
+  {
+    icon: Calendar,
+    title: "Agendado / citas",
+    description: "Automatiza confirmaciones y recordatorios.",
+    channels: ["WhatsApp", "Email", "SMS"]
+  },
+  {
+    icon: ShoppingCart,
+    title: "Carrito abandonado / reactivación",
+    description: "Recupera oportunidades con mensajes oportunos.",
+    channels: ["WhatsApp", "Email"]
+  },
+  {
+    icon: Star,
+    title: "Reseñas y reputación",
+    description: "Pide reseñas a clientes satisfechos y mejora confianza.",
+    channels: ["WhatsApp", "Email"]
+  }];
+
 
   const marketingStrategy = [
-    "Calendario de contenido",
-    "Copy y creativos",
-    "Branding coherente"
-  ];
+  "Calendario de contenido",
+  "Copy y creativos",
+  "Branding coherente"];
+
 
   const marketingCampaigns = [
-    "Campañas en Meta/IG/Facebook",
-    "Segmentación y pruebas A/B",
-    "Reporte: leads, CPL, CTR, conversiones"
-  ];
+  "Campañas en Meta/IG/Facebook",
+  "Segmentación y pruebas A/B",
+  "Reporte: leads, CPL, CTR, conversiones"];
+
 
   const steps = [
-    {
-      number: "01",
-      title: "Diagnóstico",
-      description: "Auditoría rápida de canales + objetivos"
-    },
-    {
-      number: "02",
-      title: "Implementación",
-      description: "Campañas + automatizaciones"
-    },
-    {
-      number: "03",
-      title: "Optimización",
-      description: "Medición, ajustes y mejora continua"
-    }
-  ];
+  {
+    number: "01",
+    title: "Diagnóstico",
+    description: "Auditoría rápida de canales + objetivos"
+  },
+  {
+    number: "02",
+    title: "Implementación",
+    description: "Campañas + automatizaciones"
+  },
+  {
+    number: "03",
+    title: "Optimización",
+    description: "Medición, ajustes y mejora continua"
+  }];
+
 
   const channelColors: Record<string, string> = {
     "WhatsApp": "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
@@ -178,10 +178,10 @@ const MarketingAutomatizacionPage = () => {
     <>
       <Helmet>
         <title>Marketing & Automatización | Soncorp</title>
-        <meta 
-          name="description" 
-          content="Genera más leads y ventas con campañas digitales y automatización del seguimiento. WhatsApp, email, redes sociales. Resultados medibles." 
-        />
+        <meta
+          name="description"
+          content="Genera más leads y ventas con campañas digitales y automatización del seguimiento. WhatsApp, email, redes sociales. Resultados medibles." />
+        
       </Helmet>
       <Navigation />
       <main className="min-h-screen bg-background pt-20">
@@ -199,10 +199,10 @@ const MarketingAutomatizacionPage = () => {
             </nav>
 
             {/* Back Link */}
-            <Link 
-              to="/servicios" 
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
-            >
+            <Link
+              to="/servicios"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8">
+              
               <ArrowLeft className="w-4 h-4" />
               Volver a servicios
             </Link>
@@ -256,11 +256,11 @@ const MarketingAutomatizacionPage = () => {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-              {problems.map((problem, index) => (
-                <div 
-                  key={index}
-                  className="p-5 rounded-xl bg-card/50 border border-border/50 hover:border-destructive/30 transition-all duration-300"
-                >
+              {problems.map((problem, index) =>
+              <div
+                key={index}
+                className="p-5 rounded-xl bg-card/50 border border-border/50 hover:border-destructive/30 transition-all duration-300">
+                
                   <div className="flex items-start gap-3">
                     <div className="p-1.5 rounded-lg bg-destructive/10 shrink-0 mt-0.5">
                       <X className="w-4 h-4 text-destructive" />
@@ -268,7 +268,7 @@ const MarketingAutomatizacionPage = () => {
                     <p className="text-foreground/90 text-sm leading-relaxed">{problem}</p>
                   </div>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </section>
@@ -300,11 +300,11 @@ const MarketingAutomatizacionPage = () => {
               </div>
 
               {/* Smaller Cards */}
-              {benefits.slice(1).map((benefit, index) => (
-                <div 
-                  key={index}
-                  className="p-5 rounded-xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-300"
-                >
+              {benefits.slice(1).map((benefit, index) =>
+              <div
+                key={index}
+                className="p-5 rounded-xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-300">
+                
                   <div className="flex items-start gap-3">
                     <div className="p-1.5 rounded-lg bg-primary/10 shrink-0 mt-0.5">
                       <CheckCircle2 className="w-4 h-4 text-primary" />
@@ -315,7 +315,7 @@ const MarketingAutomatizacionPage = () => {
                     </div>
                   </div>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </section>
@@ -331,8 +331,8 @@ const MarketingAutomatizacionPage = () => {
                 ¿Qué es la automatización de marketing?
               </h2>
               <div className="space-y-4 text-lg text-muted-foreground">
-                <p>
-                  Automatizar marketing significa usar tecnología para ejecutar tareas repetitivas: enviar mensajes de seguimiento, responder preguntas frecuentes, recordar citas y clasificar prospectos—todo sin intervención manual constante.
+                <p>Automatizar marketing significa usar tecnología para ejecutar tareas repetitivas: enviar mensajes de seguimiento, responder preguntas frecuentes, recordar citas y clasificar prospectos, todo sin intervención manual constante.
+
                 </p>
                 <p>
                   El resultado: respondes más rápido, personalizas a escala, reduces errores y puedes medir exactamente qué funciona y qué no.
@@ -355,28 +355,28 @@ const MarketingAutomatizacionPage = () => {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-              {automations.map((automation, index) => (
-                <div 
-                  key={index}
-                  className="p-6 rounded-xl bg-card/80 border border-border/50 hover:border-primary/30 transition-all duration-300 group"
-                >
+              {automations.map((automation, index) =>
+              <div
+                key={index}
+                className="p-6 rounded-xl bg-card/80 border border-border/50 hover:border-primary/30 transition-all duration-300 group">
+                
                   <div className="p-2.5 rounded-lg bg-primary/10 w-fit mb-4 group-hover:bg-primary/20 transition-colors">
                     <automation.icon className="w-5 h-5 text-primary" />
                   </div>
                   <h3 className="font-semibold text-foreground mb-2">{automation.title}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{automation.description}</p>
                   <div className="flex flex-wrap gap-2">
-                    {automation.channels.map((channel, idx) => (
-                      <span 
-                        key={idx}
-                        className={`px-2.5 py-1 rounded-full text-xs font-medium border ${channelColors[channel]}`}
-                      >
+                    {automation.channels.map((channel, idx) =>
+                  <span
+                    key={idx}
+                    className={`px-2.5 py-1 rounded-full text-xs font-medium border ${channelColors[channel]}`}>
+                    
                         {channel}
                       </span>
-                    ))}
+                  )}
                   </div>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </section>
@@ -403,12 +403,12 @@ const MarketingAutomatizacionPage = () => {
                   <h3 className="text-lg font-semibold text-foreground">Estrategia & Contenido</h3>
                 </div>
                 <ul className="space-y-3">
-                  {marketingStrategy.map((item, index) => (
-                    <li key={index} className="flex items-center gap-3 text-muted-foreground">
+                  {marketingStrategy.map((item, index) =>
+                  <li key={index} className="flex items-center gap-3 text-muted-foreground">
                       <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
                       <span>{item}</span>
                     </li>
-                  ))}
+                  )}
                 </ul>
               </div>
 
@@ -421,12 +421,12 @@ const MarketingAutomatizacionPage = () => {
                   <h3 className="text-lg font-semibold text-foreground">Campañas & Medición</h3>
                 </div>
                 <ul className="space-y-3">
-                  {marketingCampaigns.map((item, index) => (
-                    <li key={index} className="flex items-center gap-3 text-muted-foreground">
+                  {marketingCampaigns.map((item, index) =>
+                  <li key={index} className="flex items-center gap-3 text-muted-foreground">
                       <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
                       <span>{item}</span>
                     </li>
-                  ))}
+                  )}
                 </ul>
               </div>
             </div>
@@ -473,20 +473,20 @@ const MarketingAutomatizacionPage = () => {
 
             <div className="max-w-4xl mx-auto">
               <div className="grid md:grid-cols-3 gap-6">
-                {steps.map((step, index) => (
-                  <div key={index} className="relative">
+                {steps.map((step, index) =>
+                <div key={index} className="relative">
                     <div className="p-6 rounded-xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all duration-300 h-full">
                       <div className="text-4xl font-bold text-primary/20 mb-4">{step.number}</div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">{step.title}</h3>
                       <p className="text-sm text-muted-foreground">{step.description}</p>
                     </div>
-                    {index < steps.length - 1 && (
-                      <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2">
+                    {index < steps.length - 1 &&
+                  <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2">
                         <ChevronRight className="w-6 h-6 text-primary/30" />
                       </div>
-                    )}
+                  }
                   </div>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -525,36 +525,36 @@ const MarketingAutomatizacionPage = () => {
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                       <Label htmlFor="nombre">Nombre</Label>
-                      <Input 
+                      <Input
                         id="nombre"
                         name="nombre"
                         value={formData.nombre}
                         onChange={handleChange}
                         required
-                        placeholder="Tu nombre"
-                      />
+                        placeholder="Tu nombre" />
+                      
                     </div>
                     <div>
                       <Label htmlFor="empresa">Empresa</Label>
-                      <Input 
+                      <Input
                         id="empresa"
                         name="empresa"
                         value={formData.empresa}
                         onChange={handleChange}
                         required
-                        placeholder="Nombre de tu empresa"
-                      />
+                        placeholder="Nombre de tu empresa" />
+                      
                     </div>
                     <div>
                       <Label htmlFor="contacto">Email o Teléfono</Label>
-                      <Input 
+                      <Input
                         id="contacto"
                         name="contacto"
                         value={formData.contacto}
                         onChange={handleChange}
                         required
-                        placeholder="correo@empresa.com o +52..."
-                      />
+                        placeholder="correo@empresa.com o +52..." />
+                      
                     </div>
                     <div>
                       <Label htmlFor="canal">Canal principal</Label>
@@ -563,8 +563,8 @@ const MarketingAutomatizacionPage = () => {
                         name="canal"
                         value={formData.canal}
                         onChange={handleChange}
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                      >
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                        
                         <option value="">Selecciona un canal</option>
                         <option value="whatsapp">WhatsApp</option>
                         <option value="instagram">Instagram</option>
@@ -581,8 +581,8 @@ const MarketingAutomatizacionPage = () => {
                         name="objetivo"
                         value={formData.objetivo}
                         onChange={handleChange}
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                      >
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                        
                         <option value="">¿Qué buscas lograr?</option>
                         <option value="leads">Generar más leads</option>
                         <option value="ventas">Aumentar ventas</option>
@@ -602,8 +602,8 @@ const MarketingAutomatizacionPage = () => {
         </section>
       </main>
       <Footer />
-    </>
-  );
+    </>);
+
 };
 
 export default MarketingAutomatizacionPage;
