@@ -237,9 +237,10 @@ const ContactForm = ({
         <Button
           type="submit"
           size="lg"
+          disabled={sending}
           className="bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold flex-1"
         >
-          {submitLabel}
+          {sending ? <><Loader2 className="h-4 w-4 animate-spin mr-2" />Enviando...</> : submitLabel}
         </Button>
         <Button
           type="button"
