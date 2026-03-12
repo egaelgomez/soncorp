@@ -37,11 +37,8 @@ const Footer = () => {
             <p className="text-lg font-semibold text-primary mb-4">Enlaces Rápidos</p>
             <ul className="space-y-2">
               <li>
-                <button
-                  onClick={() => {
-                    const element = document.getElementById("inicio");
-                    if (element) element.scrollIntoView({ behavior: "smooth" });
-                  }}
+              <button
+                  onClick={() => scrollToSection("inicio")}
                   className="text-muted-foreground hover:text-secondary transition-smooth"
                 >
                   Inicio
@@ -49,10 +46,7 @@ const Footer = () => {
               </li>
               <li>
                 <button
-                  onClick={() => {
-                    const element = document.getElementById("servicios");
-                    if (element) element.scrollIntoView({ behavior: "smooth" });
-                  }}
+                  onClick={() => scrollToSection("servicios")}
                   className="text-muted-foreground hover:text-secondary transition-smooth"
                 >
                   Servicios
@@ -60,10 +54,7 @@ const Footer = () => {
               </li>
               <li>
                 <button
-                  onClick={() => {
-                    const element = document.getElementById("por-que-soncorp");
-                    if (element) element.scrollIntoView({ behavior: "smooth" });
-                  }}
+                  onClick={() => scrollToSection("por-que-soncorp")}
                   className="text-muted-foreground hover:text-secondary transition-smooth"
                 >
                   ¿Por qué Soncorp?
@@ -71,10 +62,7 @@ const Footer = () => {
               </li>
               <li>
                 <button
-                  onClick={() => {
-                    const element = document.getElementById("contacto");
-                    if (element) element.scrollIntoView({ behavior: "smooth" });
-                  }}
+                  onClick={() => scrollToSection("contacto")}
                   className="text-muted-foreground hover:text-secondary transition-smooth"
                 >
                   Contacto
