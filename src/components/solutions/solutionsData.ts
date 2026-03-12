@@ -333,7 +333,7 @@ export const solutions: Solution[] = [
       "Automatización (ManyChat/flows)",
       "Optimización por métricas"
     ],
-    audiences: ["PyME", "Mid-market", "Enterprise"],
+    audiences: ["Negocio en crecimiento", "Mid-market", "Enterprise"],
     techChips: ["ManyChat", "Meta Ads", "Google Ads", "HubSpot", "ActiveCampaign"],
     problems: [
       "Publicas pero no conviertes",

@@ -24,7 +24,7 @@ const Hero = () => {
 
           {/* Main heading */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight animate-in fade-in slide-in-from-bottom-5 duration-700 delay-100">
-            Consultoría integral para PYMEs que quieren{" "}
+            Consultoría integral para empresas que quieren{" "}
             <span className="text-secondary silver-text-glow">mejorar su atención al cliente</span>{" "}
             y hacer crecer su negocio
           </h1>

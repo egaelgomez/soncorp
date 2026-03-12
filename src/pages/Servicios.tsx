@@ -18,7 +18,7 @@ const Servicios = () => {
   return (
     <>
       <Helmet>
-        <title>Servicios | Soncorp - Consultoría para PyMEs</title>
+        <title>Servicios | Soncorp - Consultoría Empresarial</title>
         <meta 
           name="description" 
           content="Soluciones prácticas, medibles y escalables: Customer Experience, Finanzas, TI y Marketing. Desde quick wins hasta nivel enterprise." 

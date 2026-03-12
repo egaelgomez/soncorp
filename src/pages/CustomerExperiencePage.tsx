@@ -263,7 +263,7 @@ const CustomerExperiencePage = () => {
             Problemas típicos en la experiencia y atención al cliente
           </h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-            Situaciones comunes en PyMEs y empresas que afectan la experiencia y retención de clientes.
+            Situaciones comunes en empresas que afectan la experiencia y retención de clientes.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
             {problems.map((p, idx) => (

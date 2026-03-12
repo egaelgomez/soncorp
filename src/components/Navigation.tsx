@@ -44,7 +44,7 @@ const Navigation = () => {
           >
             <img 
               src={soncorpLogo} 
-              alt="Soncorp - Consultoría para PYMEs" 
+              alt="Soncorp - Consultoría Empresarial" 
               className="h-8 md:h-10 w-auto"
             />
           </button>

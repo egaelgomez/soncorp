@@ -28,7 +28,7 @@ const Footer = () => {
               className="h-10 w-auto mb-4"
             />
             <p className="text-muted-foreground mb-4">
-              Consultoría especializada para empresas en México. Le ayudamos a mejorar la experiencia de sus clientes y hacer crecer su negocio.
+              Consultoría empresarial especializada en México. Le ayudamos a mejorar la experiencia de sus clientes y hacer crecer su negocio.
             </p>
           </div>
 
