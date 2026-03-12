@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
-import { MessageSquare, Check } from "lucide-react";
+import { MessageSquare, Check, Loader2 } from "lucide-react";
 import { CONTACT_INFO } from "@/lib/constants";
+import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   nombre: z.string().trim().min(1, "Nombre requerido").max(100),
@@ -50,6 +51,7 @@ const ContactForm = ({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [sending, setSending] = useState(false);
 
   const handleWhatsAppClick = () => {
     window.open(
@@ -58,7 +60,7 @@ const ContactForm = ({
     );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const result = formSchema.safeParse(formData);
     if (!result.success) {
@@ -70,11 +72,30 @@ const ContactForm = ({
       return;
     }
     setErrors({});
-    setSubmitted(true);
-    toast({
-      title: "Solicitud recibida",
-      description: "Nos pondremos en contacto con usted a la brevedad.",
-    });
+    setSending(true);
+
+    try {
+      const { error } = await supabase.functions.invoke("send-contact-email", {
+        body: { ...formData, serviceName },
+      });
+
+      if (error) throw error;
+
+      setSubmitted(true);
+      toast({
+        title: "Solicitud recibida",
+        description: "Nos pondremos en contacto con usted a la brevedad.",
+      });
+    } catch (err) {
+      console.error("Error sending contact email:", err);
+      toast({
+        title: "Error al enviar",
+        description: "Hubo un problema. Intente de nuevo o escríbanos por WhatsApp.",
+        variant: "destructive",
+      });
+    } finally {
+      setSending(false);
+    }
   };
 
   const updateField = (field: string, value: string) => {
@@ -216,9 +237,10 @@ const ContactForm = ({
         <Button
           type="submit"
           size="lg"
+          disabled={sending}
           className="bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold flex-1"
         >
-          {submitLabel}
+          {sending ? <><Loader2 className="h-4 w-4 animate-spin mr-2" />Enviando...</> : submitLabel}
         </Button>
         <Button
           type="button"
