@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Megaphone,
   ArrowLeft,
@@ -23,41 +21,25 @@ import {
   TrendingUp,
   BarChart3 } from
 "lucide-react";
-import { toast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { CONTACT_INFO } from "@/lib/constants";
+import ContactForm from "@/components/shared/ContactForm";
+
+const marketingChallengeOptions = [
+  { value: "leads", label: "Generar más leads" },
+  { value: "ventas", label: "Aumentar ventas" },
+  { value: "retencion", label: "Mejorar retención" },
+  { value: "automatizacion", label: "Automatizar seguimiento" },
+  { value: "presencia", label: "Presencia digital" },
+  { value: "otro", label: "Otro" },
+];
 
 const MarketingAutomatizacionPage = () => {
-  const [formData, setFormData] = useState({
-    nombre: "",
-    empresa: "",
-    contacto: "",
-    canal: "",
-    objetivo: ""
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    toast({
-      title: "¡Solicitud enviada!",
-      description: "Te contactaremos pronto para definir tu estrategia."
-    });
-    setFormData({ nombre: "", empresa: "", contacto: "", canal: "", objetivo: "" });
-    setIsSubmitting(false);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
   const scrollToForm = () => {
     document.getElementById("marketing-cta")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const openWhatsApp = () => {
-    window.open("https://wa.me/521234567890?text=Hola, me interesa saber más sobre Marketing y Automatización", "_blank");
+    window.open(`https://wa.me/${CONTACT_INFO.whatsappNumber}?text=${encodeURIComponent("Hola, me interesa saber más sobre Marketing y Automatización")}`, "_blank");
   };
 
   const problems = [
@@ -520,81 +502,14 @@ const MarketingAutomatizacionPage = () => {
                 </div>
 
                 {/* Right - Form */}
-                <div className="p-6 md:p-8 rounded-2xl bg-card border border-border">
+                <div className="p-2 md:p-0">
                   <h3 className="text-lg font-semibold text-foreground mb-6">Solicitar estrategia</h3>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <Label htmlFor="nombre">Nombre</Label>
-                      <Input
-                        id="nombre"
-                        name="nombre"
-                        value={formData.nombre}
-                        onChange={handleChange}
-                        required
-                        placeholder="Tu nombre" />
-                      
-                    </div>
-                    <div>
-                      <Label htmlFor="empresa">Empresa</Label>
-                      <Input
-                        id="empresa"
-                        name="empresa"
-                        value={formData.empresa}
-                        onChange={handleChange}
-                        required
-                        placeholder="Nombre de tu empresa" />
-                      
-                    </div>
-                    <div>
-                      <Label htmlFor="contacto">Email o Teléfono</Label>
-                      <Input
-                        id="contacto"
-                        name="contacto"
-                        value={formData.contacto}
-                        onChange={handleChange}
-                        required
-                        placeholder="correo@empresa.com o +52..." />
-                      
-                    </div>
-                    <div>
-                      <Label htmlFor="canal">Canal principal</Label>
-                      <select
-                        id="canal"
-                        name="canal"
-                        value={formData.canal}
-                        onChange={handleChange}
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                        
-                        <option value="">Selecciona un canal</option>
-                        <option value="whatsapp">WhatsApp</option>
-                        <option value="instagram">Instagram</option>
-                        <option value="facebook">Facebook</option>
-                        <option value="web">Sitio Web</option>
-                        <option value="email">Email</option>
-                        <option value="otro">Otro</option>
-                      </select>
-                    </div>
-                    <div>
-                      <Label htmlFor="objetivo">Objetivo principal</Label>
-                      <select
-                        id="objetivo"
-                        name="objetivo"
-                        value={formData.objetivo}
-                        onChange={handleChange}
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                        
-                        <option value="">¿Qué buscas lograr?</option>
-                        <option value="leads">Generar más leads</option>
-                        <option value="ventas">Aumentar ventas</option>
-                        <option value="retencion">Mejorar retención</option>
-                        <option value="presencia">Presencia digital</option>
-                        <option value="otro">Otro</option>
-                      </select>
-                    </div>
-                    <Button type="submit" className="w-full" disabled={isSubmitting}>
-                      {isSubmitting ? "Enviando..." : "Solicitar estrategia"}
-                    </Button>
-                  </form>
+                  <ContactForm
+                    challengeLabel="Objetivo principal *"
+                    challengeOptions={marketingChallengeOptions}
+                    submitLabel="Solicitar estrategia"
+                    serviceName="Marketing y Automatización"
+                  />
                 </div>
               </div>
             </div>

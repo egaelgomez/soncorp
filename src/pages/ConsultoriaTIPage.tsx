@@ -1,41 +1,23 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Monitor, Check, ArrowRight, Lock, Key, FileText, FolderOpen, Server, Cloud, Database, Shield, Globe, Cpu, Settings, Headphones, Code, Workflow } from "lucide-react";
+import { ArrowLeft, Monitor, Check, ArrowRight, Lock, Key, FileText, FolderOpen, Server, Cloud, Database, Shield, Globe, Cpu, Settings, Headphones, Code, Workflow, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import { CONTACT_INFO } from "@/lib/constants";
+import ContactForm from "@/components/shared/ContactForm";
+
+const tiChallengeOptions = [
+  { value: "consultoria", label: "Consultoría IT / arquitectura" },
+  { value: "sistema", label: "Sistemas empresariales" },
+  { value: "web-app", label: "Desarrollo web / aplicaciones" },
+  { value: "automatizacion", label: "Automatización de procesos" },
+  { value: "infraestructura", label: "Infraestructura / cloud / BD" },
+  { value: "soporte", label: "Soporte especializado por tickets" },
+  { value: "otro", label: "Otro" },
+];
 
 const ConsultoriaTIPage = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    nombre: "",
-    empresa: "",
-    email: "",
-    telefono: "",
-    necesidad: "",
-    tecnologias: "",
-    alcance: ""
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    toast({
-      title: "¡Solicitud enviada!",
-      description: "Te contactaremos pronto con una propuesta.",
-    });
-    setFormData({ nombre: "", empresa: "", email: "", telefono: "", necesidad: "", tecnologias: "", alcance: "" });
-    setIsSubmitting(false);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
   const scrollToContact = () => {
     document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -248,7 +230,8 @@ const ConsultoriaTIPage = () => {
                   className="border-border hover:bg-muted"
                   asChild
                 >
-                  <a href="https://wa.me/521234567890" target="_blank" rel="noopener noreferrer">
+                  <a href={`https://wa.me/${CONTACT_INFO.whatsappNumber}?text=${encodeURIComponent(CONTACT_INFO.whatsappMessage)}`} target="_blank" rel="noopener noreferrer">
+                    <MessageSquare className="w-4 h-4 mr-2" />
                     Hablar por WhatsApp
                   </a>
                 </Button>
@@ -505,83 +488,16 @@ const ConsultoriaTIPage = () => {
               </div>
               
               {/* Contact Form */}
-              <div id="form" className="p-8 rounded-2xl bg-card border border-border">
-                <h3 className="text-xl font-semibold text-foreground mb-6">
+              <div id="form" className="max-w-2xl mx-auto">
+                <h3 className="text-xl font-semibold text-foreground mb-6 text-center">
                   Cuéntenos sobre su necesidad tecnológica
                 </h3>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <input
-                      type="text"
-                      name="nombre"
-                      placeholder="Nombre"
-                      value={formData.nombre}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg bg-muted border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground"
-                    />
-                    <input
-                      type="text"
-                      name="empresa"
-                      placeholder="Empresa"
-                      value={formData.empresa}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg bg-muted border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground"
-                    />
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg bg-muted border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground"
-                    />
-                    <input
-                      type="tel"
-                      name="telefono"
-                      placeholder="Teléfono (opcional)"
-                      value={formData.telefono}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg bg-muted border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground"
-                    />
-                  </div>
-                  <textarea
-                    name="necesidad"
-                    placeholder="¿Qué necesita resolver? (consultoría, sistema, página web, app, automatización, soporte, infraestructura, etc.)"
-                    value={formData.necesidad}
-                    onChange={handleChange}
-                    rows={3}
-                    className="w-full px-4 py-3 rounded-lg bg-muted border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground resize-none"
-                  />
-                  <input
-                    type="text"
-                    name="tecnologias"
-                    placeholder="Tecnologías o contexto actual (ej: Azure, ServiceNow, WordPress...)"
-                    value={formData.tecnologias}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-muted border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground"
-                  />
-                  <input
-                    type="text"
-                    name="alcance"
-                    placeholder="Alcance estimado o volumen (opcional)"
-                    value={formData.alcance}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-muted border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground"
-                  />
-                  <Button 
-                    type="submit" 
-                    size="lg" 
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Enviando..." : "Solicitar propuesta"}
-                  </Button>
-                </form>
+                <ContactForm
+                  challengeLabel="¿Qué necesita resolver? *"
+                  challengeOptions={tiChallengeOptions}
+                  submitLabel="Solicitar propuesta"
+                  serviceName="Consultoría TI"
+                />
               </div>
             </div>
           </div>
