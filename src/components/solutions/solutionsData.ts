@@ -53,7 +53,7 @@ export const solutions: Solution[] = [
       "Métricas de experiencia (NPS/CSAT/CES)"
     ],
     badge: "Basado en Six Pillars: Personalización, Integridad, Expectativas, Resolución, Tiempo & Esfuerzo, Empatía.",
-    audiences: ["PyME", "Mid-market", "Enterprise"],
+    audiences: ["Negocio en crecimiento", "Mid-market", "Enterprise"],
     problems: [
       "Quejas recurrentes y mala reputación",
       "Respuestas lentas o procesos inconsistentes",
