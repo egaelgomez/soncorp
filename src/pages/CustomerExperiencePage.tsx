@@ -24,15 +24,15 @@ import {
   Handshake,
   ArrowDownToLine,
   RefreshCw,
-  Network,
-} from "lucide-react";
+  Network } from
+"lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+  AccordionTrigger } from
+"@/components/ui/accordion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
@@ -52,21 +52,21 @@ const formSchema = z.object({
   telefono: z.string().trim().min(1, "Teléfono requerido").max(20),
   tamano: z.string().min(1, "Seleccione tamaño"),
   reto: z.string().min(1, "Seleccione reto principal"),
-  mensaje: z.string().trim().max(1000).optional(),
+  mensaje: z.string().trim().max(1000).optional()
 });
 
 const faqItems = [
-  { question: "¿La consultoría en Experiencia del Cliente sirve para cualquier tipo de empresa?", answer: "Sí. Adaptamos el alcance y profundidad al tamaño y madurez de cada organización. Desde negocios con 5 empleados hasta corporativos con cientos." },
-  { question: "¿Cuánto tiempo toma ver mejoras en la atención al cliente y la experiencia?", answer: "Depende del alcance. Algunas mejoras en la atención al cliente se notan en semanas; una transformación profunda de la experiencia puede tomar meses. Se definen hitos claros desde el inicio." },
-  { question: "¿Trabajan la experiencia del cliente interno y externo?", answer: "Sí. La experiencia del cliente externo depende directamente de la experiencia del cliente interno. Abordamos ambos de forma integral." },
-  { question: "¿Qué métricas de Customer Experience utilizan?", answer: "Dependiendo del contexto: CSAT (satisfacción), NPS (recomendación), CES (esfuerzo), tiempos de respuesta, tasa de resolución al primer contacto, entre otros indicadores relevantes para medir la atención al cliente y la experiencia global." },
-  { question: "¿Se requiere software para mejorar la experiencia del cliente?", answer: "No necesariamente. Trabajamos con las herramientas que usted ya utiliza. Si se identifica la necesidad, recomendamos opciones adecuadas al presupuesto." },
-  { question: "¿Ofrecen capacitación en atención al cliente y Customer Experience?", answer: "Sí. La capacitación y el desarrollo de cultura de servicio son parte fundamental de nuestro enfoque de Experiencia del Cliente." },
-  { question: "¿Cómo se define el alcance de un proyecto de CX?", answer: "En la asesoría inicial capturamos su situación actual, objetivos y recursos disponibles. Con esa información se presenta una propuesta de alcance y honorarios." },
-  { question: "¿Cuál es la inversión en consultoría de Customer Experience?", answer: "Los honorarios se definen según el alcance y complejidad de cada proyecto. Después de la asesoría inicial se presenta una propuesta formal." },
-  { question: "¿Incluye capacitación para personal de atención al cliente?", answer: "Sí. Nuestro enfoque incluye entrenamiento y coaching para las personas que tienen contacto directo con clientes. Trabajamos guiones, estándares, manejo de objeciones, empatía y comunicación profesional, adaptados a los canales y contexto de su organización." },
-  { question: "¿También aplica para cliente interno (áreas que se atienden entre sí)?", answer: "Sí. La coordinación entre áreas impacta directamente en la experiencia del cliente externo. Incluimos entrenamiento en comunicación inter-áreas, reducción de handoffs innecesarios y estándares de colaboración interna." },
-];
+{ question: "¿La consultoría en Experiencia del Cliente sirve para cualquier tipo de empresa?", answer: "Sí. Adaptamos el alcance y profundidad al tamaño y madurez de cada organización. Desde negocios con 5 empleados hasta corporativos con cientos." },
+{ question: "¿Cuánto tiempo toma ver mejoras en la atención al cliente y la experiencia?", answer: "Depende del alcance. Algunas mejoras en la atención al cliente se notan en semanas; una transformación profunda de la experiencia puede tomar meses. Se definen hitos claros desde el inicio." },
+{ question: "¿Trabajan la experiencia del cliente interno y externo?", answer: "Sí. La experiencia del cliente externo depende directamente de la experiencia del cliente interno. Abordamos ambos de forma integral." },
+{ question: "¿Qué métricas de Customer Experience utilizan?", answer: "Dependiendo del contexto: CSAT (satisfacción), NPS (recomendación), CES (esfuerzo), tiempos de respuesta, tasa de resolución al primer contacto, entre otros indicadores relevantes para medir la atención al cliente y la experiencia global." },
+{ question: "¿Se requiere software para mejorar la experiencia del cliente?", answer: "No necesariamente. Trabajamos con las herramientas que usted ya utiliza. Si se identifica la necesidad, recomendamos opciones adecuadas al presupuesto." },
+{ question: "¿Ofrecen capacitación en atención al cliente y Customer Experience?", answer: "Sí. La capacitación y el desarrollo de cultura de servicio son parte fundamental de nuestro enfoque de Experiencia del Cliente." },
+{ question: "¿Cómo se define el alcance de un proyecto de CX?", answer: "En la asesoría inicial capturamos su situación actual, objetivos y recursos disponibles. Con esa información se presenta una propuesta de alcance y honorarios." },
+{ question: "¿Cuál es la inversión en consultoría de Customer Experience?", answer: "Los honorarios se definen según el alcance y complejidad de cada proyecto. Después de la asesoría inicial se presenta una propuesta formal." },
+{ question: "¿Incluye capacitación para personal de atención al cliente?", answer: "Sí. Nuestro enfoque incluye entrenamiento y coaching para las personas que tienen contacto directo con clientes. Trabajamos guiones, estándares, manejo de objeciones, empatía y comunicación profesional, adaptados a los canales y contexto de su organización." },
+{ question: "¿También aplica para cliente interno (áreas que se atienden entre sí)?", answer: "Sí. La coordinación entre áreas impacta directamente en la experiencia del cliente externo. Incluimos entrenamiento en comunicación inter-áreas, reducción de handoffs innecesarios y estándares de colaboración interna." }];
+
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -74,8 +74,8 @@ const faqSchema = {
   mainEntity: faqItems.map((item) => ({
     "@type": "Question",
     name: item.question,
-    acceptedAnswer: { "@type": "Answer", text: item.answer },
-  })),
+    acceptedAnswer: { "@type": "Answer", text: item.answer }
+  }))
 };
 
 const orgSchema = {
@@ -83,14 +83,14 @@ const orgSchema = {
   "@type": "Organization",
   name: "Soncorp",
   url: "https://soncorp.com.mx",
-  description: "Consultoría especializada en Experiencia del Cliente (Customer Experience, CX) y mejora de atención al cliente para empresas en México.",
+  description: "Consultoría especializada en Experiencia del Cliente (Customer Experience, CX) y mejora de atención al cliente para empresas en México."
 };
 
 const CustomerExperiencePage = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     nombre: "", empresa: "", rol: "", email: "", telefono: "",
-    tamano: "", reto: "", mensaje: "",
+    tamano: "", reto: "", mensaje: ""
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -143,7 +143,7 @@ const CustomerExperiencePage = () => {
     setSubmitted(true);
     toast({
       title: "Solicitud recibida",
-      description: "Nos pondremos en contacto con usted a la brevedad.",
+      description: "Nos pondremos en contacto con usted a la brevedad."
     });
   };
 
@@ -153,30 +153,30 @@ const CustomerExperiencePage = () => {
   };
 
   const problems = [
-    { title: "Quejas recurrentes", desc: "Clientes insatisfechos que no regresan y afectan su reputación." },
-    { title: "Tiempos de respuesta lentos", desc: "Sin seguimiento real ni resolución oportuna." },
-    { title: "Inconsistencia en el servicio", desc: "Cada área o empleado atiende de manera diferente." },
-    { title: "Retrabajo y fricción interna", desc: "Problemas entre áreas que afectan al cliente interno y externo." },
-    { title: "Equipos sin estándares", desc: "Personal desalineado, sin protocolos ni capacitación." },
-    { title: "Falta de métricas", desc: "No se mide la experiencia: no se sabe qué mejorar." },
-  ];
+  { title: "Quejas recurrentes", desc: "Clientes insatisfechos que no regresan y afectan su reputación." },
+  { title: "Tiempos de respuesta lentos", desc: "Sin seguimiento real ni resolución oportuna." },
+  { title: "Inconsistencia en el servicio", desc: "Cada área o empleado atiende de manera diferente." },
+  { title: "Retrabajo y fricción interna", desc: "Problemas entre áreas que afectan al cliente interno y externo." },
+  { title: "Equipos sin estándares", desc: "Personal desalineado, sin protocolos ni capacitación." },
+  { title: "Falta de métricas", desc: "No se mide la experiencia: no se sabe qué mejorar." }];
+
 
   const solutions = [
-    { icon: Search, title: "Diagnóstico de journey", desc: "Mapeo de puntos de contacto e identificación de oportunidades de mejora." },
-    { icon: BarChart3, title: "Medición", desc: "Implementación de indicadores como CSAT, NPS y CES para tomar decisiones basadas en datos." },
-    { icon: Settings, title: "Procesos y estándares", desc: "Diseño de protocolos de servicio consistentes y escalables." },
-    { icon: GraduationCap, title: "Cultura y capacitación", desc: "Desarrollo de habilidades y mentalidad orientada al cliente en su equipo." },
-    { icon: Shield, title: "Gobernanza y mejora continua", desc: "Estructura de seguimiento para sostener y escalar los avances." },
-  ];
+  { icon: Search, title: "Diagnóstico de journey", desc: "Mapeo de puntos de contacto e identificación de oportunidades de mejora." },
+  { icon: BarChart3, title: "Medición", desc: "Implementación de indicadores como CSAT, NPS y CES para tomar decisiones basadas en datos." },
+  { icon: Settings, title: "Procesos y estándares", desc: "Diseño de protocolos de servicio consistentes y escalables." },
+  { icon: GraduationCap, title: "Cultura y capacitación", desc: "Desarrollo de habilidades y mentalidad orientada al cliente en su equipo." },
+  { icon: Shield, title: "Gobernanza y mejora continua", desc: "Estructura de seguimiento para sostener y escalar los avances." }];
+
 
   const pillars = [
-    { icon: Users, title: "Personalización", desc: "Adaptar la experiencia a las necesidades de cada cliente." },
-    { icon: HandshakeIcon, title: "Integridad", desc: "Generar confianza a través de transparencia y coherencia." },
-    { icon: Target, title: "Expectativas", desc: "Gestionar y superar lo que el cliente espera." },
-    { icon: Settings, title: "Resolución", desc: "Convertir problemas en oportunidades de fidelización." },
-    { icon: Clock, title: "Tiempo y esfuerzo", desc: "Reducir la fricción en cada interacción." },
-    { icon: Heart, title: "Empatía", desc: "Comprender la situación del cliente y actuar en consecuencia." },
-  ];
+  { icon: Users, title: "Personalización", desc: "Adaptar la experiencia a las necesidades de cada cliente." },
+  { icon: HandshakeIcon, title: "Integridad", desc: "Generar confianza a través de transparencia y coherencia." },
+  { icon: Target, title: "Expectativas", desc: "Gestionar y superar lo que el cliente espera." },
+  { icon: Settings, title: "Resolución", desc: "Convertir problemas en oportunidades de fidelización." },
+  { icon: Clock, title: "Tiempo y esfuerzo", desc: "Reducir la fricción en cada interacción." },
+  { icon: Heart, title: "Empatía", desc: "Comprender la situación del cliente y actuar en consecuencia." }];
+
 
   const inputClass = "w-full px-4 py-3 rounded-lg bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-secondary/60 transition-colors text-sm";
   const labelClass = "block text-sm font-medium text-foreground mb-1.5";
@@ -220,10 +220,10 @@ const CustomerExperiencePage = () => {
               </h1>
             </div>
 
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-4 max-w-3xl">
-              Fortalezca la retención, satisfacción y recomendación de sus clientes —externos e internos—
-              mientras impulsa la eficiencia operativa de su organización. Un enfoque integral que conecta
-              cada punto de contacto con resultados empresariales concretos.
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-4 max-w-3xl">Fortalezca la retención, satisfacción y recomendación de sus clientes externos e internos, impulsa la eficiencia operativa de su organización. Un enfoque integral que conecta cada punto de contacto con resultados empresariales concretos.
+
+
+
             </p>
             <p className="text-sm md:text-base text-muted-foreground/80 italic mb-8 max-w-3xl">
               La atención al cliente es parte de la Experiencia del Cliente; nuestro enfoque es integral y abarca tanto al cliente interno como al externo.
@@ -231,15 +231,15 @@ const CustomerExperiencePage = () => {
 
             <ul className="space-y-3 mb-10 max-w-2xl">
               {[
-                "Diagnóstico integral: identifique oportunidades en la experiencia de su cliente externo y en la colaboración entre áreas.",
-                "Acompañamiento experto adaptado a su organización: desde la estrategia hasta la ejecución.",
-                "Resultados empresariales: mayor retención, mejor satisfacción, eficiencia operativa y equipos alineados.",
-              ].map((bullet, i) => (
-                <li key={i} className="flex items-start gap-3 text-foreground/90">
+              "Diagnóstico integral: identifique oportunidades en la experiencia de su cliente externo y en la colaboración entre áreas.",
+              "Acompañamiento experto adaptado a su organización: desde la estrategia hasta la ejecución.",
+              "Resultados empresariales: mayor retención, mejor satisfacción, eficiencia operativa y equipos alineados."].
+              map((bullet, i) =>
+              <li key={i} className="flex items-start gap-3 text-foreground/90">
                   <Check className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
                   <span className="text-sm md:text-base">{bullet}</span>
                 </li>
-              ))}
+              )}
             </ul>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -266,8 +266,8 @@ const CustomerExperiencePage = () => {
             Situaciones comunes en empresas que afectan la experiencia y retención de clientes.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-            {problems.map((p, idx) => (
-              <div key={idx} className="flex items-start gap-3 p-5 rounded-lg bg-card/50 border border-border/50 hover:border-destructive/30 transition-colors">
+            {problems.map((p, idx) =>
+            <div key={idx} className="flex items-start gap-3 p-5 rounded-lg bg-card/50 border border-border/50 hover:border-destructive/30 transition-colors">
                 <div className="flex-shrink-0 w-6 h-6 rounded-full bg-destructive/10 flex items-center justify-center mt-0.5">
                   <AlertTriangle className="h-3 w-3 text-destructive" />
                 </div>
@@ -276,7 +276,7 @@ const CustomerExperiencePage = () => {
                   <p className="text-muted-foreground text-xs leading-relaxed">{p.desc}</p>
                 </div>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -300,8 +300,8 @@ const CustomerExperiencePage = () => {
                   </div>
                   <h3 className="font-semibold text-foreground mb-2">{s.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-                </div>
-              );
+                </div>);
+
             })}
           </div>
         </div>
@@ -336,8 +336,8 @@ const CustomerExperiencePage = () => {
                       <h3 className="font-semibold text-foreground">{p.title}</h3>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
-                  </div>
-                );
+                  </div>);
+
               })}
             </div>
           </div>
@@ -354,26 +354,26 @@ const CustomerExperiencePage = () => {
             <div className="hidden md:flex items-start justify-between relative">
               <div className="absolute top-8 left-[15%] right-[15%] h-px bg-border" />
               {[
-                { n: "01", t: "Asesoría inicial", d: "Captura de información, entendimiento del negocio y sus objetivos." },
-                { n: "02", t: "Hallazgos y plan", d: "Priorización de acciones y ruta clara de mejora." },
-                { n: "03", t: "Implementación guiada", d: "Acompañamiento por etapas, adaptado a su organización." },
-              ].map((step, idx) => (
-                <div key={idx} className="flex flex-col items-center text-center relative z-10 w-1/3 px-4">
+              { n: "01", t: "Asesoría inicial", d: "Captura de información, entendimiento del negocio y sus objetivos." },
+              { n: "02", t: "Hallazgos y plan", d: "Priorización de acciones y ruta clara de mejora." },
+              { n: "03", t: "Implementación guiada", d: "Acompañamiento por etapas, adaptado a su organización." }].
+              map((step, idx) =>
+              <div key={idx} className="flex flex-col items-center text-center relative z-10 w-1/3 px-4">
                   <div className="w-16 h-16 rounded-full bg-secondary/10 border-2 border-secondary/40 flex items-center justify-center mb-4">
                     <span className="text-lg font-bold text-secondary">{step.n}</span>
                   </div>
                   <h3 className="font-semibold text-foreground mb-2">{step.t}</h3>
                   <p className="text-sm text-muted-foreground">{step.d}</p>
                 </div>
-              ))}
+              )}
             </div>
             <div className="md:hidden space-y-6">
               {[
-                { n: "01", t: "Asesoría inicial", d: "Captura de información, entendimiento del negocio y sus objetivos." },
-                { n: "02", t: "Hallazgos y plan", d: "Priorización de acciones y ruta clara de mejora." },
-                { n: "03", t: "Implementación guiada", d: "Acompañamiento por etapas, adaptado a su organización." },
-              ].map((step, idx) => (
-                <div key={idx} className="flex items-start gap-4">
+              { n: "01", t: "Asesoría inicial", d: "Captura de información, entendimiento del negocio y sus objetivos." },
+              { n: "02", t: "Hallazgos y plan", d: "Priorización de acciones y ruta clara de mejora." },
+              { n: "03", t: "Implementación guiada", d: "Acompañamiento por etapas, adaptado a su organización." }].
+              map((step, idx) =>
+              <div key={idx} className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full bg-secondary/10 border-2 border-secondary/40 flex items-center justify-center flex-shrink-0">
                     <span className="text-sm font-bold text-secondary">{step.n}</span>
                   </div>
@@ -382,7 +382,7 @@ const CustomerExperiencePage = () => {
                     <p className="text-sm text-muted-foreground">{step.d}</p>
                   </div>
                 </div>
-              ))}
+              )}
             </div>
             <p className="text-center text-sm text-muted-foreground mt-10">
               El alcance y profundidad se adaptan al tamaño y madurez de cada organización.
@@ -409,13 +409,13 @@ const CustomerExperiencePage = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                { icon: BookOpen, title: "Guiones y estándares de servicio", desc: "Tono, protocolos y escalamiento definidos para cada canal y punto de contacto." },
-                { icon: MessageCircle, title: "Manejo de objeciones y conversaciones difíciles", desc: "Técnicas para responder con profesionalismo y convertir situaciones complejas en oportunidades." },
-                { icon: Handshake, title: "Empatía y comunicación profesional", desc: "Habilidades para la interacción presencial, telefónica y por chat con enfoque en el cliente." },
-                { icon: RefreshCw, title: "Resolución y recuperación del servicio", desc: "Service recovery: cómo actuar cuando algo falla para restaurar la confianza del cliente." },
-                { icon: ArrowDownToLine, title: "Reducción de esfuerzo del cliente", desc: "Simplificación de pasos y handoffs para que el cliente resuelva con menos fricción." },
-                { icon: Network, title: "Coordinación inter-áreas (cliente interno)", desc: "Estándares de colaboración entre departamentos para evitar fricción y mejorar la experiencia global." },
-              ].map((item, idx) => {
+              { icon: BookOpen, title: "Guiones y estándares de servicio", desc: "Tono, protocolos y escalamiento definidos para cada canal y punto de contacto." },
+              { icon: MessageCircle, title: "Manejo de objeciones y conversaciones difíciles", desc: "Técnicas para responder con profesionalismo y convertir situaciones complejas en oportunidades." },
+              { icon: Handshake, title: "Empatía y comunicación profesional", desc: "Habilidades para la interacción presencial, telefónica y por chat con enfoque en el cliente." },
+              { icon: RefreshCw, title: "Resolución y recuperación del servicio", desc: "Service recovery: cómo actuar cuando algo falla para restaurar la confianza del cliente." },
+              { icon: ArrowDownToLine, title: "Reducción de esfuerzo del cliente", desc: "Simplificación de pasos y handoffs para que el cliente resuelva con menos fricción." },
+              { icon: Network, title: "Coordinación inter-áreas (cliente interno)", desc: "Estándares de colaboración entre departamentos para evitar fricción y mejorar la experiencia global." }].
+              map((item, idx) => {
                 const Icon = item.icon;
                 return (
                   <div key={idx} className="p-5 rounded-xl bg-card border border-border/50 hover:border-secondary/30 transition-colors group">
@@ -426,8 +426,8 @@ const CustomerExperiencePage = () => {
                       <h3 className="font-semibold text-foreground text-sm">{item.title}</h3>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-                  </div>
-                );
+                  </div>);
+
               })}
             </div>
             <div className="text-center mt-10">
@@ -438,8 +438,8 @@ const CustomerExperiencePage = () => {
                   updateField("reto", "entrenamiento");
                   document.getElementById("cta-final")?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="gap-2 bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold"
-              >
+                className="gap-2 bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold">
+                
                 Agendar asesoría inicial de entrenamiento
                 <ChevronRight className="h-4 w-4" />
               </Button>
@@ -459,16 +459,16 @@ const CustomerExperiencePage = () => {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl mx-auto">
             {[
-              { name: "Diagnóstico CX", desc: "Evaluación inicial de la experiencia actual, identificación de oportunidades, recomendaciones prioritarias e identificación de brechas de capacitación y consistencia.", tag: "Punto de partida" },
-              { name: "Plan CX", desc: "Priorización de acciones, estándares de servicio, hoja de ruta con hitos claros, plan de entrenamiento por roles y playbooks de atención.", tag: "Ruta de mejora" },
-              { name: "Acompañamiento CX", desc: "Implementación guiada por etapas junto a su equipo, coaching por etapas con observación y retroalimentación, medición y mejora continua.", tag: "Implementación" },
-            ].map((pkg, idx) => (
-              <div key={idx} className={`p-6 rounded-xl border transition-colors ${idx === 1 ? "bg-gradient-to-br from-secondary/15 to-secondary/5 border-secondary/30" : "bg-card border-border/50 hover:border-secondary/30"}`}>
+            { name: "Diagnóstico CX", desc: "Evaluación inicial de la experiencia actual, identificación de oportunidades, recomendaciones prioritarias e identificación de brechas de capacitación y consistencia.", tag: "Punto de partida" },
+            { name: "Plan CX", desc: "Priorización de acciones, estándares de servicio, hoja de ruta con hitos claros, plan de entrenamiento por roles y playbooks de atención.", tag: "Ruta de mejora" },
+            { name: "Acompañamiento CX", desc: "Implementación guiada por etapas junto a su equipo, coaching por etapas con observación y retroalimentación, medición y mejora continua.", tag: "Implementación" }].
+            map((pkg, idx) =>
+            <div key={idx} className={`p-6 rounded-xl border transition-colors ${idx === 1 ? "bg-gradient-to-br from-secondary/15 to-secondary/5 border-secondary/30" : "bg-card border-border/50 hover:border-secondary/30"}`}>
                 <span className="inline-block text-xs font-medium text-secondary bg-secondary/10 px-3 py-1 rounded-full mb-4">{pkg.tag}</span>
                 <h3 className="text-lg font-semibold text-foreground mb-3">{pkg.name}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{pkg.desc}</p>
               </div>
-            ))}
+            )}
           </div>
           <p className="text-center text-sm text-muted-foreground mt-8 max-w-lg mx-auto">
             Honorarios definidos según alcance y complejidad; se presenta propuesta después de la asesoría inicial.
@@ -484,12 +484,12 @@ const CustomerExperiencePage = () => {
               Preguntas frecuentes sobre Customer Experience
             </h2>
             <Accordion type="single" collapsible className="space-y-3">
-              {faqItems.map((item, idx) => (
-                <AccordionItem
-                  key={idx}
-                  value={`item-${idx}`}
-                  className="border border-border rounded-lg bg-card px-6 data-[state=open]:border-secondary/40"
-                >
+              {faqItems.map((item, idx) =>
+              <AccordionItem
+                key={idx}
+                value={`item-${idx}`}
+                className="border border-border rounded-lg bg-card px-6 data-[state=open]:border-secondary/40">
+                
                   <AccordionTrigger className="text-left text-foreground hover:text-secondary hover:no-underline py-5 text-sm md:text-base">
                     {item.question}
                   </AccordionTrigger>
@@ -497,7 +497,7 @@ const CustomerExperiencePage = () => {
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>
-              ))}
+              )}
             </Accordion>
           </div>
         </div>
@@ -532,8 +532,8 @@ const CustomerExperiencePage = () => {
               Cuéntenos sobre su organización y sus retos. Sin compromiso.
             </p>
 
-            {submitted ? (
-              <div className="text-center p-10 rounded-xl bg-card border border-secondary/30">
+            {submitted ?
+            <div className="text-center p-10 rounded-xl bg-card border border-secondary/30">
                 <Check className="h-12 w-12 text-secondary mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-foreground mb-3">Solicitud recibida</h3>
                 <p className="text-muted-foreground mb-6">Nos pondremos en contacto con usted a la brevedad.</p>
@@ -541,9 +541,9 @@ const CustomerExperiencePage = () => {
                   <MessageSquare className="h-4 w-4" />
                   También puede escribirnos por WhatsApp
                 </Button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5 p-8 rounded-xl bg-card border border-border/50">
+              </div> :
+
+            <form onSubmit={handleSubmit} className="space-y-5 p-8 rounded-xl bg-card border border-border/50">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
                     <label className={labelClass}>Nombre completo *</label>
@@ -594,16 +594,16 @@ const CustomerExperiencePage = () => {
                   </select>
                   {errors.reto && <p className={errorClass}>{errors.reto}</p>}
                 </div>
-                {!showMessage ? (
-                  <button type="button" onClick={() => setShowMessage(true)} className="text-sm text-secondary hover:text-secondary/80 transition-colors underline underline-offset-2">
+                {!showMessage ?
+              <button type="button" onClick={() => setShowMessage(true)} className="text-sm text-secondary hover:text-secondary/80 transition-colors underline underline-offset-2">
                     + Agregar mensaje (opcional)
-                  </button>
-                ) : (
-                  <div>
+                  </button> :
+
+              <div>
                     <label className={labelClass}>Mensaje (opcional)</label>
                     <textarea className={`${inputClass} min-h-[80px] resize-none`} placeholder="Cuéntenos brevemente sobre su situación." value={formData.mensaje} onChange={(e) => updateField("mensaje", e.target.value)} />
                   </div>
-                )}
+              }
                 <div className="flex flex-col sm:flex-row gap-4 pt-2">
                   <Button type="submit" size="lg" className="bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold flex-1">
                     Agendar asesoría inicial
@@ -614,7 +614,7 @@ const CustomerExperiencePage = () => {
                   </Button>
                 </div>
               </form>
-            )}
+            }
 
             {/* Microdisclaimer */}
             <p className="text-xs text-muted-foreground text-center mt-6">
@@ -626,8 +626,8 @@ const CustomerExperiencePage = () => {
 
       <Footer />
       <WhatsAppFloat />
-    </>
-  );
+    </>);
+
 };
 
 export default CustomerExperiencePage;
