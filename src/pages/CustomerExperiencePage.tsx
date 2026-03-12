@@ -71,15 +71,18 @@ const orgSchema = {
   description: "Consultoría especializada en Experiencia del Cliente (Customer Experience, CX) y mejora de atención al cliente para empresas en México."
 };
 
+const cxChallengeOptions = [
+  { value: "atencion", label: "Atención al cliente / servicio" },
+  { value: "procesos", label: "Procesos y tiempos de respuesta" },
+  { value: "cliente-interno", label: "Cliente interno (colaboración entre áreas)" },
+  { value: "metricas", label: "Medición y métricas (NPS/CSAT/CES)" },
+  { value: "entrenamiento", label: "Entrenamiento y estandarización" },
+  { value: "otro", label: "Otro" },
+];
+
 const CustomerExperiencePage = () => {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    nombre: "", empresa: "", rol: "", email: "", telefono: "",
-    tamano: "", reto: "", mensaje: ""
-  });
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [submitted, setSubmitted] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
+  const [defaultChallenge, setDefaultChallenge] = useState("");
   const sentinelRef = useRef<HTMLDivElement>(null);
   const scrollTracked = useRef(false);
 
