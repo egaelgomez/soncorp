@@ -1,74 +1,52 @@
 
 
-## Plan: Optimizacion final de conversion y SEO en /servicios/customer-experience
+## Plan: Refactorizar servicio TI a "Consultoría y Soluciones TI"
 
-Archivo unico a modificar: `src/pages/CustomerExperiencePage.tsx`
+### Archivos a modificar
 
----
+#### 1. `src/App.tsx`
+- Cambiar ruta de `/servicios/mesa-ingenieria-ti-por-tickets` a `/servicios/consultoria-soluciones-ti`
+- Agregar redirección `Navigate` desde la ruta antigua hacia la nueva
 
-### Cambios (4 ediciones puntuales)
+#### 2. `src/components/solutions/solutionsData.ts`
+Reescribir el objeto `id: "it"`:
+- **slug**: `"consultoria-soluciones-ti"`
+- **title**: `"Consultoría y Soluciones TI"`
+- **result**: `"Resuelva necesidades tecnológicas con consultoría, implementación y soporte especializado."`
+- **chips**: `["Consultoría", "Implementación", "Soporte especializado"]`
+- **headline**: actualizado al nuevo posicionamiento integral
+- **heroBullets**: consultoría IT, sistemas, web, apps, automatización, infraestructura, soporte
+- **techChips**: agregar "Active Directory", "Sitios web", "Apps empresariales", "Integraciones"
+- **problems**: 8 nuevos dolores amplios (falta de claridad tecnológica, procesos manuales, necesidad de web/app, dependencia interna, falta de especialistas, backlog, procesos desconectados, modernización)
+- **benefits**: alineados a la nueva oferta
+- **scope**: 4 cards (Evaluación inicial → Definición de alcance → Implementación o soporte → Entrega y continuidad)
+- **packages**: renombrar a 3 modalidades (Diagnóstico y consultoría / Implementación y desarrollo / Soporte especializado por tickets)
+- **faq**: reescribir con preguntas relevantes al nuevo posicionamiento
 
-**1. CTA de Entrenamiento - texto + scroll con preseleccion (lineas 433-444)**
+#### 3. `src/pages/ConsultoriaTIPage.tsx` — Reescritura completa
+Mantener estructura visual (hero, sections, form) pero reescribir todo el contenido:
 
-Cambiar el texto del boton de "Solicitar informacion de entrenamiento" a **"Agendar asesoria inicial de entrenamiento"**.
+- **SEO**: title "Consultoría y Soluciones TI | Soncorp", meta description amplia
+- **Breadcrumb**: "Consultoría y Soluciones TI"
+- **Hero**: nuevo título, subtítulo integral, bullets de capacidades (sistemas, web, apps, automatización, infra, cloud, BD, soporte)
+- **Problemas**: 8 dolores amplios del brief
+- **Qué hacemos**: nueva sección con 6 cards de oferta (Consultoría IT, Sistemas empresariales, Desarrollo web y apps, Automatización, Infraestructura/cloud/BD, Soporte por tickets)
+- **Modalidades de servicio**: nueva sección con 3 modalidades (Diagnóstico y consultoría / Implementación y desarrollo / Soporte por tickets-bolsa de horas)
+- **Tecnologías**: ampliar con Active Directory, sitios web, apps empresariales, integraciones/automatización
+- **Seguridad**: mantener como está
+- **Cómo trabajamos**: 4 pasos (Evaluación inicial → Definición de alcance/propuesta → Implementación o soporte → Entrega, documentación y continuidad)
+- **Stat card**: mantener
+- **CTA final**: "Convierta necesidades tecnológicas en soluciones ejecutables", formulario actualizado con campo "necesidad" (textarea con placeholder amplio) y "tecnologias" actualizado, "volumen" renombrado a "alcance estimado (opcional)"
 
-Modificar el onClick para que, ademas de hacer scroll al formulario y disparar el tracking `cx_training_cta_click`, preseleccione automaticamente el dropdown "Que desea mejorar?" en el valor `"entrenamiento"` (Entrenamiento y estandarizacion).
+#### 4. `index.html`
+- Actualizar meta description si menciona "tickets" (verificar; probablemente ya es genérico)
 
-Implementacion: llamar `updateField("reto", "entrenamiento")` antes del scrollIntoView.
+### Sin cambios necesarios
+- `Navigation.tsx`, `Footer.tsx`, `SolutionsSection.tsx`, `Servicios.tsx`: renderizan dinámicamente desde `solutionsData`, se actualizan automáticamente
+- Otras páginas de servicio: no mencionan TI por tickets
 
-**2. SEO en H2 - variantes de "atencion al cliente" (ya cubiertas)**
-
-Verificacion: los H2 actuales ya contienen las variantes necesarias:
-- Linea 262: "Problemas tipicos en la experiencia y atencion al cliente" (incluye "atencion al cliente")
-- Linea 287: "Que hacemos: mas alla de la atencion al cliente" (incluye "atencion al cliente")
-- Linea 482: "Preguntas frecuentes sobre Customer Experience"
-
-Las FAQ ya incluyen variantes de "atencion al cliente" en preguntas 2, 6, 9 y 10. **No se requieren cambios adicionales en H2 ni FAQ.**
-
-**3. Formulario - verificacion de campos (maximo 6 visibles)**
-
-Campos actuales visibles:
-1. Nombre completo
-2. Empresa
-3. Rol / Cargo
-4. Email
-5. Telefono / WhatsApp
-6. Tamano de empresa
-7. Que desea mejorar?
-8. Mensaje (opcional)
-
-Son 8 campos, 2 mas del limite solicitado. Se hara:
-- **Mover "Rol / Cargo" a opcional** (quitar asterisco, remover validacion required en Zod: cambiar a `.optional().or(z.literal(""))`)
-- **Mover "Mensaje" a colapsable** con un enlace "Agregar mensaje (opcional)" que muestre/oculte el textarea. De esta forma solo 6 campos son visibles por defecto: Nombre, Empresa, Email, Telefono, Tamano, Que desea mejorar.
-
-Cambios en Zod schema (linea 50): `rol` pasa de `z.string().trim().min(1)` a `z.string().trim().max(100).optional().or(z.literal(""))`.
-
-Agregar un estado `showMessage` para controlar la visibilidad del campo Mensaje.
-
----
-
-### Resumen de cambios
-
-| Seccion | Cambio |
-|---------|--------|
-| CTA Entrenamiento | Texto "Agendar asesoria inicial de entrenamiento" + preseleccion dropdown |
-| SEO H2/FAQ | Sin cambios (ya cubiertos) |
-| Formulario | Rol pasa a opcional, Mensaje colapsable -> 6 campos visibles por defecto |
-| Zod schema | `rol` deja de ser required |
-
----
-
-### Detalle tecnico
-
-**Preseleccion del dropdown:**
-```
-onClick={() => {
-  trackEvent("cta_click", "cx_training_cta_click");
-  updateField("reto", "entrenamiento");
-  document.getElementById("cta-final")?.scrollIntoView({ behavior: "smooth" });
-}}
-```
-
-**Estado para Mensaje colapsable:**
-Se agrega `const [showMessage, setShowMessage] = useState(false);` y se envuelve el campo Mensaje en un condicional con un toggle link.
+### Resumen de impacto
+- 3 archivos editados: `App.tsx`, `solutionsData.ts`, `ConsultoriaTIPage.tsx`
+- Posiblemente `index.html` si contiene referencia a tickets
+- Redirección SEO preservada desde la ruta antigua
 
