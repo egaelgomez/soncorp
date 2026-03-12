@@ -398,7 +398,7 @@ const CustomerExperiencePage = () => {
                 size="lg"
                 onClick={() => {
                   trackEvent("cta_click", "cx_training_cta_click");
-                  updateField("reto", "entrenamiento");
+                  setDefaultChallenge("entrenamiento");
                   document.getElementById("cta-final")?.scrollIntoView({ behavior: "smooth" });
                 }}
                 className="gap-2 bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold">
