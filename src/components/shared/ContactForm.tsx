@@ -60,7 +60,7 @@ const ContactForm = ({
     );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const result = formSchema.safeParse(formData);
     if (!result.success) {
@@ -72,11 +72,30 @@ const ContactForm = ({
       return;
     }
     setErrors({});
-    setSubmitted(true);
-    toast({
-      title: "Solicitud recibida",
-      description: "Nos pondremos en contacto con usted a la brevedad.",
-    });
+    setSending(true);
+
+    try {
+      const { error } = await supabase.functions.invoke("send-contact-email", {
+        body: { ...formData, serviceName },
+      });
+
+      if (error) throw error;
+
+      setSubmitted(true);
+      toast({
+        title: "Solicitud recibida",
+        description: "Nos pondremos en contacto con usted a la brevedad.",
+      });
+    } catch (err) {
+      console.error("Error sending contact email:", err);
+      toast({
+        title: "Error al enviar",
+        description: "Hubo un problema. Intente de nuevo o escríbanos por WhatsApp.",
+        variant: "destructive",
+      });
+    } finally {
+      setSending(false);
+    }
   };
 
   const updateField = (field: string, value: string) => {
