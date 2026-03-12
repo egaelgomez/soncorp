@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Monitor, Check, ArrowRight, Lock, Key, FileText, FolderOpen, Server, Cloud, Database, Shield } from "lucide-react";
+import { ArrowLeft, Monitor, Check, ArrowRight, Lock, Key, FileText, FolderOpen, Server, Cloud, Database, Shield, Globe, Cpu, Settings, Headphones, Code, Workflow } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -14,8 +14,9 @@ const ConsultoriaTIPage = () => {
     empresa: "",
     email: "",
     telefono: "",
+    necesidad: "",
     tecnologias: "",
-    volumen: ""
+    alcance: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -27,7 +28,7 @@ const ConsultoriaTIPage = () => {
       title: "¡Solicitud enviada!",
       description: "Te contactaremos pronto con una propuesta.",
     });
-    setFormData({ nombre: "", empresa: "", email: "", telefono: "", tecnologias: "", volumen: "" });
+    setFormData({ nombre: "", empresa: "", email: "", telefono: "", necesidad: "", tecnologias: "", alcance: "" });
     setIsSubmitting(false);
   };
 
@@ -40,48 +41,77 @@ const ConsultoriaTIPage = () => {
   };
 
   const problems = [
-    "Backlog de tickets que crece y nadie alcanza a atender",
-    "No tienes especialistas en ciertas tecnologías (y contratar es caro)",
-    "Incidentes repetitivos que consumen tiempo y frenan al negocio",
-    "Cambios y solicitudes que se atrasan por falta de capacidad",
-    "Proyectos pequeños que nunca se ejecutan por 'prioridades del día a día'",
-    "Falta de control: tiempos, SLAs y visibilidad real del servicio"
+    "Falta de claridad sobre qué tecnología implementar",
+    "Sistemas o procesos manuales que frenan la operación",
+    "Necesidad de una página web o aplicación sin saber cómo estructurar el proyecto",
+    "Dependencia excesiva del equipo interno para iniciativas tecnológicas",
+    "Falta de especialistas para proyectos puntuales",
+    "Backlog de requerimientos técnicos y tickets sin resolver",
+    "Procesos desconectados entre áreas y herramientas",
+    "Necesidad de modernizar infraestructura o plataformas"
   ];
 
-  const benefits = [
+  const serviceCards = [
     {
-      title: "Ahorro vs. contratar personal especializado",
-      description: "Por cada tecnología que necesitas",
-      large: true
+      icon: Cpu,
+      title: "Consultoría IT y arquitectura tecnológica",
+      description: "Diagnóstico, estrategia y roadmap para alinear tecnología con objetivos de negocio."
     },
     {
-      title: "Gasto flexible, no costo fijo alto",
-      description: "Pagas por horas/capacidad realmente usada"
+      icon: Settings,
+      title: "Sistemas empresariales",
+      description: "Implementación y mejora de sistemas que soportan la operación de su empresa."
     },
     {
-      title: "Menos tiempo muerto",
-      description: "Menos impacto al negocio por tickets críticos"
+      icon: Globe,
+      title: "Desarrollo de páginas web y aplicaciones",
+      description: "Sitios corporativos, aplicaciones a medida e integraciones con sus plataformas."
     },
     {
-      title: "Talento certificado sin reclutamiento",
-      description: "Acceso inmediato sin procesos largos"
+      icon: Workflow,
+      title: "Automatización de procesos",
+      description: "Eliminamos trabajo manual conectando sistemas, flujos y herramientas."
     },
     {
-      title: "Un solo partner multitecnología",
-      description: "Soporte unificado para distintas plataformas"
+      icon: Cloud,
+      title: "Infraestructura, cloud y bases de datos",
+      description: "Servidores, Azure, bases de datos Oracle/SQL y modernización de plataformas."
     },
     {
-      title: "Transparencia total",
-      description: "Reportes, SLAs, priorización y seguimiento"
+      icon: Headphones,
+      title: "Soporte especializado por tickets",
+      description: "Bolsa de horas con SLAs definidos para resolver requerimientos técnicos bajo demanda."
+    }
+  ];
+
+  const modalities = [
+    {
+      icon: Code,
+      title: "Diagnóstico y consultoría",
+      description: "Evaluamos su situación tecnológica actual, identificamos oportunidades y definimos un plan de acción con prioridades claras.",
+      bullets: ["Análisis de infraestructura y sistemas", "Roadmap tecnológico", "Recomendaciones priorizadas"]
+    },
+    {
+      icon: Settings,
+      title: "Implementación y desarrollo",
+      description: "Ejecutamos proyectos tecnológicos: desde desarrollo web y aplicaciones hasta integración de sistemas y automatización.",
+      bullets: ["Desarrollo web y apps", "Implementación de sistemas", "Automatización e integraciones"]
+    },
+    {
+      icon: Headphones,
+      title: "Soporte especializado por tickets",
+      description: "Capacidad técnica bajo demanda con bolsa de horas y SLAs. Ideal para resolver backlog sin contratar especialistas full-time.",
+      bullets: ["Bolsa de horas con SLA", "Multitecnología", "Reportes y mejora continua"]
     }
   ];
 
   const technologies = [
-    { category: "ServiceNow (ITSM)", items: ["Incidentes", "Cambios", "Requests", "Catálogo", "Flujos"] },
-    { category: "Infraestructura", items: ["Linux", "Windows", "Servidores"] },
-    { category: "Cloud & VDI", items: ["Azure", "Citrix"] },
-    { category: "Bases de datos", items: ["Oracle", "Microsoft SQL"] },
-    { category: "Identity/Accesos", items: ["IDM", "Active Directory"] }
+    { category: "ServiceNow (ITSM)", items: ["Incidentes", "Cambios", "Requests", "Catálogo", "Flujos"], icon: Server },
+    { category: "Infraestructura", items: ["Linux", "Windows", "Servidores"], icon: Monitor },
+    { category: "Cloud & VDI", items: ["Azure", "Citrix"], icon: Cloud },
+    { category: "Bases de datos", items: ["Oracle", "Microsoft SQL"], icon: Database },
+    { category: "Identity / Accesos", items: ["Active Directory", "IDM"], icon: Shield },
+    { category: "Web & Apps", items: ["Sitios corporativos", "Apps empresariales", "Integraciones"], icon: Globe }
   ];
 
   const securityCards = [
@@ -94,13 +124,13 @@ const ConsultoriaTIPage = () => {
     {
       icon: Key,
       title: "Control de accesos",
-      description: "Principio de mínimo privilegio para cada ticket.",
+      description: "Principio de mínimo privilegio en cada proyecto.",
       badge: "Least Privilege"
     },
     {
       icon: FileText,
       title: "Trazabilidad y evidencia",
-      description: "Cada ticket con historial completo y auditable.",
+      description: "Cada proyecto o ticket con historial completo y auditable.",
       badge: "Audit Trail"
     },
     {
@@ -114,28 +144,33 @@ const ConsultoriaTIPage = () => {
   const steps = [
     {
       number: "1",
-      title: "Onboarding & NDA",
-      description: "Alcance, accesos, reglas y SLAs definidos"
+      title: "Evaluación inicial",
+      description: "Entendemos su contexto, necesidades y prioridades tecnológicas"
     },
     {
       number: "2",
-      title: "Triage y resolución",
-      description: "Priorización inteligente + ejecución por SLA"
+      title: "Definición de alcance",
+      description: "Propuesta técnica con arquitectura, tiempos y presupuesto"
     },
     {
       number: "3",
-      title: "Cierre con evidencia",
-      description: "Documentación + reporte + mejoras sugeridas"
+      title: "Implementación o soporte",
+      description: "Ejecución del proyecto o servicio continuo con seguimiento"
+    },
+    {
+      number: "4",
+      title: "Entrega y continuidad",
+      description: "Documentación, capacitación y acompañamiento post-entrega"
     }
   ];
 
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Consultoría TI por Tickets | Soncorp</title>
+        <title>Consultoría y Soluciones TI | Soncorp</title>
         <meta 
           name="description" 
-          content="Resuelve tickets críticos sin contratar especialistas full-time. Bolsa de horas, SLAs claros y soporte multitecnología con NDA." 
+          content="Consultoría TI, desarrollo web, aplicaciones empresariales, automatización, infraestructura cloud y soporte técnico especializado. Resuelva necesidades tecnológicas con Soncorp." 
         />
       </Helmet>
       
@@ -154,7 +189,7 @@ const ConsultoriaTIPage = () => {
               <span>/</span>
               <Link to="/servicios" className="hover:text-foreground transition-colors">Servicios</Link>
               <span>/</span>
-              <span className="text-foreground">Consultoría TI por Tickets</span>
+              <span className="text-foreground">Consultoría y Soluciones TI</span>
             </div>
             
             {/* Back link */}
@@ -173,23 +208,29 @@ const ConsultoriaTIPage = () => {
                   <Monitor className="w-8 h-8 text-primary" />
                 </div>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-                  Consultoría TI por Tickets
-                  <span className="block text-xl md:text-2xl font-normal text-muted-foreground mt-2">
-                    (Bolsa de horas)
-                  </span>
+                  Consultoría y Soluciones TI
                 </h1>
               </div>
               
               {/* Headline */}
               <p className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
-                Resuelve tickets críticos sin contratar especialistas full-time.
+                Resuelva necesidades tecnológicas con consultoría, implementación y soporte especializado.
               </p>
               
               {/* Subheadline */}
-              <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl">
-                Tu equipo TI ampliado bajo demanda: ingenieros altamente capacitados para resolver 
-                e implementar tickets en distintas tecnologías, con operación por SLA y confidencialidad (NDA).
+              <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-3xl">
+                Ayudamos a empresas a tomar mejores decisiones tecnológicas y ejecutarlas: 
+                desde sistemas empresariales y desarrollo web hasta automatización, infraestructura cloud y soporte técnico especializado.
               </p>
+
+              {/* Capability chips */}
+              <div className="flex flex-wrap gap-2 mb-10">
+                {["Sistemas empresariales", "Páginas web", "Aplicaciones", "Automatización", "Infraestructura y cloud", "Bases de datos", "Soporte técnico"].map((cap) => (
+                  <span key={cap} className="px-3 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-sm text-foreground font-medium">
+                    {cap}
+                  </span>
+                ))}
+              </div>
               
               {/* CTAs */}
               <div className="flex flex-wrap gap-4">
@@ -216,80 +257,105 @@ const ConsultoriaTIPage = () => {
           </div>
         </section>
 
-        {/* Problemas molestos - Grid 2×3 */}
+        {/* Problemas que resolvemos */}
         <section className="py-20 bg-muted/10">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Problemas molestos que resolvemos
+                Problemas que resolvemos
               </h2>
             </div>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
               {problems.map((problem, index) => (
                 <div 
                   key={index}
                   className="flex items-start gap-3 p-5 rounded-xl bg-card/50 border border-destructive/20 hover:border-destructive/40 transition-colors"
                 >
                   <div className="w-2 h-2 rounded-full bg-destructive mt-2 flex-shrink-0" />
-                  <span className="text-foreground">{problem}</span>
+                  <span className="text-foreground text-sm">{problem}</span>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Beneficios - Bento Grid */}
+        {/* Qué hacemos - 6 cards */}
         <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Beneficios (en dinero y en operación)
+                Qué hacemos
               </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Una oferta integral de tecnología para cubrir las necesidades de su empresa.
+              </p>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-4 max-w-5xl mx-auto">
-              {/* Large card */}
-              <div className="md:col-span-2 md:row-span-2 p-8 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30">
-                <div className="h-full flex flex-col justify-center">
-                  <Check className="w-10 h-10 text-primary mb-4" />
-                  <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
-                    {benefits[0].title}
-                  </h3>
-                  <p className="text-lg text-muted-foreground">
-                    {benefits[0].description}
-                  </p>
-                </div>
-              </div>
-              
-              {/* Small cards */}
-              {benefits.slice(1).map((benefit, index) => (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {serviceCards.map((card, index) => (
                 <div 
                   key={index}
                   className="p-6 rounded-xl bg-card border border-border/50 hover:border-primary/30 transition-colors"
                 >
-                  <Check className="w-5 h-5 text-primary mb-3" />
-                  <h3 className="font-semibold text-foreground mb-2">{benefit.title}</h3>
-                  <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                  <div className="p-2 rounded-lg bg-primary/10 w-fit mb-4">
+                    <card.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-2">{card.title}</h3>
+                  <p className="text-sm text-muted-foreground">{card.description}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Tecnologías que cubrimos */}
+        {/* Modalidades de servicio */}
         <section className="py-20 bg-muted/10">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Tecnologías que cubrimos
+                Modalidades de servicio
+              </h2>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {modalities.map((mod, index) => (
+                <div 
+                  key={index}
+                  className="p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/30 transition-colors flex flex-col"
+                >
+                  <div className="p-3 rounded-xl bg-primary/20 border border-primary/30 w-fit mb-4">
+                    <mod.icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-foreground mb-3">{mod.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-4 flex-1">{mod.description}</p>
+                  <ul className="space-y-2">
+                    {mod.bullets.map((bullet, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-foreground">
+                        <Check className="w-4 h-4 text-primary flex-shrink-0" />
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Tecnologías y capacidades */}
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Tecnologías y capacidades
               </h2>
             </div>
             
             <div className="max-w-4xl mx-auto">
               {/* Main tech chips */}
               <div className="flex flex-wrap justify-center gap-3 mb-8">
-                {["ServiceNow", "Linux", "Windows", "Azure", "Citrix", "Oracle", "SQL Server", "IDM"].map((tech) => (
+                {["ServiceNow", "Linux", "Windows", "Azure", "Citrix", "Oracle", "SQL Server", "Active Directory", "Sitios web", "Apps empresariales"].map((tech) => (
                   <span 
                     key={tech}
                     className="px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-foreground font-medium"
@@ -304,11 +370,7 @@ const ConsultoriaTIPage = () => {
                 {technologies.map((cat, index) => (
                   <div key={index} className="p-4 rounded-xl bg-card border border-border/50">
                     <div className="flex items-center gap-2 mb-3">
-                      {index === 0 && <Server className="w-4 h-4 text-primary" />}
-                      {index === 1 && <Monitor className="w-4 h-4 text-primary" />}
-                      {index === 2 && <Cloud className="w-4 h-4 text-primary" />}
-                      {index === 3 && <Database className="w-4 h-4 text-primary" />}
-                      {index === 4 && <Shield className="w-4 h-4 text-primary" />}
+                      <cat.icon className="w-4 h-4 text-primary" />
                       <span className="font-medium text-foreground text-sm">{cat.category}</span>
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -326,14 +388,14 @@ const ConsultoriaTIPage = () => {
               </div>
               
               <p className="text-center text-muted-foreground text-sm">
-                ¿Tu tecnología no aparece? La evaluamos y te decimos si podemos cubrirla por SLA.
+                ¿Su tecnología no aparece? La evaluamos y le indicamos si podemos cubrirla.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Seguridad y Confidencialidad - Grid 2×2 */}
-        <section className="py-20">
+        {/* Seguridad y Confidencialidad */}
+        <section className="py-20 bg-muted/10">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -365,27 +427,27 @@ const ConsultoriaTIPage = () => {
           </div>
         </section>
 
-        {/* Cómo funciona - Timeline */}
-        <section className="py-20 bg-muted/10">
+        {/* Cómo trabajamos - Timeline */}
+        <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Cómo funciona
+                Cómo trabajamos
               </h2>
             </div>
             
-            <div className="max-w-4xl mx-auto">
-              <div className="grid md:grid-cols-3 gap-8 relative">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-4 gap-8 relative">
                 {/* Connection line */}
-                <div className="hidden md:block absolute top-8 left-1/6 right-1/6 h-0.5 bg-gradient-to-r from-primary/50 via-primary to-primary/50" />
+                <div className="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-primary/50 via-primary to-primary/50" />
                 
                 {steps.map((step, index) => (
                   <div key={index} className="relative text-center">
                     <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center relative z-10">
                       <span className="text-2xl font-bold text-primary">{step.number}</span>
                     </div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">{step.title}</h3>
-                    <p className="text-muted-foreground">{step.description}</p>
+                    <h3 className="text-lg font-semibold text-foreground mb-2">{step.title}</h3>
+                    <p className="text-sm text-muted-foreground">{step.description}</p>
                   </div>
                 ))}
               </div>
@@ -393,8 +455,8 @@ const ConsultoriaTIPage = () => {
           </div>
         </section>
 
-        {/* Stat Card - ¿Sabías que...? */}
-        <section className="py-20">
+        {/* Stat Card */}
+        <section className="py-20 bg-muted/10">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <span className="text-sm font-medium text-primary mb-4 block">¿Sabías que...?</span>
@@ -421,10 +483,7 @@ const ConsultoriaTIPage = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Convierte tickets en operación estable
-                <span className="block text-lg md:text-xl font-normal text-muted-foreground mt-2">
-                  (sin inflar tu nómina)
-                </span>
+                Convierta necesidades tecnológicas en soluciones ejecutables
               </h2>
               
               <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -448,7 +507,7 @@ const ConsultoriaTIPage = () => {
               {/* Contact Form */}
               <div id="form" className="p-8 rounded-2xl bg-card border border-border">
                 <h3 className="text-xl font-semibold text-foreground mb-6">
-                  Cuéntanos sobre tu operación
+                  Cuéntenos sobre su necesidad tecnológica
                 </h3>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid md:grid-cols-2 gap-4">
@@ -490,19 +549,27 @@ const ConsultoriaTIPage = () => {
                       className="w-full px-4 py-3 rounded-lg bg-muted border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground"
                     />
                   </div>
+                  <textarea
+                    name="necesidad"
+                    placeholder="¿Qué necesita resolver? (consultoría, sistema, página web, app, automatización, soporte, infraestructura, etc.)"
+                    value={formData.necesidad}
+                    onChange={handleChange}
+                    rows={3}
+                    className="w-full px-4 py-3 rounded-lg bg-muted border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground resize-none"
+                  />
                   <input
                     type="text"
                     name="tecnologias"
-                    placeholder="Tecnologías que usas (ej: ServiceNow, Linux, Azure...)"
+                    placeholder="Tecnologías o contexto actual (ej: Azure, ServiceNow, WordPress...)"
                     value={formData.tecnologias}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg bg-muted border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground"
                   />
                   <input
                     type="text"
-                    name="volumen"
-                    placeholder="Volumen estimado de tickets/mes (opcional)"
-                    value={formData.volumen}
+                    name="alcance"
+                    placeholder="Alcance estimado o volumen (opcional)"
+                    value={formData.alcance}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg bg-muted border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground"
                   />
