@@ -230,7 +230,8 @@ const ConsultoriaTIPage = () => {
                   className="border-border hover:bg-muted"
                   asChild
                 >
-                  <a href="https://wa.me/521234567890" target="_blank" rel="noopener noreferrer">
+                  <a href={`https://wa.me/${CONTACT_INFO.whatsappNumber}?text=${encodeURIComponent(CONTACT_INFO.whatsappMessage)}`} target="_blank" rel="noopener noreferrer">
+                    <MessageSquare className="w-4 h-4 mr-2" />
                     Hablar por WhatsApp
                   </a>
                 </Button>
