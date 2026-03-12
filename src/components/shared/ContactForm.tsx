@@ -51,6 +51,7 @@ const ContactForm = ({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [sending, setSending] = useState(false);
 
   const handleWhatsAppClick = () => {
     window.open(
