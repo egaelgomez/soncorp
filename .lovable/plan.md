@@ -1,74 +1,47 @@
 
 
-## Plan: Optimizacion final de conversion y SEO en /servicios/customer-experience
+## Plan: Eliminar enfoque PYME y corregir navegacion en CX
 
-Archivo unico a modificar: `src/pages/CustomerExperiencePage.tsx`
+### Parte 1: Reemplazar todas las referencias a PYME/PyME
 
----
+Se cambiara "PYMEs" por terminologia general como "empresas", "organizaciones" o "su empresa" segun contexto. Archivos afectados:
 
-### Cambios (4 ediciones puntuales)
-
-**1. CTA de Entrenamiento - texto + scroll con preseleccion (lineas 433-444)**
-
-Cambiar el texto del boton de "Solicitar informacion de entrenamiento" a **"Agendar asesoria inicial de entrenamiento"**.
-
-Modificar el onClick para que, ademas de hacer scroll al formulario y disparar el tracking `cx_training_cta_click`, preseleccione automaticamente el dropdown "Que desea mejorar?" en el valor `"entrenamiento"` (Entrenamiento y estandarizacion).
-
-Implementacion: llamar `updateField("reto", "entrenamiento")` antes del scrollIntoView.
-
-**2. SEO en H2 - variantes de "atencion al cliente" (ya cubiertas)**
-
-Verificacion: los H2 actuales ya contienen las variantes necesarias:
-- Linea 262: "Problemas tipicos en la experiencia y atencion al cliente" (incluye "atencion al cliente")
-- Linea 287: "Que hacemos: mas alla de la atencion al cliente" (incluye "atencion al cliente")
-- Linea 482: "Preguntas frecuentes sobre Customer Experience"
-
-Las FAQ ya incluyen variantes de "atencion al cliente" en preguntas 2, 6, 9 y 10. **No se requieren cambios adicionales en H2 ni FAQ.**
-
-**3. Formulario - verificacion de campos (maximo 6 visibles)**
-
-Campos actuales visibles:
-1. Nombre completo
-2. Empresa
-3. Rol / Cargo
-4. Email
-5. Telefono / WhatsApp
-6. Tamano de empresa
-7. Que desea mejorar?
-8. Mensaje (opcional)
-
-Son 8 campos, 2 mas del limite solicitado. Se hara:
-- **Mover "Rol / Cargo" a opcional** (quitar asterisco, remover validacion required en Zod: cambiar a `.optional().or(z.literal(""))`)
-- **Mover "Mensaje" a colapsable** con un enlace "Agregar mensaje (opcional)" que muestre/oculte el textarea. De esta forma solo 6 campos son visibles por defecto: Nombre, Empresa, Email, Telefono, Tamano, Que desea mejorar.
-
-Cambios en Zod schema (linea 50): `rol` pasa de `z.string().trim().min(1)` a `z.string().trim().max(100).optional().or(z.literal(""))`.
-
-Agregar un estado `showMessage` para controlar la visibilidad del campo Mensaje.
-
----
-
-### Resumen de cambios
-
-| Seccion | Cambio |
+| Archivo | Cambio |
 |---------|--------|
-| CTA Entrenamiento | Texto "Agendar asesoria inicial de entrenamiento" + preseleccion dropdown |
-| SEO H2/FAQ | Sin cambios (ya cubiertos) |
-| Formulario | Rol pasa a opcional, Mensaje colapsable -> 6 campos visibles por defecto |
-| Zod schema | `rol` deja de ser required |
+| **index.html** (lineas 9-12, 18-19, 24-27) | Title: "Soncorp - Consultoria Empresarial" / meta descriptions sin "PYMEs mexicanas" / OG y Twitter tags actualizados |
+| **src/components/Hero.tsx** (lineas 22, 27) | Badge: "Consultoria Empresarial Especializada" / H1: "Consultoria integral para empresas que quieren..." |
+| **src/components/Navigation.tsx** (linea 42) | Alt logo: "Soncorp - Consultoria Empresarial" |
+| **src/pages/Servicios.tsx** (linea 21) | Title: "Servicios \| Soncorp - Consultoria Empresarial" |
+| **src/components/solutions/solutionsData.ts** | 4x `audiences`: cambiar "PyME" a "Negocio en crecimiento" / 3x `idealFor`: "PyMEs iniciando en CX" → "Empresas iniciando en CX", "PyMEs que quieren orden" → "Empresas que buscan orden", "PyMEs con soporte basico" → "Empresas con soporte basico" |
+| **src/pages/CustomerExperiencePage.tsx** | FAQ pregunta 1: "...sirve para PyMEs?" → "...sirve para cualquier tipo de empresa?" / Linea 266: "Situaciones comunes en PyMEs y empresas" → "Situaciones comunes en empresas" |
+| **src/pages/ConsultoriaDeNegociosPage.tsx** (linea 99) | "Negocios en crecimiento (PyME)" → "Negocios en crecimiento" |
 
----
+### Parte 2: Corregir navegacion en pagina CX
 
-### Detalle tecnico
+**Problema:** El componente `Navigation` usa `scrollToSection()` con `document.getElementById()`, pero las secciones "inicio", "servicios", "por-que-soncorp" y "contacto" solo existen en la pagina Index. En `/servicios/customer-experience` los botones no hacen nada.
 
-**Preseleccion del dropdown:**
+**Solucion:** Modificar `Navigation.tsx` para detectar si esta en la pagina principal (`/`). Si no esta en `/`, navegar a `/#seccion` usando `useNavigate` de react-router. Si ya esta en `/`, hacer scroll directo.
+
+```text
+scrollToSection(id) {
+  if (location.pathname === "/") {
+    document.getElementById(id)?.scrollIntoView(...)
+  } else {
+    navigate("/#" + id)
+  }
+}
 ```
-onClick={() => {
-  trackEvent("cta_click", "cx_training_cta_click");
-  updateField("reto", "entrenamiento");
-  document.getElementById("cta-final")?.scrollIntoView({ behavior: "smooth" });
-}}
-```
 
-**Estado para Mensaje colapsable:**
-Se agrega `const [showMessage, setShowMessage] = useState(false);` y se envuelve el campo Mensaje en un condicional con un toggle link.
+Tambien aplicar la misma logica en **Footer.tsx** que tiene el mismo problema con sus enlaces rapidos.
+
+### Resumen de archivos a editar
+
+1. `index.html` — SEO meta tags
+2. `src/components/Hero.tsx` — badge y H1
+3. `src/components/Navigation.tsx` — alt logo + navegacion cross-page
+4. `src/components/Footer.tsx` — alt texto si aplica + enlaces cross-page
+5. `src/pages/Servicios.tsx` — title meta
+6. `src/components/solutions/solutionsData.ts` — audiences e idealFor
+7. `src/pages/CustomerExperiencePage.tsx` — FAQ y subtitulo problemas
+8. `src/pages/ConsultoriaDeNegociosPage.tsx` — segmento PyME
 
