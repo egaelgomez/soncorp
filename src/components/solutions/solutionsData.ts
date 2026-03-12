@@ -95,7 +95,7 @@ export const solutions: Solution[] = [
         name: "Starter",
         description: "Quick wins para mejorar atención básica",
         bullets: ["Diagnóstico inicial", "Protocolos esenciales", "1 entrenamiento"],
-        idealFor: "PyMEs iniciando en CX"
+        idealFor: "Empresas iniciando en CX"
       },
       {
         name: "Growth",
