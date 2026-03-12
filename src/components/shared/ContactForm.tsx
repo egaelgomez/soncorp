@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
-import { MessageSquare, Check } from "lucide-react";
+import { MessageSquare, Check, Loader2 } from "lucide-react";
 import { CONTACT_INFO } from "@/lib/constants";
+import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   nombre: z.string().trim().min(1, "Nombre requerido").max(100),
