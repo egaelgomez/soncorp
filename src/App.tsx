@@ -12,6 +12,7 @@ import ConsultoriaDeNegociosPage from "./pages/ConsultoriaDeNegociosPage";
 import ConsultoriaTIPage from "./pages/ConsultoriaTIPage";
 import MarketingAutomatizacionPage from "./pages/MarketingAutomatizacionPage";
 import NotFound from "./pages/NotFound";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
