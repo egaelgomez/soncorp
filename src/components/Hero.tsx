@@ -35,13 +35,13 @@ const Hero = () => {
           </p>
 
           {/* Target audience text */}
-          <p className="text-sm text-muted-foreground/80 mb-8 max-w-xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-700 delay-250">
-            Para dueños y directores de empresas que buscan resultados tangibles.
-          </p>
+          
+
+          
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default Hero;
