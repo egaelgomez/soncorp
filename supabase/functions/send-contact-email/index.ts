@@ -66,7 +66,7 @@ Deno.serve(async (req) => {
 
     // Enqueue email via pgmq
     const { error: enqueueError } = await supabase.rpc("enqueue_email", {
-      queue_name: "email_queue",
+      queue_name: "transactional_emails",
       payload: {
         to: ["hola@soncorp.com.mx"],
         subject,
