@@ -1,41 +1,23 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Monitor, Check, ArrowRight, Lock, Key, FileText, FolderOpen, Server, Cloud, Database, Shield, Globe, Cpu, Settings, Headphones, Code, Workflow } from "lucide-react";
+import { ArrowLeft, Monitor, Check, ArrowRight, Lock, Key, FileText, FolderOpen, Server, Cloud, Database, Shield, Globe, Cpu, Settings, Headphones, Code, Workflow, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import { CONTACT_INFO } from "@/lib/constants";
+import ContactForm from "@/components/shared/ContactForm";
+
+const tiChallengeOptions = [
+  { value: "consultoria", label: "Consultoría IT / arquitectura" },
+  { value: "sistema", label: "Sistemas empresariales" },
+  { value: "web-app", label: "Desarrollo web / aplicaciones" },
+  { value: "automatizacion", label: "Automatización de procesos" },
+  { value: "infraestructura", label: "Infraestructura / cloud / BD" },
+  { value: "soporte", label: "Soporte especializado por tickets" },
+  { value: "otro", label: "Otro" },
+];
 
 const ConsultoriaTIPage = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    nombre: "",
-    empresa: "",
-    email: "",
-    telefono: "",
-    necesidad: "",
-    tecnologias: "",
-    alcance: ""
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    toast({
-      title: "¡Solicitud enviada!",
-      description: "Te contactaremos pronto con una propuesta.",
-    });
-    setFormData({ nombre: "", empresa: "", email: "", telefono: "", necesidad: "", tecnologias: "", alcance: "" });
-    setIsSubmitting(false);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
   const scrollToContact = () => {
     document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" });
   };
