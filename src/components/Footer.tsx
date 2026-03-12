@@ -1,7 +1,19 @@
 import { Mail, Phone, MapPin } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 import soncorpLogo from "@/assets/soncorp-logo.png";
 
 const Footer = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const scrollToSection = (id: string) => {
+    if (location.pathname === "/") {
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate(`/#${id}`);
+    }
+  };
   const currentYear = new Date().getFullYear();
 
   return (
@@ -16,7 +28,7 @@ const Footer = () => {
               className="h-10 w-auto mb-4"
             />
             <p className="text-muted-foreground mb-4">
-              Consultoría especializada para empresas en México. Le ayudamos a mejorar la experiencia de sus clientes y hacer crecer su negocio.
+              Consultoría empresarial especializada en México. Le ayudamos a mejorar la experiencia de sus clientes y hacer crecer su negocio.
             </p>
           </div>
 
@@ -25,11 +37,8 @@ const Footer = () => {
             <p className="text-lg font-semibold text-primary mb-4">Enlaces Rápidos</p>
             <ul className="space-y-2">
               <li>
-                <button
-                  onClick={() => {
-                    const element = document.getElementById("inicio");
-                    if (element) element.scrollIntoView({ behavior: "smooth" });
-                  }}
+              <button
+                  onClick={() => scrollToSection("inicio")}
                   className="text-muted-foreground hover:text-secondary transition-smooth"
                 >
                   Inicio
@@ -37,10 +46,7 @@ const Footer = () => {
               </li>
               <li>
                 <button
-                  onClick={() => {
-                    const element = document.getElementById("servicios");
-                    if (element) element.scrollIntoView({ behavior: "smooth" });
-                  }}
+                  onClick={() => scrollToSection("servicios")}
                   className="text-muted-foreground hover:text-secondary transition-smooth"
                 >
                   Servicios
@@ -48,10 +54,7 @@ const Footer = () => {
               </li>
               <li>
                 <button
-                  onClick={() => {
-                    const element = document.getElementById("por-que-soncorp");
-                    if (element) element.scrollIntoView({ behavior: "smooth" });
-                  }}
+                  onClick={() => scrollToSection("por-que-soncorp")}
                   className="text-muted-foreground hover:text-secondary transition-smooth"
                 >
                   ¿Por qué Soncorp?
@@ -59,10 +62,7 @@ const Footer = () => {
               </li>
               <li>
                 <button
-                  onClick={() => {
-                    const element = document.getElementById("contacto");
-                    if (element) element.scrollIntoView({ behavior: "smooth" });
-                  }}
+                  onClick={() => scrollToSection("contacto")}
                   className="text-muted-foreground hover:text-secondary transition-smooth"
                 >
                   Contacto

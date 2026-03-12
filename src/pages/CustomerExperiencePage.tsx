@@ -56,7 +56,7 @@ const formSchema = z.object({
 });
 
 const faqItems = [
-  { question: "¿La consultoría en Experiencia del Cliente sirve para PyMEs?", answer: "Sí. Adaptamos el alcance y profundidad al tamaño y madurez de cada organización. Desde negocios con 5 empleados hasta corporativos con cientos." },
+  { question: "¿La consultoría en Experiencia del Cliente sirve para cualquier tipo de empresa?", answer: "Sí. Adaptamos el alcance y profundidad al tamaño y madurez de cada organización. Desde negocios con 5 empleados hasta corporativos con cientos." },
   { question: "¿Cuánto tiempo toma ver mejoras en la atención al cliente y la experiencia?", answer: "Depende del alcance. Algunas mejoras en la atención al cliente se notan en semanas; una transformación profunda de la experiencia puede tomar meses. Se definen hitos claros desde el inicio." },
   { question: "¿Trabajan la experiencia del cliente interno y externo?", answer: "Sí. La experiencia del cliente externo depende directamente de la experiencia del cliente interno. Abordamos ambos de forma integral." },
   { question: "¿Qué métricas de Customer Experience utilizan?", answer: "Dependiendo del contexto: CSAT (satisfacción), NPS (recomendación), CES (esfuerzo), tiempos de respuesta, tasa de resolución al primer contacto, entre otros indicadores relevantes para medir la atención al cliente y la experiencia global." },
@@ -263,7 +263,7 @@ const CustomerExperiencePage = () => {
             Problemas típicos en la experiencia y atención al cliente
           </h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-            Situaciones comunes en PyMEs y empresas que afectan la experiencia y retención de clientes.
+            Situaciones comunes en empresas que afectan la experiencia y retención de clientes.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
             {problems.map((p, idx) => (

@@ -96,7 +96,7 @@ const ConsultoriaDeNegociosPage = () => {
 
   const segments = [
     {
-      title: "Negocios en crecimiento (PyME)",
+      title: "Negocios en crecimiento",
       description: "Quieres orden y consistencia para crecer sin caos."
     },
     {

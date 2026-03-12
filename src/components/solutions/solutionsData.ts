@@ -53,7 +53,7 @@ export const solutions: Solution[] = [
       "Métricas de experiencia (NPS/CSAT/CES)"
     ],
     badge: "Basado en Six Pillars: Personalización, Integridad, Expectativas, Resolución, Tiempo & Esfuerzo, Empatía.",
-    audiences: ["PyME", "Mid-market", "Enterprise"],
+    audiences: ["Negocio en crecimiento", "Mid-market", "Enterprise"],
     problems: [
       "Quejas recurrentes y mala reputación",
       "Respuestas lentas o procesos inconsistentes",
@@ -95,7 +95,7 @@ export const solutions: Solution[] = [
         name: "Starter",
         description: "Quick wins para mejorar atención básica",
         bullets: ["Diagnóstico inicial", "Protocolos esenciales", "1 entrenamiento"],
-        idealFor: "PyMEs iniciando en CX"
+        idealFor: "Empresas iniciando en CX"
       },
       {
         name: "Growth",
@@ -146,7 +146,7 @@ export const solutions: Solution[] = [
       "Procesos más eficientes",
       "Prioridades claras para impactar resultados"
     ],
-    audiences: ["PyME", "Mid-market", "Enterprise"],
+    audiences: ["Negocio en crecimiento", "Mid-market", "Enterprise"],
     problems: [
       "Ventas estancadas o impredecibles",
       "Prospectos se pierden por falta de seguimiento",
@@ -188,7 +188,7 @@ export const solutions: Solution[] = [
         name: "Starter",
         description: "Claridad básica de números",
         bullets: ["Diagnóstico financiero", "Estructura de costos", "1 sesión estratégica"],
-        idealFor: "PyMEs que quieren orden"
+        idealFor: "Empresas que buscan orden"
       },
       {
         name: "Growth",
@@ -239,7 +239,7 @@ export const solutions: Solution[] = [
       "Soporte multitecnología",
       "Reportes y mejora continua"
     ],
-    audiences: ["PyME", "Mid-market", "Enterprise"],
+    audiences: ["Negocio en crecimiento", "Mid-market", "Enterprise"],
     techChips: ["ServiceNow", "Linux/Windows", "Azure", "Citrix", "Oracle", "Microsoft SQL", "IDM"],
     problems: [
       "Backlog de tickets crece sin control",
@@ -282,7 +282,7 @@ export const solutions: Solution[] = [
         name: "Starter",
         description: "Bolsa de horas para emergencias",
         bullets: ["20 horas/mes", "SLA estándar", "1 tecnología"],
-        idealFor: "PyMEs con soporte básico"
+        idealFor: "Empresas con soporte básico"
       },
       {
         name: "Growth",
@@ -333,7 +333,7 @@ export const solutions: Solution[] = [
       "Automatización (ManyChat/flows)",
       "Optimización por métricas"
     ],
-    audiences: ["PyME", "Mid-market", "Enterprise"],
+    audiences: ["Negocio en crecimiento", "Mid-market", "Enterprise"],
     techChips: ["ManyChat", "Meta Ads", "Google Ads", "HubSpot", "ActiveCampaign"],
     problems: [
       "Publicas pero no conviertes",
