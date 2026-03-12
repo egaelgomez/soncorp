@@ -11,112 +11,112 @@ const ConsultoriaDeNegociosPage = () => {
   };
 
   const areas = [
-    {
-      icon: Target,
-      title: "Planeación estratégica",
-      description: "Objetivos claros y un plan ejecutable para crecer."
-    },
-    {
-      icon: BarChart3,
-      title: "Estrategia comercial y ventas",
-      description: "Proceso comercial que convierte prospectos en clientes."
-    },
-    {
-      icon: Cog,
-      title: "Optimización de procesos",
-      description: "Orden y eficiencia para entregar mejor y más rápido."
-    },
-    {
-      icon: Users,
-      title: "Organización y roles",
-      description: "Estructura y responsabilidades claras para ejecutar sin fricción interna."
-    },
-    {
-      icon: TrendingUp,
-      title: "Eficiencia operativa",
-      description: "Reducimos desperdicio, retrabajo y fugas operativas."
-    },
-    {
-      icon: Wrench,
-      title: "Implementación de herramientas",
-      description: "Seleccionamos e implementamos herramientas clave (CRM/automatización) para que el plan se ejecute."
-    }
-  ];
+  {
+    icon: Target,
+    title: "Planeación estratégica",
+    description: "Objetivos claros y un plan ejecutable para crecer."
+  },
+  {
+    icon: BarChart3,
+    title: "Estrategia comercial y ventas",
+    description: "Proceso comercial que convierte prospectos en clientes."
+  },
+  {
+    icon: Cog,
+    title: "Optimización de procesos",
+    description: "Orden y eficiencia para entregar mejor y más rápido."
+  },
+  {
+    icon: Users,
+    title: "Organización y roles",
+    description: "Estructura y responsabilidades claras para ejecutar sin fricción interna."
+  },
+  {
+    icon: TrendingUp,
+    title: "Eficiencia operativa",
+    description: "Reducimos desperdicio, retrabajo y fugas operativas."
+  },
+  {
+    icon: Wrench,
+    title: "Implementación de herramientas",
+    description: "Seleccionamos e implementamos herramientas clave (CRM/automatización) para que el plan se ejecute."
+  }];
+
 
   const problems = [
-    "Ventas estancadas o impredecibles",
-    "Prospectos se pierden por falta de seguimiento",
-    "Operación desordenada y retrabajo",
-    "Equipo sin claridad de prioridades",
-    "Falta de métricas y control",
-    "Crecimiento con caos (crece la carga, no el resultado)"
-  ];
+  "Ventas estancadas o impredecibles",
+  "Prospectos se pierden por falta de seguimiento",
+  "Operación desordenada y retrabajo",
+  "Equipo sin claridad de prioridades",
+  "Falta de métricas y control",
+  "Crecimiento con caos (crece la carga, no el resultado)"];
+
 
   const benefits = [
-    {
-      title: "Aumento en ventas e ingreso",
-      description: "Por proceso y enfoque comercial claro",
-      large: true
-    },
-    {
-      title: "Mejor conversión y seguimiento comercial",
-      description: "Prospectos que se convierten en clientes"
-    },
-    {
-      title: "Operación más eficiente y predecible",
-      description: "Menos caos, más resultados"
-    },
-    {
-      title: "Equipo alineado",
-      description: "Con responsabilidades claras"
-    },
-    {
-      title: "Decisiones más rápidas con indicadores simples",
-      description: "Menos pérdidas por errores, retrabajo y desorden"
-    }
-  ];
+  {
+    title: "Aumento en ventas e ingreso",
+    description: "Por proceso y enfoque comercial claro",
+    large: true
+  },
+  {
+    title: "Mejor conversión y seguimiento comercial",
+    description: "Prospectos que se convierten en clientes"
+  },
+  {
+    title: "Operación más eficiente y predecible",
+    description: "Menos caos, más resultados"
+  },
+  {
+    title: "Equipo alineado",
+    description: "Con responsabilidades claras"
+  },
+  {
+    title: "Decisiones más rápidas con indicadores simples",
+    description: "Menos pérdidas por errores, retrabajo y desorden"
+  }];
+
 
   const steps = [
-    {
-      number: "1",
-      title: "Diagnóstico",
-      description: "Entendemos tu negocio, números y cuellos de botella"
-    },
-    {
-      number: "2",
-      title: "Plan accionable",
-      description: "Prioridades claras y metas realistas"
-    },
-    {
-      number: "3",
-      title: "Acompañamiento",
-      description: "Seguimiento cercano hasta ver resultados"
-    }
-  ];
+  {
+    number: "1",
+    title: "Diagnóstico",
+    description: "Entendemos tu negocio, números y cuellos de botella"
+  },
+  {
+    number: "2",
+    title: "Plan accionable",
+    description: "Prioridades claras y metas realistas"
+  },
+  {
+    number: "3",
+    title: "Acompañamiento",
+    description: "Seguimiento cercano hasta ver resultados"
+  }];
+
 
   const segments = [
-    {
-      title: "Negocios en crecimiento",
-      description: "Quieres orden y consistencia para crecer sin caos."
-    },
-    {
-      title: "Empresas con volumen",
-      description: "Necesitas control, calidad y seguimiento para mantener el ritmo."
-    },
-    {
-      title: "Empresas grandes",
-      description: "Estándares, capacitación y métricas para escalar con estructura."
-    }
-  ];
+  {
+    title: "Negocios en crecimiento",
+    description: "Quieres orden y consistencia para crecer sin caos."
+  },
+  {
+    title: "Empresas con volumen",
+    description: "Necesitas control, calidad y seguimiento para mantener el ritmo."
+  },
+  {
+    title: "Empresas grandes",
+    description: "Estándares, capacitación y métricas para escalar con estructura."
+  }];
+
 
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>Consultoría de Negocios | Soncorp</title>
-        <meta 
-          name="description" 
-          content="Impulsamos el crecimiento rentable de tu empresa con estrategia, procesos y ejecución. Menos improvisación, más ventas y control." 
-        />
+        <meta
+          name="description"
+          content="Impulsamos el crecimiento rentable de tu empresa con estrategia, procesos y ejecución. Menos improvisación, más ventas y control." />
+        
       </Helmet>
       
       <Navigation />
@@ -139,10 +139,10 @@ const ConsultoriaDeNegociosPage = () => {
             </div>
             
             {/* Back link */}
-            <Link 
-              to="/servicios" 
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
-            >
+            <Link
+              to="/servicios"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8">
+              
               <ArrowLeft className="w-4 h-4" />
               Volver a servicios
             </Link>
@@ -182,20 +182,20 @@ const ConsultoriaDeNegociosPage = () => {
               
               {/* CTAs */}
               <div className="flex flex-wrap gap-4">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="bg-secondary hover:bg-secondary/90 text-secondary-foreground"
-                  onClick={scrollToContact}
-                >
+                  onClick={scrollToContact}>
+                  
                   Agendar llamada
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   variant="outline"
                   className="border-border hover:bg-muted"
-                  asChild
-                >
+                  asChild>
+                  
                   <a href="https://wa.me/521234567890" target="_blank" rel="noopener noreferrer">
                     Contacto / WhatsApp
                   </a>
@@ -213,9 +213,9 @@ const ConsultoriaDeNegociosPage = () => {
                 Nuestro objetivo es que tu empresa crezca de forma rentable. Sin rodeos: más ventas, 
                 costos bajo control y operación ordenada.
               </p>
-              <p className="text-lg text-muted-foreground">
-                No solo resolvemos problemas—identificamos oportunidades que estás dejando pasar 
-                y riesgos que podrías evitar. Todo con lenguaje simple y accionable.
+              <p className="text-lg text-muted-foreground">No solo resolvemos problemas, identificamos oportunidades que estás dejando pasar y riesgos que podrías evitar. Todo con lenguaje simple y accionable.
+
+
               </p>
               <p className="text-lg text-muted-foreground">
                 Trabajamos de la mano contigo. Definimos prioridades claras, establecemos metas 
@@ -238,11 +238,11 @@ const ConsultoriaDeNegociosPage = () => {
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {areas.map((area, index) => (
-                <div 
-                  key={index}
-                  className="group p-6 rounded-xl border border-border/50 bg-card hover:border-secondary/50 transition-all duration-300"
-                >
+              {areas.map((area, index) =>
+              <div
+                key={index}
+                className="group p-6 rounded-xl border border-border/50 bg-card hover:border-secondary/50 transition-all duration-300">
+                
                   <div className="flex items-start gap-4">
                     <div className="p-2 rounded-lg bg-secondary/10 group-hover:bg-secondary/20 transition-colors">
                       <area.icon className="w-5 h-5 text-secondary" />
@@ -253,7 +253,7 @@ const ConsultoriaDeNegociosPage = () => {
                     </div>
                   </div>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </section>
@@ -268,15 +268,15 @@ const ConsultoriaDeNegociosPage = () => {
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
-              {problems.map((problem, index) => (
-                <div 
-                  key={index}
-                  className="flex items-start gap-3 p-4 rounded-lg bg-destructive/5 border border-destructive/20"
-                >
+              {problems.map((problem, index) =>
+              <div
+                key={index}
+                className="flex items-start gap-3 p-4 rounded-lg bg-destructive/5 border border-destructive/20">
+                
                   <div className="w-2 h-2 rounded-full bg-destructive mt-2 flex-shrink-0" />
                   <span className="text-foreground">{problem}</span>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </section>
@@ -305,16 +305,16 @@ const ConsultoriaDeNegociosPage = () => {
               </div>
               
               {/* Small cards */}
-              {benefits.slice(1).map((benefit, index) => (
-                <div 
-                  key={index}
-                  className="p-6 rounded-xl bg-card border border-border/50 hover:border-secondary/30 transition-colors"
-                >
+              {benefits.slice(1).map((benefit, index) =>
+              <div
+                key={index}
+                className="p-6 rounded-xl bg-card border border-border/50 hover:border-secondary/30 transition-colors">
+                
                   <Check className="w-5 h-5 text-secondary mb-3" />
                   <h3 className="font-semibold text-foreground mb-2">{benefit.title}</h3>
                   <p className="text-sm text-muted-foreground">{benefit.description}</p>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </section>
@@ -358,8 +358,8 @@ const ConsultoriaDeNegociosPage = () => {
                 {/* Connection line */}
                 <div className="hidden md:block absolute top-8 left-1/6 right-1/6 h-0.5 bg-gradient-to-r from-secondary/50 via-secondary to-secondary/50" />
                 
-                {steps.map((step, index) => (
-                  <div key={index} className="relative text-center">
+                {steps.map((step, index) =>
+                <div key={index} className="relative text-center">
                     {/* Step number */}
                     <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-secondary/20 border-2 border-secondary flex items-center justify-center relative z-10">
                       <span className="text-2xl font-bold text-secondary">{step.number}</span>
@@ -367,7 +367,7 @@ const ConsultoriaDeNegociosPage = () => {
                     <h3 className="text-xl font-semibold text-foreground mb-2">{step.title}</h3>
                     <p className="text-muted-foreground">{step.description}</p>
                   </div>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -383,15 +383,15 @@ const ConsultoriaDeNegociosPage = () => {
             </div>
             
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              {segments.map((segment, index) => (
-                <div 
-                  key={index}
-                  className="p-6 rounded-xl bg-card border border-border/50 hover:border-secondary/30 transition-all text-center"
-                >
+              {segments.map((segment, index) =>
+              <div
+                key={index}
+                className="p-6 rounded-xl bg-card border border-border/50 hover:border-secondary/30 transition-all text-center">
+                
                   <h3 className="font-semibold text-foreground mb-3">{segment.title}</h3>
                   <p className="text-sm text-muted-foreground">{segment.description}</p>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </section>
@@ -405,19 +405,19 @@ const ConsultoriaDeNegociosPage = () => {
               </h2>
               
               <div className="flex flex-wrap justify-center gap-4 mb-12">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="bg-secondary hover:bg-secondary/90 text-secondary-foreground"
-                  onClick={scrollToContact}
-                >
+                  onClick={scrollToContact}>
+                  
                   Agendar llamada
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   variant="outline"
-                  asChild
-                >
+                  asChild>
+                  
                   <Link to="/servicios">Ver otros servicios</Link>
                 </Button>
               </div>
@@ -428,36 +428,36 @@ const ConsultoriaDeNegociosPage = () => {
                   O déjanos tus datos y te contactamos
                 </h3>
                 <form className="grid md:grid-cols-2 gap-4">
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     placeholder="Nombre"
-                    className="px-4 py-3 rounded-lg bg-background border border-border focus:border-secondary focus:outline-none transition-colors"
-                  />
-                  <input 
-                    type="text" 
+                    className="px-4 py-3 rounded-lg bg-background border border-border focus:border-secondary focus:outline-none transition-colors" />
+                  
+                  <input
+                    type="text"
                     placeholder="Empresa"
-                    className="px-4 py-3 rounded-lg bg-background border border-border focus:border-secondary focus:outline-none transition-colors"
-                  />
-                  <input 
-                    type="email" 
+                    className="px-4 py-3 rounded-lg bg-background border border-border focus:border-secondary focus:outline-none transition-colors" />
+                  
+                  <input
+                    type="email"
                     placeholder="Email"
-                    className="px-4 py-3 rounded-lg bg-background border border-border focus:border-secondary focus:outline-none transition-colors"
-                  />
-                  <input 
-                    type="tel" 
+                    className="px-4 py-3 rounded-lg bg-background border border-border focus:border-secondary focus:outline-none transition-colors" />
+                  
+                  <input
+                    type="tel"
                     placeholder="Teléfono"
-                    className="px-4 py-3 rounded-lg bg-background border border-border focus:border-secondary focus:outline-none transition-colors"
-                  />
-                  <textarea 
+                    className="px-4 py-3 rounded-lg bg-background border border-border focus:border-secondary focus:outline-none transition-colors" />
+                  
+                  <textarea
                     placeholder="Comentarios (opcional)"
                     rows={3}
-                    className="md:col-span-2 px-4 py-3 rounded-lg bg-background border border-border focus:border-secondary focus:outline-none transition-colors resize-none"
-                  />
+                    className="md:col-span-2 px-4 py-3 rounded-lg bg-background border border-border focus:border-secondary focus:outline-none transition-colors resize-none" />
+                  
                   <div className="md:col-span-2">
-                    <Button 
-                      type="submit" 
-                      className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground"
-                    >
+                    <Button
+                      type="submit"
+                      className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground">
+                      
                       Enviar
                     </Button>
                   </div>
@@ -469,8 +469,8 @@ const ConsultoriaDeNegociosPage = () => {
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>);
+
 };
 
 export default ConsultoriaDeNegociosPage;
