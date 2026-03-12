@@ -19,7 +19,7 @@ const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-4 py-2 rounded-full mb-6 border border-secondary/30 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <TrendingUp className="h-4 w-4" />
-            <span className="text-sm font-medium">Consultoría Especializada para PYMEs</span>
+            <span className="text-sm font-medium">Consultoría Empresarial Especializada</span>
           </div>
 
           {/* Main heading */}
