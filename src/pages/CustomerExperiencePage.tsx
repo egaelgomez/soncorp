@@ -495,89 +495,13 @@ const CustomerExperiencePage = () => {
               Cuéntenos sobre su organización y sus retos. Sin compromiso.
             </p>
 
-            {submitted ?
-            <div className="text-center p-10 rounded-xl bg-card border border-secondary/30">
-                <Check className="h-12 w-12 text-secondary mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-foreground mb-3">Solicitud recibida</h3>
-                <p className="text-muted-foreground mb-6">Nos pondremos en contacto con usted a la brevedad.</p>
-                <Button onClick={handleWhatsAppClick} variant="outline" className="gap-2 border-secondary/50 text-secondary">
-                  <MessageSquare className="h-4 w-4" />
-                  También puede escribirnos por WhatsApp
-                </Button>
-              </div> :
-
-            <form onSubmit={handleSubmit} className="space-y-5 p-8 rounded-xl bg-card border border-border/50">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div>
-                    <label className={labelClass}>Nombre completo *</label>
-                    <input className={inputClass} placeholder="Su nombre" value={formData.nombre} onChange={(e) => updateField("nombre", e.target.value)} />
-                    {errors.nombre && <p className={errorClass}>{errors.nombre}</p>}
-                  </div>
-                  <div>
-                    <label className={labelClass}>Empresa *</label>
-                    <input className={inputClass} placeholder="Nombre de su empresa" value={formData.empresa} onChange={(e) => updateField("empresa", e.target.value)} />
-                    {errors.empresa && <p className={errorClass}>{errors.empresa}</p>}
-                  </div>
-                  <div>
-                    <label className={labelClass}>Rol / Cargo</label>
-                    <input className={inputClass} placeholder="Director, Gerente, etc. (opcional)" value={formData.rol} onChange={(e) => updateField("rol", e.target.value)} />
-                  </div>
-                  <div>
-                    <label className={labelClass}>Email *</label>
-                    <input className={inputClass} type="email" placeholder="correo@empresa.com" value={formData.email} onChange={(e) => updateField("email", e.target.value)} />
-                    {errors.email && <p className={errorClass}>{errors.email}</p>}
-                  </div>
-                  <div>
-                    <label className={labelClass}>Teléfono / WhatsApp *</label>
-                    <input className={inputClass} placeholder="+52 55 1234 5678" value={formData.telefono} onChange={(e) => updateField("telefono", e.target.value)} />
-                    {errors.telefono && <p className={errorClass}>{errors.telefono}</p>}
-                  </div>
-                  <div>
-                    <label className={labelClass}>Tamaño de empresa *</label>
-                    <select className={inputClass} value={formData.tamano} onChange={(e) => updateField("tamano", e.target.value)}>
-                      <option value="">Seleccione</option>
-                      <option value="1-10">1–10 empleados</option>
-                      <option value="11-50">11–50 empleados</option>
-                      <option value="51-200">51–200 empleados</option>
-                      <option value="201+">201+ empleados</option>
-                    </select>
-                    {errors.tamano && <p className={errorClass}>{errors.tamano}</p>}
-                  </div>
-                </div>
-                <div>
-                  <label className={labelClass}>¿Qué desea mejorar? *</label>
-                  <select className={inputClass} value={formData.reto} onChange={(e) => updateField("reto", e.target.value)}>
-                    <option value="">Seleccione</option>
-                    <option value="atencion">Atención al cliente / servicio</option>
-                    <option value="procesos">Procesos y tiempos de respuesta</option>
-                    <option value="cliente-interno">Cliente interno (colaboración entre áreas)</option>
-                    <option value="metricas">Medición y métricas (NPS/CSAT/CES)</option>
-                    <option value="entrenamiento">Entrenamiento y estandarización</option>
-                    <option value="otro">Otro</option>
-                  </select>
-                  {errors.reto && <p className={errorClass}>{errors.reto}</p>}
-                </div>
-                {!showMessage ?
-              <button type="button" onClick={() => setShowMessage(true)} className="text-sm text-secondary hover:text-secondary/80 transition-colors underline underline-offset-2">
-                    + Agregar mensaje (opcional)
-                  </button> :
-
-              <div>
-                    <label className={labelClass}>Mensaje (opcional)</label>
-                    <textarea className={`${inputClass} min-h-[80px] resize-none`} placeholder="Cuéntenos brevemente sobre su situación." value={formData.mensaje} onChange={(e) => updateField("mensaje", e.target.value)} />
-                  </div>
-              }
-                <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                  <Button type="submit" size="lg" className="bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold flex-1">
-                    Agendar asesoría inicial
-                  </Button>
-                  <Button type="button" variant="outline" size="lg" onClick={handleWhatsAppClick} className="gap-2 border-secondary/50 text-secondary hover:bg-secondary/10">
-                    <MessageSquare className="h-4 w-4" />
-                    WhatsApp
-                  </Button>
-                </div>
-              </form>
-            }
+            <ContactForm
+              challengeLabel="¿Qué desea mejorar? *"
+              challengeOptions={cxChallengeOptions}
+              defaultChallenge={defaultChallenge}
+              submitLabel="Agendar asesoría inicial"
+              serviceName="Customer Experience"
+            />
 
             {/* Microdisclaimer */}
             <p className="text-xs text-muted-foreground text-center mt-6">
