@@ -1,74 +1,51 @@
 
 
-## Plan: Optimizacion final de conversion y SEO en /servicios/customer-experience
+## Plan: Actualizar datos de contacto y unificar formularios en todo el sitio
 
-Archivo unico a modificar: `src/pages/CustomerExperiencePage.tsx`
+### Datos oficiales a configurar
 
----
+| Dato | Valor |
+|------|-------|
+| Email | hola@soncorp.com.mx |
+| Teléfono / WhatsApp | +52 (662) 471-3286 |
+| WhatsApp link | `https://wa.me/526624713286` |
+| Dirección | Blvd. Morelos 307, Col. Zona Militar, 83144, Hermosillo, Sonora, México |
 
-### Cambios (4 ediciones puntuales)
+### Parte 1: Actualizar datos de contacto (7 archivos)
 
-**1. CTA de Entrenamiento - texto + scroll con preseleccion (lineas 433-444)**
+| Archivo | Cambios |
+|---------|---------|
+| `src/components/Contact.tsx` | Email → hola@soncorp.com.mx, teléfono → +52 (662) 471-3286, dirección → Hermosillo, WHATSAPP_NUMBER → 526624713286 |
+| `src/components/Footer.tsx` | Email, teléfono y dirección actualizados |
+| `src/components/WhatsAppFloat.tsx` | WHATSAPP_NUMBER → 526624713286 |
+| `src/pages/CustomerExperiencePage.tsx` | WHATSAPP_NUMBER → 526624713286 |
+| `src/pages/MarketingAutomatizacionPage.tsx` | WhatsApp link → wa.me/526624713286 |
+| `src/pages/ConsultoriaTIPage.tsx` | (si tiene WhatsApp links) |
+| `src/components/servicios/ServiceHero.tsx` | WhatsApp link → wa.me/526624713286 |
 
-Cambiar el texto del boton de "Solicitar informacion de entrenamiento" a **"Agendar asesoria inicial de entrenamiento"**.
+### Parte 2: Unificar formularios al estilo CX (4 archivos)
 
-Modificar el onClick para que, ademas de hacer scroll al formulario y disparar el tracking `cx_training_cta_click`, preseleccione automaticamente el dropdown "Que desea mejorar?" en el valor `"entrenamiento"` (Entrenamiento y estandarizacion).
+El formulario de CX tiene: nombre, empresa, rol (opcional), email, teléfono, tamaño de empresa, reto principal (select contextual), mensaje (toggle opcional), botón WhatsApp junto al submit, Zod validation, estado de éxito con botón WhatsApp.
 
-Implementacion: llamar `updateField("reto", "entrenamiento")` antes del scrollIntoView.
+Se replicará este patrón en cada página, adaptando solo el campo "reto" al contexto del servicio:
 
-**2. SEO en H2 - variantes de "atencion al cliente" (ya cubiertas)**
+| Archivo | Formulario actual | Cambio |
+|---------|------------------|--------|
+| `src/components/Contact.tsx` | Nombre, email, empresa, mensaje | Reemplazar con estilo CX: agregar teléfono, tamaño, reto (opciones generales: CX, TI, Marketing, Negocios, Otro), rol opcional, mensaje toggle, Zod, estado éxito, botón WhatsApp |
+| `src/components/servicios/ServiceCTA.tsx` | Nombre, empresa, email, teléfono | Reemplazar con estilo CX: agregar tamaño, reto (contextual al servicio via prop), rol opcional, mensaje toggle, Zod, estado éxito, botón WhatsApp |
+| `src/pages/ConsultoriaTIPage.tsx` | Nombre, empresa, email, teléfono, necesidad, tecnologías, alcance | Reemplazar con estilo CX: campos estándar + reto con opciones TI (consultoría, sistema, web/app, automatización, infraestructura, soporte), botón WhatsApp |
+| `src/pages/MarketingAutomatizacionPage.tsx` | Nombre, empresa, contacto, canal, objetivo | Reemplazar con estilo CX: campos estándar + reto con opciones marketing (leads, ventas, retención, automatización, presencia digital), botón WhatsApp |
+| `src/pages/ConsultoriaDeNegociosPage.tsx` | Nombre, empresa, email, teléfono, comentarios (sin JS logic) | Reemplazar con estilo CX completo: campos estándar + reto con opciones negocios (estrategia, ventas, procesos, estructura, otro), Zod, estado éxito, botón WhatsApp |
 
-Verificacion: los H2 actuales ya contienen las variantes necesarias:
-- Linea 262: "Problemas tipicos en la experiencia y atencion al cliente" (incluye "atencion al cliente")
-- Linea 287: "Que hacemos: mas alla de la atencion al cliente" (incluye "atencion al cliente")
-- Linea 482: "Preguntas frecuentes sobre Customer Experience"
+### Resumen de archivos a editar
 
-Las FAQ ya incluyen variantes de "atencion al cliente" en preguntas 2, 6, 9 y 10. **No se requieren cambios adicionales en H2 ni FAQ.**
-
-**3. Formulario - verificacion de campos (maximo 6 visibles)**
-
-Campos actuales visibles:
-1. Nombre completo
-2. Empresa
-3. Rol / Cargo
-4. Email
-5. Telefono / WhatsApp
-6. Tamano de empresa
-7. Que desea mejorar?
-8. Mensaje (opcional)
-
-Son 8 campos, 2 mas del limite solicitado. Se hara:
-- **Mover "Rol / Cargo" a opcional** (quitar asterisco, remover validacion required en Zod: cambiar a `.optional().or(z.literal(""))`)
-- **Mover "Mensaje" a colapsable** con un enlace "Agregar mensaje (opcional)" que muestre/oculte el textarea. De esta forma solo 6 campos son visibles por defecto: Nombre, Empresa, Email, Telefono, Tamano, Que desea mejorar.
-
-Cambios en Zod schema (linea 50): `rol` pasa de `z.string().trim().min(1)` a `z.string().trim().max(100).optional().or(z.literal(""))`.
-
-Agregar un estado `showMessage` para controlar la visibilidad del campo Mensaje.
-
----
-
-### Resumen de cambios
-
-| Seccion | Cambio |
-|---------|--------|
-| CTA Entrenamiento | Texto "Agendar asesoria inicial de entrenamiento" + preseleccion dropdown |
-| SEO H2/FAQ | Sin cambios (ya cubiertos) |
-| Formulario | Rol pasa a opcional, Mensaje colapsable -> 6 campos visibles por defecto |
-| Zod schema | `rol` deja de ser required |
-
----
-
-### Detalle tecnico
-
-**Preseleccion del dropdown:**
-```
-onClick={() => {
-  trackEvent("cta_click", "cx_training_cta_click");
-  updateField("reto", "entrenamiento");
-  document.getElementById("cta-final")?.scrollIntoView({ behavior: "smooth" });
-}}
-```
-
-**Estado para Mensaje colapsable:**
-Se agrega `const [showMessage, setShowMessage] = useState(false);` y se envuelve el campo Mensaje en un condicional con un toggle link.
+1. `src/components/Contact.tsx` — datos + formulario CX
+2. `src/components/Footer.tsx` — datos de contacto
+3. `src/components/WhatsAppFloat.tsx` — número WhatsApp
+4. `src/pages/CustomerExperiencePage.tsx` — número WhatsApp
+5. `src/pages/ConsultoriaTIPage.tsx` — formulario CX + WhatsApp
+6. `src/pages/MarketingAutomatizacionPage.tsx` — formulario CX + WhatsApp
+7. `src/pages/ConsultoriaDeNegociosPage.tsx` — formulario CX + WhatsApp
+8. `src/components/servicios/ServiceHero.tsx` — enlace WhatsApp
+9. `src/components/servicios/ServiceCTA.tsx` — formulario CX + WhatsApp
 
