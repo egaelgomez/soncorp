@@ -1,6 +1,6 @@
+import { CONTACT_INFO } from "@/lib/constants";
 import { MessageSquare } from "lucide-react";
 
-const WHATSAPP_NUMBER = "5215512345678";
 const WHATSAPP_MESSAGE = encodeURIComponent(
   "Hola, solicito una asesoría inicial de Soncorp CX. Me interesa mejorar la experiencia del cliente (interno/externo). ¿Podemos agendar una llamada?"
 );
@@ -8,7 +8,7 @@ const WHATSAPP_MESSAGE = encodeURIComponent(
 const WhatsAppFloat = () => {
   const handleClick = () => {
     (window as any).dataLayer?.push({ event: "whatsapp_click", label: "cx_whatsapp_float" });
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`, "_blank");
+    window.open(`https://wa.me/${CONTACT_INFO.whatsappNumber}?text=${WHATSAPP_MESSAGE}`, "_blank");
   };
 
   return (

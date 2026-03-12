@@ -1,6 +1,7 @@
 import { Mail, Phone, MapPin } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import soncorpLogo from "@/assets/soncorp-logo.png";
+import { CONTACT_INFO } from "@/lib/constants";
 
 const Footer = () => {
   const location = useLocation();
@@ -85,15 +86,19 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <Mail className="h-5 w-5 mt-0.5 flex-shrink-0 text-secondary" />
-                <span className="text-muted-foreground">contacto@soncorp.mx</span>
+                <a href={`mailto:${CONTACT_INFO.email}`} className="text-muted-foreground hover:text-secondary transition-colors">
+                  {CONTACT_INFO.email}
+                </a>
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="h-5 w-5 mt-0.5 flex-shrink-0 text-secondary" />
-                <span className="text-muted-foreground">+52 (55) 1234-5678</span>
+                <a href={CONTACT_INFO.phoneLink} className="text-muted-foreground hover:text-secondary transition-colors">
+                  {CONTACT_INFO.phone}
+                </a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0 text-secondary" />
-                <span className="text-muted-foreground">Ciudad de México, México</span>
+                <span className="text-muted-foreground">{CONTACT_INFO.fullAddress}</span>
               </li>
             </ul>
           </div>

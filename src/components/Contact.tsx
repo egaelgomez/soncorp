@@ -1,93 +1,24 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, MapPin, MessageCircle, Lock, Loader2 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { z } from "zod";
+import { Mail, Phone, MapPin, MessageCircle, Lock } from "lucide-react";
+import { CONTACT_INFO } from "@/lib/constants";
+import ContactForm from "@/components/shared/ContactForm";
 
-const contactSchema = z.object({
-  name: z.string()
-    .trim()
-    .min(2, "El nombre debe tener al menos 2 caracteres")
-    .max(100, "El nombre no puede exceder 100 caracteres"),
-  email: z.string()
-    .trim()
-    .email("Por favor ingresa un correo válido")
-    .max(255, "El email no puede exceder 255 caracteres"),
-  company: z.string()
-    .trim()
-    .max(100, "El nombre de empresa no puede exceder 100 caracteres")
-    .optional(),
-  message: z.string()
-    .trim()
-    .min(10, "El mensaje debe tener al menos 10 caracteres")
-    .max(1000, "El mensaje no puede exceder 1000 caracteres"),
-});
-
-const WHATSAPP_NUMBER = "5215512345678"; // Placeholder
-const WHATSAPP_MESSAGE = encodeURIComponent(
-  "Hola, me interesa una consultoría inicial para mi negocio. ¿Podrían darme más información?"
-);
+const generalChallengeOptions = [
+  { value: "cx", label: "Experiencia del cliente (CX)" },
+  { value: "ti", label: "Consultoría o soluciones TI" },
+  { value: "marketing", label: "Marketing y automatización" },
+  { value: "negocios", label: "Consultoría de negocios" },
+  { value: "otro", label: "Otro" },
+];
 
 const Contact = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    message: "",
-  });
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrors({});
-    
-    // Validar con Zod
-    const result = contactSchema.safeParse(formData);
-    
-    if (!result.success) {
-      const fieldErrors: Record<string, string> = {};
-      result.error.errors.forEach((err) => {
-        if (err.path[0]) {
-          fieldErrors[err.path[0] as string] = err.message;
-        }
-      });
-      setErrors(fieldErrors);
-      return;
-    }
-    
-    setIsSubmitting(true);
-    
-    // Simulación de envío (aquí se conectaría con un backend real)
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "¡Mensaje enviado!",
-      description: "Gracias por contactarnos. Te responderemos en menos de 24 horas.",
-    });
-    
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      message: "",
-    });
-    setIsSubmitting(false);
-  };
-
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`, "_blank");
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    window.open(
+      `https://wa.me/${CONTACT_INFO.whatsappNumber}?text=${encodeURIComponent(CONTACT_INFO.whatsappMessage)}`,
+      "_blank"
+    );
   };
 
   return (
@@ -137,7 +68,9 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-primary mb-1">Email</h3>
-                  <p className="text-muted-foreground">contacto@soncorp.mx</p>
+                  <a href={`mailto:${CONTACT_INFO.email}`} className="text-muted-foreground hover:text-secondary transition-colors">
+                    {CONTACT_INFO.email}
+                  </a>
                 </div>
               </CardContent>
             </Card>
@@ -149,7 +82,9 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-primary mb-1">Teléfono</h3>
-                  <p className="text-muted-foreground">+52 (55) 1234-5678</p>
+                  <a href={CONTACT_INFO.phoneLink} className="text-muted-foreground hover:text-secondary transition-colors">
+                    {CONTACT_INFO.phone}
+                  </a>
                 </div>
               </CardContent>
             </Card>
@@ -161,116 +96,28 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-primary mb-1">Ubicación</h3>
-                  <p className="text-muted-foreground">Ciudad de México, México</p>
+                  <p className="text-muted-foreground">{CONTACT_INFO.address}</p>
+                  <p className="text-muted-foreground">{CONTACT_INFO.city}</p>
                 </div>
               </CardContent>
             </Card>
           </div>
 
           {/* Contact Form */}
-          <Card className="lg:col-span-2 border-border bg-card">
-            <CardContent className="p-5 md:p-6 lg:p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-primary mb-2">
-                      Nombre completo *
-                    </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Juan Pérez"
-                      className={`bg-muted border-border focus:border-secondary ${errors.name ? "border-destructive" : ""}`}
-                    />
-                    {errors.name && (
-                      <p className="text-destructive text-xs mt-1">{errors.name}</p>
-                    )}
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-primary mb-2">
-                      Email *
-                    </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="juan@empresa.com"
-                      className={`bg-muted border-border focus:border-secondary ${errors.email ? "border-destructive" : ""}`}
-                    />
-                    {errors.email && (
-                      <p className="text-destructive text-xs mt-1">{errors.email}</p>
-                    )}
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="company" className="block text-sm font-medium text-primary mb-2">
-                    Empresa (opcional)
-                  </label>
-                  <Input
-                    id="company"
-                    name="company"
-                    type="text"
-                    value={formData.company}
-                    onChange={handleChange}
-                    placeholder="Mi Empresa S.A."
-                    className={`bg-muted border-border focus:border-secondary ${errors.company ? "border-destructive" : ""}`}
-                  />
-                  {errors.company && (
-                    <p className="text-destructive text-xs mt-1">{errors.company}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-primary mb-2">
-                    Mensaje *
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    required
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Cuéntanos sobre tu negocio y cómo podemos ayudarte..."
-                    className={`w-full min-h-[120px] bg-muted border-border focus:border-secondary resize-none ${errors.message ? "border-destructive" : ""}`}
-                  />
-                  {errors.message && (
-                    <p className="text-destructive text-xs mt-1">{errors.message}</p>
-                  )}
-                </div>
-
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full md:w-auto bg-secondary hover:bg-accent-hover text-secondary-foreground px-8 font-semibold"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Enviando...
-                    </>
-                  ) : (
-                    "Enviar Mensaje"
-                  )}
-                </Button>
-
-                <div className="flex items-start gap-2 text-xs text-muted-foreground mt-4">
-                  <Lock className="h-4 w-4 flex-shrink-0 mt-0.5" />
-                  <p>
-                    Tu información será utilizada únicamente para contactarte sobre los servicios de Soncorp. 
-                    No compartimos tus datos con terceros.
-                  </p>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
+          <div className="lg:col-span-2">
+            <ContactForm
+              challengeLabel="¿Qué le interesa? *"
+              challengeOptions={generalChallengeOptions}
+              submitLabel="Enviar solicitud"
+            />
+            <div className="flex items-start gap-2 text-xs text-muted-foreground mt-4 px-2">
+              <Lock className="h-4 w-4 flex-shrink-0 mt-0.5" />
+              <p>
+                Tu información será utilizada únicamente para contactarte sobre los servicios de Soncorp. 
+                No compartimos tus datos con terceros.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

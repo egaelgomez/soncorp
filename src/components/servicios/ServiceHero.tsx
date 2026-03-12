@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import Chip from "@/components/solutions/Chip";
 import { Solution } from "@/components/solutions/solutionsData";
+import { CONTACT_INFO } from "@/lib/constants";
 
 interface ServiceHeroProps {
   solution: Solution;
@@ -118,7 +119,7 @@ const ServiceHero = ({ solution }: ServiceHeroProps) => {
               Agendar llamada
             </Button>
             <Button variant="outline" size="lg" className="gap-2" asChild>
-              <a href="https://wa.me/525512345678" target="_blank" rel="noopener noreferrer">
+              <a href={`https://wa.me/${CONTACT_INFO.whatsappNumber}?text=${encodeURIComponent(CONTACT_INFO.whatsappMessage)}`} target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="h-4 w-4" />
                 Hablar por WhatsApp
               </a>
