@@ -86,6 +86,7 @@ Deno.serve(async (req) => {
         sender_domain: "notify.www.soncorp.com.mx",
         subject,
         html: htmlBody,
+        text: textBody,
         purpose: "transactional",
         label: "contact-form",
         queued_at: new Date().toISOString(),
