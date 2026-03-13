@@ -1,4 +1,4 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.4";
+import { sendLovableEmail } from "npm:@lovable.dev/email-js";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -37,9 +37,14 @@ Deno.serve(async (req) => {
       }
     }
 
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-    const supabase = createClient(supabaseUrl, serviceRoleKey);
+    const apiKey = Deno.env.get("LOVABLE_API_KEY");
+    if (!apiKey) {
+      console.error("Missing LOVABLE_API_KEY");
+      return new Response(
+        JSON.stringify({ error: "Server configuration error" }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
 
     const subject = payload.serviceName
       ? `Nuevo lead – ${payload.serviceName} – ${payload.empresa}`
@@ -64,33 +69,40 @@ Deno.serve(async (req) => {
       </div>
     `;
 
-    // Enqueue email via pgmq
-    const { error: enqueueError } = await supabase.rpc("enqueue_email", {
-      queue_name: "transactional_emails",
-      payload: {
-        to: ["hola@soncorp.com.mx"],
+    const textBody = [
+      `Nuevo Lead${payload.serviceName ? `: ${payload.serviceName}` : ""}`,
+      `Nombre: ${payload.nombre}`,
+      `Empresa: ${payload.empresa}`,
+      payload.rol ? `Rol: ${payload.rol}` : null,
+      `Email: ${payload.email}`,
+      `Teléfono: ${payload.telefono}`,
+      `Tamaño: ${payload.tamano}`,
+      `Reto: ${payload.reto}`,
+      payload.mensaje ? `Mensaje: ${payload.mensaje}` : null,
+    ].filter(Boolean).join("\n");
+
+    await sendLovableEmail(
+      {
+        to: "hola@soncorp.com.mx",
+        from: "Soncorp Web <noreply@notify.www.soncorp.com.mx>",
+        sender_domain: "notify.www.soncorp.com.mx",
         subject,
         html: htmlBody,
-        from_name: "Soncorp Web",
+        text: textBody,
+        purpose: "transactional",
+        label: "contact-form",
       },
-    });
-
-    if (enqueueError) {
-      console.error("Enqueue error:", enqueueError);
-      return new Response(
-        JSON.stringify({ error: "Error al enviar el mensaje" }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
+      { apiKey }
+    );
 
     return new Response(
       JSON.stringify({ success: true }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (err) {
-    console.error("Error:", err);
+    console.error("Error sending email:", err);
     return new Response(
-      JSON.stringify({ error: "Error interno del servidor" }),
+      JSON.stringify({ error: "Error al enviar el mensaje" }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
