@@ -64,6 +64,18 @@ Deno.serve(async (req) => {
       </div>
     `;
 
+    const textBody = [
+      `Nuevo Lead${payload.serviceName ? `: ${payload.serviceName}` : ""}`,
+      `Nombre: ${payload.nombre}`,
+      `Empresa: ${payload.empresa}`,
+      payload.rol ? `Rol: ${payload.rol}` : null,
+      `Email: ${payload.email}`,
+      `Teléfono: ${payload.telefono}`,
+      `Tamaño: ${payload.tamano}`,
+      `Reto: ${payload.reto}`,
+      payload.mensaje ? `Mensaje: ${payload.mensaje}` : null,
+    ].filter(Boolean).join("\n");
+
     // Enqueue email via pgmq
     const { error: enqueueError } = await supabase.rpc("enqueue_email", {
       queue_name: "transactional_emails",
