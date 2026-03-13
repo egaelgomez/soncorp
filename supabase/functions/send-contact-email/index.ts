@@ -1,5 +1,3 @@
-import { sendLovableEmail } from "npm:@lovable.dev/email-js";
-
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
@@ -26,7 +24,6 @@ Deno.serve(async (req) => {
   try {
     const payload: ContactPayload = await req.json();
 
-    // Validate required fields
     const required = ["nombre", "empresa", "email", "telefono", "tamano", "reto"] as const;
     for (const field of required) {
       if (!payload[field]?.trim()) {
@@ -37,9 +34,9 @@ Deno.serve(async (req) => {
       }
     }
 
-    const apiKey = Deno.env.get("LOVABLE_API_KEY");
-    if (!apiKey) {
-      console.error("Missing LOVABLE_API_KEY");
+    const resendApiKey = Deno.env.get("RESEND_API_KEY");
+    if (!resendApiKey) {
+      console.error("Missing RESEND_API_KEY");
       return new Response(
         JSON.stringify({ error: "Server configuration error" }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -69,31 +66,28 @@ Deno.serve(async (req) => {
       </div>
     `;
 
-    const textBody = [
-      `Nuevo Lead${payload.serviceName ? `: ${payload.serviceName}` : ""}`,
-      `Nombre: ${payload.nombre}`,
-      `Empresa: ${payload.empresa}`,
-      payload.rol ? `Rol: ${payload.rol}` : null,
-      `Email: ${payload.email}`,
-      `Teléfono: ${payload.telefono}`,
-      `Tamaño: ${payload.tamano}`,
-      `Reto: ${payload.reto}`,
-      payload.mensaje ? `Mensaje: ${payload.mensaje}` : null,
-    ].filter(Boolean).join("\n");
-
-    await sendLovableEmail(
-      {
-        to: "hola@soncorp.com.mx",
-        from: "Soncorp Web <noreply@notify.www.soncorp.com.mx>",
-        sender_domain: "notify.www.soncorp.com.mx",
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${resendApiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Soncorp Web <noreply@soncorp.com.mx>",
+        to: ["hola@soncorp.com.mx"],
         subject,
         html: htmlBody,
-        text: textBody,
-        purpose: "transactional",
-        label: "contact-form",
-      },
-      { apiKey }
-    );
+      }),
+    });
+
+    if (!res.ok) {
+      const errBody = await res.text();
+      console.error(`Resend API error [${res.status}]:`, errBody);
+      throw new Error(`Resend error: ${res.status}`);
+    }
+
+    const data = await res.json();
+    console.log("Email sent successfully, id:", data.id);
 
     return new Response(
       JSON.stringify({ success: true }),
