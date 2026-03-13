@@ -68,10 +68,14 @@ Deno.serve(async (req) => {
     const { error: enqueueError } = await supabase.rpc("enqueue_email", {
       queue_name: "transactional_emails",
       payload: {
-        to: ["hola@soncorp.com.mx"],
+        to: "hola@soncorp.com.mx",
+        from: "Soncorp Web <noreply@notify.www.soncorp.com.mx>",
+        sender_domain: "notify.www.soncorp.com.mx",
         subject,
         html: htmlBody,
-        from_name: "Soncorp Web",
+        purpose: "transactional",
+        label: "contact-form",
+        queued_at: new Date().toISOString(),
       },
     });
 
