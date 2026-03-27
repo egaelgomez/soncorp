@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, MapPin, MessageCircle, Lock } from "lucide-react";
 import { CONTACT_INFO } from "@/lib/constants";
 import ContactForm from "@/components/shared/ContactForm";
+import AnimatedSection from "./AnimatedSection";
 
 const generalChallengeOptions = [
   { value: "cx", label: "Experiencia del cliente (CX)" },
@@ -24,7 +25,7 @@ const Contact = () => {
   return (
     <section id="contacto" className="py-20 bg-muted">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 md:mb-16">
+        <AnimatedSection animation="fade-up" className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
             ¿Listo para Mejorar tu Negocio?
           </h2>
@@ -33,14 +34,14 @@ const Contact = () => {
             Analizamos tu situación actual y te damos recomendaciones concretas 
             para mejorar tu atención al cliente, procesos o ventas.
           </p>
-        </div>
+        </AnimatedSection>
 
         {/* WhatsApp CTA */}
-        <div className="max-w-md mx-auto mb-12">
+        <AnimatedSection animation="scale-up" delay={100} className="max-w-md mx-auto mb-12">
           <Button
             onClick={handleWhatsAppClick}
             aria-label="Contactar por WhatsApp para respuesta rápida"
-            className="w-full h-auto py-4 px-6 bg-[#25D366] hover:bg-[#20BA5A] text-white text-base md:text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+            className="w-full h-auto py-4 px-6 bg-[#25D366] hover:bg-[#20BA5A] text-white text-base md:text-lg font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200"
             size="lg"
           >
             <MessageCircle className="h-6 w-6 mr-3" />
@@ -49,7 +50,7 @@ const Contact = () => {
               <div className="text-xs font-normal opacity-90">Respuesta en menos de 24 horas</div>
             </div>
           </Button>
-        </div>
+        </AnimatedSection>
 
         {/* Separador */}
         <div className="flex items-center gap-4 max-w-2xl mx-auto mb-12">
@@ -61,50 +62,29 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Contact Info Cards */}
           <div className="lg:col-span-1 space-y-4">
-            <Card className="border-border bg-card hover:border-secondary/50 transition-smooth">
-              <CardContent className="p-6 flex items-start gap-4">
-                <div className="bg-secondary/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Mail className="h-6 w-6 text-secondary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-primary mb-1">Email</h3>
-                  <a href={`mailto:${CONTACT_INFO.email}`} className="text-muted-foreground hover:text-secondary transition-colors">
-                    {CONTACT_INFO.email}
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border bg-card hover:border-secondary/50 transition-smooth">
-              <CardContent className="p-6 flex items-start gap-4">
-                <div className="bg-secondary/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Phone className="h-6 w-6 text-secondary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-primary mb-1">Teléfono</h3>
-                  <a href={CONTACT_INFO.phoneLink} className="text-muted-foreground hover:text-secondary transition-colors">
-                    {CONTACT_INFO.phone}
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border bg-card hover:border-secondary/50 transition-smooth">
-              <CardContent className="p-6 flex items-start gap-4">
-                <div className="bg-secondary/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MapPin className="h-6 w-6 text-secondary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-primary mb-1">Ubicación</h3>
-                  <p className="text-muted-foreground">{CONTACT_INFO.address}</p>
-                  <p className="text-muted-foreground">{CONTACT_INFO.city}</p>
-                </div>
-              </CardContent>
-            </Card>
+            {[
+              { icon: Mail, title: "Email", content: <a href={`mailto:${CONTACT_INFO.email}`} className="text-muted-foreground hover:text-secondary transition-colors">{CONTACT_INFO.email}</a> },
+              { icon: Phone, title: "Teléfono", content: <a href={CONTACT_INFO.phoneLink} className="text-muted-foreground hover:text-secondary transition-colors">{CONTACT_INFO.phone}</a> },
+              { icon: MapPin, title: "Ubicación", content: <><p className="text-muted-foreground">{CONTACT_INFO.address}</p><p className="text-muted-foreground">{CONTACT_INFO.city}</p></> },
+            ].map((item, idx) => (
+              <AnimatedSection key={idx} animation="fade-left" delay={idx * 100}>
+                <Card className="border-border bg-card hover:border-secondary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-secondary/5">
+                  <CardContent className="p-6 flex items-start gap-4">
+                    <div className="bg-secondary/10 w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110">
+                      <item.icon className="h-6 w-6 text-secondary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-primary mb-1">{item.title}</h3>
+                      {item.content}
+                    </div>
+                  </CardContent>
+                </Card>
+              </AnimatedSection>
+            ))}
           </div>
 
           {/* Contact Form */}
-          <div className="lg:col-span-2">
+          <AnimatedSection animation="fade-right" delay={200} className="lg:col-span-2">
             <ContactForm
               challengeLabel="¿Qué le interesa? *"
               challengeOptions={generalChallengeOptions}
@@ -117,7 +97,7 @@ const Contact = () => {
                 No compartimos tus datos con terceros.
               </p>
             </div>
-          </div>
+          </AnimatedSection>
         </div>
       </div>
     </section>

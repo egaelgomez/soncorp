@@ -137,4 +137,58 @@ All colors MUST be HSL.
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* 3D card tilt on hover */
+  .card-3d {
+    perspective: 800px;
+    transform-style: preserve-3d;
+  }
+
+  /* Glass effect */
+  .glass-effect {
+    background: hsl(var(--card) / 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Shimmer border */
+  .shimmer-border {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(215 20% 72% / 0.3) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+  }
+
+  /* Animated underline for nav links */
+  .nav-link-underline {
+    position: relative;
+  }
+  .nav-link-underline::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: hsl(var(--secondary));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+  .nav-link-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-3d,
+    .shimmer-border,
+    .nav-link-underline::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
 }
