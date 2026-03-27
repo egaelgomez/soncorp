@@ -64,8 +64,8 @@ const SolutionsSection = () => {
           {solutions.map((solution, index) => {
             const Icon = solution.icon;
             return (
-              <AnimatedSection key={solution.id} animation="fade-up" delay={index * 100}>
-                <TiltCard className="group relative p-6 lg:p-8 rounded-xl bg-card border border-border hover:border-secondary/40 transition-all duration-300 hover:shadow-lg hover:shadow-secondary/10">
+              <AnimatedSection key={solution.id} animation="fade-up" delay={index * 100} className="h-full">
+                <TiltCard className="group relative p-6 lg:p-8 rounded-xl bg-card border border-border hover:border-secondary/40 transition-all duration-300 hover:shadow-lg hover:shadow-secondary/10 h-full flex flex-col">
                   {/* Shimmer overlay on hover */}
                   <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 shimmer-border animate-shimmer pointer-events-none" />
 
@@ -85,7 +85,7 @@ const SolutionsSection = () => {
                   </p>
 
                   {/* Chips */}
-                  <div className="flex flex-wrap gap-2 mb-6 relative">
+                  <div className="flex flex-wrap gap-2 mb-6 relative flex-grow">
                     {solution.chips.map((chip, idx) => (
                       <Chip key={idx}>{chip}</Chip>
                     ))}
