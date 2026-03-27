@@ -1,28 +1,29 @@
 
 
-## Plan: Botón flotante de WhatsApp global con animación de pulso
+## Plan: Menciones naturales de SEO local en la página principal
 
-### Situación actual
-Ya existe `src/components/WhatsAppFloat.tsx` pero solo se usa en `CustomerExperiencePage`. El componente usa `MessageSquare` de Lucide en lugar del ícono oficial de WhatsApp, y no tiene animación de pulso.
+### Cambios por archivo
 
-### Cambios
+**1. `src/components/Hero.tsx`**
+- Badge: cambiar "Consultoría Empresarial Especializada" → "Consultoría Empresarial en Hermosillo, Sonora"
+- Subheading (párrafo): agregar mención de tamaños de empresa. Cambiar el texto a: "En Soncorp le ayudamos a transformar la experiencia de sus clientes, optimizar sus procesos operativos y de TI, e impulsar su crecimiento con estrategias de marketing y desarrollo de negocios orientadas a resultados."  → agregar al final o reformular para incluir "Trabajamos con empresas pequeñas, medianas y grandes en Hermosillo, Sonora y todo México."
+- Esto cubre: 1 mención de "Hermosillo, Sonora" + mención de tamaños de empresa
 
-**1. Actualizar `src/components/WhatsAppFloat.tsx`**
-- Cambiar el mensaje predefinido a: "Hola, me interesa conocer más sobre los servicios de Soncorp"
-- Reemplazar el ícono `MessageSquare` por un SVG del ícono oficial de WhatsApp
-- Agregar animación de pulso CSS al botón (`animate-pulse` o keyframe personalizado)
-- Ajustar posición en móvil (`bottom-20 right-4`) para no tapar contenido
-- Mantener `z-50` para visibilidad global
+**2. `src/components/WhySoncorp.tsx`**
+- Subtítulo de sección: cambiar "Método, ejecución y métricas. No teoría." → "Desde Hermosillo, Sonora, llevamos método, ejecución y métricas a cada proyecto."
+- Esto cubre: 2da mención de "Hermosillo, Sonora"
 
-**2. Mover el componente a `src/App.tsx`**
-- Importar y renderizar `WhatsAppFloat` dentro del `BrowserRouter` para que aparezca en todas las páginas
-- Eliminar la importación duplicada en `CustomerExperiencePage.tsx`
+**3. `src/components/Contact.tsx`**
+- La ubicación ya muestra `CONTACT_INFO.city` que es "Hermosillo, Sonora, México" ✓
+- Sin cambios necesarios aquí
 
-**3. Agregar keyframe de pulso en `tailwind.config.ts`** (si no existe uno adecuado)
-- Pulso suave tipo "ring" verde que se expande desde el botón
+**4. `src/components/Footer.tsx`**
+- Ya muestra `CONTACT_INFO.fullAddress` que incluye "Hermosillo, Sonora, México" ✓
+- Sin cambios necesarios
 
-### Detalles técnicos
-- El número de WhatsApp ya está centralizado en `CONTACT_INFO.whatsappNumber` en `src/lib/constants.ts`
-- El botón usará `bottom-6 right-6` en desktop y `bottom-20 right-4` en móvil (con clases responsive) para no tapar la navegación inferior
-- La animación será un `box-shadow` pulsante verde, no un cambio de escala, para no ser intrusivo
+### Resumen
+- 2 archivos editados: `Hero.tsx` y `WhySoncorp.tsx`
+- 2 menciones naturales de "Hermosillo, Sonora" en contenido visible
+- Mención de empresas pequeñas, medianas y grandes en el hero
+- Footer y contacto ya cubren "Hermosillo, Sonora, México"
 
