@@ -13,6 +13,7 @@ import ConsultoriaTIPage from "./pages/ConsultoriaTIPage";
 import MarketingAutomatizacionPage from "./pages/MarketingAutomatizacionPage";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
+import WhatsAppFloat from "./components/WhatsAppFloat";
 
 const queryClient = new QueryClient();
 
@@ -36,7 +37,8 @@ const App = () => (
             <Route path="/servicios/:slug" element={<ServicioDetalle />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
-          </Routes>
+        </Routes>
+          <WhatsAppFloat />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
