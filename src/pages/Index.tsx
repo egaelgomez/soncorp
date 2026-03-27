@@ -6,6 +6,7 @@ import SolutionsSection from "@/components/SolutionsSection";
 import WhySoncorp from "@/components/WhySoncorp";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import CursorGlow from "@/components/CursorGlow";
 
 const Index = () => {
   const location = useLocation();
@@ -21,6 +22,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <CursorGlow />
       <Navigation />
       <main>
         <Hero />
