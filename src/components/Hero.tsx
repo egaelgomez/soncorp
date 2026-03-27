@@ -19,7 +19,7 @@ const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-4 py-2 rounded-full mb-6 border border-secondary/30 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <TrendingUp className="h-4 w-4" />
-            <span className="text-sm font-medium">Consultoría Empresarial Especializada</span>
+            <span className="text-sm font-medium">Consultoría Empresarial en Hermosillo, Sonora</span>
           </div>
 
           {/* Main heading */}
@@ -31,7 +31,7 @@ const Hero = () => {
 
           {/* Subheading */}
           <p className="text-lg md:text-xl text-muted-foreground mb-4 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
-            En Soncorp le ayudamos a transformar la experiencia de sus clientes, optimizar sus procesos operativos y de TI, e impulsar su crecimiento con estrategias de marketing y desarrollo de negocios orientadas a resultados.
+            En Soncorp le ayudamos a transformar la experiencia de sus clientes, optimizar sus procesos operativos y de TI, e impulsar su crecimiento con estrategias de marketing y desarrollo de negocios orientadas a resultados. Trabajamos con empresas pequeñas, medianas y grandes en Hermosillo, Sonora y todo México.
           </p>
 
           {/* Target audience text */}

@@ -49,7 +49,7 @@ const WhySoncorp = () => {
             ¿Por qué elegir Soncorp?
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Método, ejecución y métricas. No teoría.
+            Desde Hermosillo, Sonora, llevamos método, ejecución y métricas a cada proyecto.
           </p>
         </div>
 
