@@ -35,7 +35,7 @@ import {
 "@/components/ui/accordion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
+
 import { useToast } from "@/hooks/use-toast";
 import { CONTACT_INFO } from "@/lib/constants";
 import ContactForm from "@/components/shared/ContactForm";
@@ -508,7 +508,7 @@ const CustomerExperiencePage = () => {
       </section>
 
       <Footer />
-      <WhatsAppFloat />
+      
     </>);
 
 };
