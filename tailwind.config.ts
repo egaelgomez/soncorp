@@ -84,10 +84,19 @@ export default {
             height: "0",
           },
         },
+        "whatsapp-pulse": {
+          "0%, 100%": {
+            boxShadow: "0 0 0 0 rgba(37, 211, 102, 0.5)",
+          },
+          "50%": {
+            boxShadow: "0 0 0 12px rgba(37, 211, 102, 0)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "whatsapp-pulse": "whatsapp-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
     },
   },
