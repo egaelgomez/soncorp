@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -43,11 +43,11 @@ const MarketingAutomatizacionPage = () => {
   };
 
   const problems = [
-  "Pagas anuncios pero no convierten (no hay seguimiento real)",
+  "Invierte en anuncios pero no convierten (no hay seguimiento real)",
   "Leads que llegan y nadie responde a tiempo",
-  "Contenido inconsistente (publicas 'cuando se puede')",
+  "Contenido inconsistente (publicación irregular)",
   "Mucho trabajo manual: mensajes, recordatorios, respuestas repetidas",
-  "No hay medición clara: no sabes qué funciona y qué no",
+  "No hay medición clara: no sabe qué funciona y qué no",
   "Prospectos abandonan porque el proceso es lento o confuso"];
 
 
@@ -59,7 +59,7 @@ const MarketingAutomatizacionPage = () => {
   },
   {
     title: "Menor desperdicio publicitario",
-    description: "Mejor conversión de tu inversión en ads"
+    description: "Mejor conversión de su inversión en ads"
   },
   {
     title: "Respuesta más rápida = más cierres",
@@ -75,7 +75,7 @@ const MarketingAutomatizacionPage = () => {
   },
   {
     title: "Resultados medibles",
-    description: "Sabes qué campaña genera leads y cuál no"
+    description: "Sabe qué campaña genera leads y cuál no"
   }];
 
 
@@ -158,13 +158,11 @@ const MarketingAutomatizacionPage = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Marketing & Automatización | Soncorp</title>
-        <meta
-          name="description"
-          content="Genera más leads y ventas con campañas digitales y automatización del seguimiento. WhatsApp, email, redes sociales. Resultados medibles." />
-        
-      </Helmet>
+      <SEO
+        title="Marketing & Automatización | Soncorp"
+        description="Genere más leads y ventas con campañas digitales y automatización del seguimiento. WhatsApp, email y redes sociales con resultados medibles."
+        canonicalPath="/servicios/marketing-automatizacion"
+      />
       <Navigation />
       <main className="min-h-screen bg-background pt-20">
         {/* Hero Section */}
@@ -207,7 +205,7 @@ const MarketingAutomatizacionPage = () => {
 
               {/* Subheadline */}
               <p className="text-lg text-muted-foreground mb-8 max-w-3xl">
-                Creamos contenido y campañas, y automatizamos el seguimiento (WhatsApp/chat/email) para que no se te escapen prospectos y tu inversión rinda más.
+                Creamos contenido y campañas, y automatizamos el seguimiento (WhatsApp/chat/email) para que no se le escapen prospectos y su inversión rinda más.
               </p>
 
               {/* CTAs */}
@@ -233,7 +231,7 @@ const MarketingAutomatizacionPage = () => {
                 Problemas molestos que resolvemos
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Si alguno de estos problemas te suena familiar, podemos ayudarte.
+                Si alguno de estos problemas le resulta familiar, podemos ayudarle.
               </p>
             </div>
 
@@ -263,7 +261,7 @@ const MarketingAutomatizacionPage = () => {
                 Beneficios (en dinero y operación)
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Resultados tangibles que impactan tu negocio directamente.
+                Resultados tangibles que impactan su negocio directamente.
               </p>
             </div>
 
@@ -317,7 +315,7 @@ const MarketingAutomatizacionPage = () => {
 
                 </p>
                 <p>
-                  El resultado: respondes más rápido, personalizas a escala, reduces errores y puedes medir exactamente qué funciona y qué no.
+                  El resultado: responda más rápido, personalice a escala, reduzca errores y pueda medir exactamente qué funciona y qué no.
                 </p>
               </div>
             </div>
@@ -332,7 +330,7 @@ const MarketingAutomatizacionPage = () => {
                 Automatizaciones típicas (casos de uso)
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Ejemplos de lo que podemos automatizar para tu negocio.
+                Ejemplos de lo que podemos automatizar para su negocio.
               </p>
             </div>
 
@@ -371,7 +369,7 @@ const MarketingAutomatizacionPage = () => {
                 Marketing Digital (lo que hacemos)
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Marketing digital te permite tener presencia donde están tus clientes, crecer con medición constante y optimizar para mejorar resultados.
+                El marketing digital le permite tener presencia donde están sus clientes, crecer con medición constante y optimizar para mejorar resultados.
               </p>
             </div>
 
@@ -482,10 +480,10 @@ const MarketingAutomatizacionPage = () => {
                 {/* Left - Copy */}
                 <div className="md:sticky md:top-24">
                   <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                    Haz que tu marketing deje de depender de 'estar persiguiendo' prospectos
+                    Haga que su marketing deje de depender de perseguir prospectos
                   </h2>
                   <p className="text-muted-foreground mb-6">
-                    Automatiza el seguimiento, mejora tus conversiones y mide lo que realmente funciona. Agenda una llamada para definir tu estrategia.
+                    Automatice el seguimiento, mejore sus conversiones y mida lo que realmente funciona. Solicite una evaluación inicial para definir su estrategia.
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <Button variant="outline" onClick={openWhatsApp} className="gap-2">

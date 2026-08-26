@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import soncorpLogo from "@/assets/soncorp-logo.png";
@@ -63,12 +63,12 @@ const Navigation = () => {
             >
               Servicios
             </button>
-            <a
-              href="/servicios/customer-experience"
+            <Link
+              to="/servicios/customer-experience"
               className="nav-link-underline text-foreground/80 hover:text-secondary transition-colors duration-200 font-medium"
             >
               Soncorp CX
-            </a>
+            </Link>
             <button
               onClick={() => scrollToSection("por-que-soncorp")}
               className="nav-link-underline text-foreground/80 hover:text-secondary transition-colors duration-200 font-medium"
@@ -113,13 +113,13 @@ const Navigation = () => {
               >
                 Servicios
               </button>
-              <a
-                href="/servicios/customer-experience"
+              <Link
+                to="/servicios/customer-experience"
                 className="text-left text-foreground/80 hover:text-secondary transition-colors duration-200 font-medium py-2 block"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Soncorp CX
-              </a>
+              </Link>
               <button
                 onClick={() => scrollToSection("por-que-soncorp")}
                 className="text-left text-foreground/80 hover:text-secondary transition-colors duration-200 font-medium py-2"

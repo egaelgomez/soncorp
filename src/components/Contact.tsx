@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, MapPin, MessageCircle, Lock } from "lucide-react";
@@ -27,12 +26,10 @@ const Contact = () => {
       <div className="container mx-auto px-4">
         <AnimatedSection animation="fade-up" className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            ¿Listo para Mejorar tu Negocio?
+            ¿Listo para mejorar su negocio?
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Solicita tu consultoría o diagnóstico inicial sin compromiso. 
-            Analizamos tu situación actual y te damos recomendaciones concretas 
-            para mejorar tu atención al cliente, procesos o ventas.
+            Solicite una evaluación inicial sin compromiso. Conozcamos su situación, el reto que desea resolver y determinemos cómo Soncorp puede ayudarle.
           </p>
         </AnimatedSection>
 
@@ -40,14 +37,14 @@ const Contact = () => {
         <AnimatedSection animation="scale-up" delay={100} className="max-w-md mx-auto mb-12">
           <Button
             onClick={handleWhatsAppClick}
-            aria-label="Contactar por WhatsApp para respuesta rápida"
+            aria-label="Contactar por WhatsApp"
             className="w-full h-auto py-4 px-6 bg-[#25D366] hover:bg-[#20BA5A] text-white text-base md:text-lg font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200"
             size="lg"
           >
             <MessageCircle className="h-6 w-6 mr-3" />
             <div className="text-left">
-              <div>Escríbenos por WhatsApp</div>
-              <div className="text-xs font-normal opacity-90">Respuesta en menos de 24 horas</div>
+              <div>Escríbanos por WhatsApp</div>
+              <div className="text-xs font-normal opacity-90">Contacto directo por WhatsApp</div>
             </div>
           </Button>
         </AnimatedSection>
@@ -55,7 +52,7 @@ const Contact = () => {
         {/* Separador */}
         <div className="flex items-center gap-4 max-w-2xl mx-auto mb-12">
           <div className="flex-1 h-px bg-border"></div>
-          <span className="text-muted-foreground text-sm">o déjanos un mensaje</span>
+          <span className="text-muted-foreground text-sm">o déjenos un mensaje</span>
           <div className="flex-1 h-px bg-border"></div>
         </div>
 
@@ -93,8 +90,8 @@ const Contact = () => {
             <div className="flex items-start gap-2 text-xs text-muted-foreground mt-4 px-2">
               <Lock className="h-4 w-4 flex-shrink-0 mt-0.5" />
               <p>
-                Tu información será utilizada únicamente para contactarte sobre los servicios de Soncorp. 
-                No compartimos tus datos con terceros.
+                Su información será utilizada únicamente para contactarle sobre los servicios de Soncorp.
+                No compartimos sus datos con terceros.
               </p>
             </div>
           </AnimatedSection>

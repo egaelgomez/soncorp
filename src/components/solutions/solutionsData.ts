@@ -49,7 +49,7 @@ export const solutions: Solution[] = [
     headline: "Diseñamos experiencias consistentes que reducen fricción y aumentan confianza y lealtad.",
     heroBullets: [
       "Estandarización de atención y experiencia",
-      "Entrenamiento y ejecución con tu equipo",
+      "Entrenamiento y ejecución con su equipo",
       "Métricas de experiencia (NPS/CSAT/CES)"
     ],
     badge: "Basado en Six Pillars: Personalización, Integridad, Expectativas, Resolución, Tiempo & Esfuerzo, Empatía.",
@@ -81,7 +81,7 @@ export const solutions: Solution[] = [
       },
       {
         title: "Implementación",
-        description: "Ejecución junto a tu equipo",
+        description: "Ejecución junto a su equipo",
         bullets: ["Entrenamiento", "Acompañamiento en campo"]
       },
       {
@@ -117,11 +117,11 @@ export const solutions: Solution[] = [
       },
       {
         question: "¿Cómo iniciamos?",
-        answer: "Con una llamada de diagnóstico gratuita donde evaluamos tu situación actual y definimos prioridades."
+        answer: "Con una evaluación inicial sin costo donde conocemos su situación actual y definimos prioridades."
       },
       {
         question: "¿Qué necesito preparar?",
-        answer: "Acceso a métricas actuales (si las tienes), disponibilidad del equipo clave y apertura para cambiar procesos."
+        answer: "Acceso a métricas actuales (si las tiene), disponibilidad del equipo clave y apertura para cambiar procesos."
       },
       {
         question: "¿Cómo se mide el éxito?",
@@ -140,7 +140,7 @@ export const solutions: Solution[] = [
     title: "Consultoría de Negocios",
     result: "Crece con estrategia, orden y ejecución medible.",
     chips: ["Estrategia", "Procesos", "Ventas"],
-    headline: "Impulsamos el crecimiento rentable de tu empresa con estrategia, procesos y ejecución.",
+    headline: "Impulsamos el crecimiento rentable de su empresa con estrategia, procesos y ejecución.",
     heroBullets: [
       "Aumento en ventas e ingreso",
       "Procesos más eficientes",
@@ -214,7 +214,7 @@ export const solutions: Solution[] = [
       },
       {
         question: "¿Ayudan a conseguir inversión?",
-        answer: "Preparamos tu empresa para inversión: estructura, métricas y pitch. La conexión con fondos es un servicio adicional."
+        answer: "Preparamos su empresa para inversión: estructura, métricas y pitch. La conexión con fondos es un servicio adicional."
       },
       {
         question: "¿Trabajan con startups?",
@@ -340,7 +340,7 @@ export const solutions: Solution[] = [
     audiences: ["Negocio en crecimiento", "Mid-market", "Enterprise"],
     techChips: ["ManyChat", "Meta Ads", "Google Ads", "HubSpot", "ActiveCampaign"],
     problems: [
-      "Publicas pero no conviertes",
+      "Publicación sin conversión clara",
       "Leads sin seguimiento rápido",
       "Mensajes inconsistentes o sin estrategia",
       "No hay sistema para calificar prospectos",
@@ -402,7 +402,7 @@ export const solutions: Solution[] = [
       },
       {
         question: "¿Qué plataformas de automatización usan?",
-        answer: "ManyChat, HubSpot, ActiveCampaign, Make/Zapier según tus necesidades."
+        answer: "ManyChat, HubSpot, ActiveCampaign, Make/Zapier según sus necesidades."
       },
       {
         question: "¿Cuánto tarda en verse resultados?",
@@ -410,7 +410,7 @@ export const solutions: Solution[] = [
       },
       {
         question: "¿Necesito tener CRM?",
-        answer: "No es obligatorio. Podemos implementar uno básico o integrarnos al tuyo."
+        answer: "No es obligatorio. Podemos implementar uno básico o integrarnos al suyo."
       },
       {
         question: "¿Incluyen diseño gráfico?",

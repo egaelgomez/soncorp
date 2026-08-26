@@ -19,7 +19,7 @@ const ServicePackages = ({ packages }: ServicePackagesProps) => {
             </h2>
           </div>
           <p className="text-muted-foreground mb-10 max-w-2xl">
-            Iniciamos con quick wins y escalamos a Enterprise conforme creces.
+            Iniciamos con quick wins y escalamos a Enterprise conforme su empresa crece.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">

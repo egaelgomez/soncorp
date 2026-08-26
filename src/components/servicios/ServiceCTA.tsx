@@ -32,8 +32,8 @@ const ServiceCTA = ({
                 ¿Listo para empezar?
               </h2>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                Agenda una llamada de diagnóstico sin costo. Evaluamos tu situación actual 
-                y te proponemos un plan con quick wins y resultados medibles.
+                Solicite una evaluación inicial sin compromiso. Conozcamos su situación actual
+                y definamos prioridades con quick wins y resultados medibles.
               </p>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Calendar className="h-4 w-4 text-secondary" />
@@ -46,7 +46,7 @@ const ServiceCTA = ({
               challengeLabel={challengeLabel}
               challengeOptions={challengeOptions}
               defaultChallenge={defaultChallenge}
-              submitLabel="Solicitar diagnóstico"
+              submitLabel="Solicitar evaluación inicial"
               serviceName={serviceName}
             />
           </div>

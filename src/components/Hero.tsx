@@ -14,8 +14,8 @@ const FloatingOrb = ({ className }: { className?: string }) => (
 );
 
 const Hero = () => {
-  const scrollToContact = () => {
-    const element = document.getElementById("contacto");
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -43,7 +43,7 @@ const Hero = () => {
             )}
           >
             <TrendingUp className="h-4 w-4" />
-            <span className="text-sm font-medium">Consultoría Empresarial en Hermosillo, Sonora</span>
+            <span className="text-sm font-medium">Consultoría empresarial para empresas en México</span>
           </div>
 
           {/* Main heading */}
@@ -61,12 +61,37 @@ const Hero = () => {
           {/* Subheading */}
           <p
             className={cn(
-              "text-lg md:text-xl text-muted-foreground mb-4 max-w-2xl mx-auto transition-all duration-700 ease-out delay-300",
+              "text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto transition-all duration-700 ease-out delay-300",
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             )}
           >
-            En Soncorp le ayudamos a transformar la experiencia de sus clientes, optimizar sus procesos operativos y de TI, e impulsar su crecimiento con estrategias de marketing y desarrollo de negocios orientadas a resultados. Trabajamos con empresas pequeñas, medianas y grandes en Hermosillo, Sonora y todo México.
+            En Soncorp le ayudamos a transformar la experiencia de sus clientes, optimizar sus procesos operativos y de TI, e impulsar su crecimiento con estrategias de marketing, automatización y consultoría de negocios orientadas a resultados.
           </p>
+
+          {/* CTAs */}
+          <div
+            className={cn(
+              "flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-700 ease-out delay-500",
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            )}
+          >
+            <Button
+              size="lg"
+              className="w-full sm:w-auto bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold gap-2"
+              onClick={() => scrollToSection("contacto")}
+            >
+              Solicitar evaluación inicial
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="w-full sm:w-auto gap-2"
+              onClick={() => scrollToSection("servicios")}
+            >
+              Ver servicios
+            </Button>
+          </div>
         </div>
       </div>
     </section>
