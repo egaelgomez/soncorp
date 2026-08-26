@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import {
   ArrowLeft,
   HeartHandshake,
@@ -143,12 +143,14 @@ const CustomerExperiencePage = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Consultoría en Experiencia del Cliente (Customer Experience) | Soncorp CX</title>
-        <meta name="description" content="Consultoría en experiencia del cliente (customer experience) para empresas en México. Mejore la atención al cliente, retención y satisfacción con un enfoque integral de CX. Mejora de atención al cliente, diagnóstico, medición y acompañamiento." />
+      <SEO
+        title="Consultoría en Experiencia del Cliente (Customer Experience) | Soncorp CX"
+        description="Consultoría en experiencia del cliente (CX) para empresas en México. Mejore la atención al cliente, retención y satisfacción con diagnóstico, medición y acompañamiento profesional."
+        canonicalPath="/servicios/customer-experience"
+      >
         <script type="application/ld+json">{JSON.stringify(orgSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-      </Helmet>
+      </SEO>
 
       <Navigation />
 

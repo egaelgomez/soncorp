@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
 import { ArrowLeft, TrendingUp, Check, Target, Users, Cog, BarChart3, Wrench, ArrowRight, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -90,7 +90,7 @@ const ConsultoriaDeNegociosPage = () => {
   {
     number: "1",
     title: "Diagnóstico",
-    description: "Entendemos tu negocio, números y cuellos de botella"
+    description: "Entendemos su negocio, números y cuellos de botella"
   },
   {
     number: "2",
@@ -107,7 +107,7 @@ const ConsultoriaDeNegociosPage = () => {
   const segments = [
   {
     title: "Negocios en crecimiento",
-    description: "Quieres orden y consistencia para crecer sin caos."
+    description: "Busca orden y consistencia para crecer sin caos."
   },
   {
     title: "Empresas con volumen",
@@ -121,13 +121,11 @@ const ConsultoriaDeNegociosPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>Consultoría de Negocios | Soncorp</title>
-        <meta
-          name="description"
-          content="Impulsamos el crecimiento rentable de tu empresa con estrategia, procesos y ejecución. Menos improvisación, más ventas y control." />
-        
-      </Helmet>
+      <SEO
+        title="Consultoría de Negocios | Soncorp"
+        description="Impulsamos el crecimiento rentable de su empresa con estrategia, procesos y ejecución. Menos improvisación, más ventas y control."
+        canonicalPath="/servicios/consultoria-de-negocios"
+      />
       
       <Navigation />
       
@@ -170,7 +168,7 @@ const ConsultoriaDeNegociosPage = () => {
               
               {/* Subtitle */}
               <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl">
-                Impulsamos el crecimiento rentable de tu empresa con estrategia, procesos y ejecución. 
+                Impulsamos el crecimiento rentable de su empresa con estrategia, procesos y ejecución.
                 Menos improvisación, más ventas y control.
               </p>
               
@@ -221,16 +219,16 @@ const ConsultoriaDeNegociosPage = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto space-y-6 text-center">
               <p className="text-lg text-muted-foreground">
-                Nuestro objetivo es que tu empresa crezca de forma rentable. Sin rodeos: más ventas, 
+                Nuestro objetivo es que su empresa crezca de forma rentable. Sin rodeos: más ventas,
                 costos bajo control y operación ordenada.
               </p>
-              <p className="text-lg text-muted-foreground">No solo resolvemos problemas, identificamos oportunidades que estás dejando pasar y riesgos que podrías evitar. Todo con lenguaje simple y accionable.
+              <p className="text-lg text-muted-foreground">No solo resolvemos problemas, identificamos oportunidades que está dejando pasar y riesgos que podría evitar. Todo con lenguaje simple y accionable.
 
 
               </p>
               <p className="text-lg text-muted-foreground">
-                Trabajamos de la mano contigo. Definimos prioridades claras, establecemos metas 
-                medibles y te acompañamos hasta ver resultados.
+                Trabajamos de la mano con usted. Definimos prioridades claras, establecemos metas
+                medibles y le acompañamos hasta ver resultados.
               </p>
             </div>
           </div>
@@ -244,7 +242,7 @@ const ConsultoriaDeNegociosPage = () => {
                 Áreas de Consultoría de Negocios
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Trabajamos en las áreas clave que impactan directamente tus resultados.
+                Trabajamos en las áreas clave que impactan directamente sus resultados.
               </p>
             </div>
             
@@ -297,7 +295,7 @@ const ConsultoriaDeNegociosPage = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Lo que cambia para tu negocio
+                Lo que cambia para su negocio
               </h2>
             </div>
             
@@ -412,7 +410,7 @@ const ConsultoriaDeNegociosPage = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                ¿Listo para ordenar tu negocio y crecer con control?
+                ¿Listo para ordenar su negocio y crecer con control?
               </h2>
               
               <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -436,7 +434,7 @@ const ConsultoriaDeNegociosPage = () => {
               {/* Contact Form */}
               <div className="max-w-2xl mx-auto">
                 <h3 className="text-xl font-semibold text-foreground mb-6 text-center">
-                  O déjanos tus datos y te contactamos
+                  O déjenos sus datos y le contactamos
                 </h3>
                 <ContactForm
                   challengeLabel="¿Qué necesita mejorar? *"

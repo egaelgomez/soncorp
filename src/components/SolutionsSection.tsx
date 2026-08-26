@@ -109,7 +109,7 @@ const SolutionsSection = () => {
         {/* Tagline */}
         <AnimatedSection animation="fade-in" delay={400}>
           <p className="text-center text-sm text-muted-foreground mt-10 mb-8">
-            Empezamos con quick wins (Starter) y escalamos a Enterprise conforme creces.
+            Empezamos con quick wins (Starter) y escalamos a Enterprise conforme crece su empresa.
           </p>
         </AnimatedSection>
 
@@ -118,7 +118,7 @@ const SolutionsSection = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button size="lg" className="gap-2 hover:scale-105 transition-transform duration-200" onClick={scrollToContact}>
               <Calendar className="h-4 w-4" />
-              Agendar llamada
+              Solicitar evaluación inicial
             </Button>
             <Button variant="outline" size="lg" className="gap-2 group/btn hover:scale-105 transition-transform duration-200" asChild>
               <Link to="/servicios">

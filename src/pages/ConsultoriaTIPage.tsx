@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Monitor, Check, ArrowRight, Lock, Key, FileText, FolderOpen, Server, Cloud, Database, Shield, Globe, Cpu, Settings, Headphones, Code, Workflow, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -148,13 +148,11 @@ const ConsultoriaTIPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>Consultoría y Soluciones TI | Soncorp</title>
-        <meta 
-          name="description" 
-          content="Consultoría TI, desarrollo web, aplicaciones empresariales, automatización, infraestructura cloud y soporte técnico especializado. Resuelva necesidades tecnológicas con Soncorp." 
-        />
-      </Helmet>
+      <SEO
+        title="Consultoría y Soluciones TI | Soncorp"
+        description="Consultoría TI, desarrollo web, aplicaciones empresariales, automatización, infraestructura cloud y soporte técnico especializado. Resuelva necesidades tecnológicas con Soncorp."
+        canonicalPath="/servicios/consultoria-soluciones-ti"
+      />
       
       <Navigation />
       

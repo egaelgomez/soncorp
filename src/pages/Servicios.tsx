@@ -1,29 +1,20 @@
 import { ArrowRight, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import Chip from "@/components/solutions/Chip";
 import { solutions } from "@/components/solutions/solutionsData";
 
 const Servicios = () => {
-  const scrollToContact = () => {
-    const element = document.getElementById("contacto");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <>
-      <Helmet>
-        <title>Servicios | Soncorp - Consultoría Empresarial</title>
-        <meta 
-          name="description" 
-          content="Soluciones prácticas, medibles y escalables: Customer Experience, Finanzas, TI y Marketing. Desde quick wins hasta nivel enterprise." 
-        />
-      </Helmet>
+      <SEO
+        title="Servicios | Soncorp — Consultoría empresarial"
+        description="Customer Experience, Consultoría de Negocios, Consultoría y Soluciones TI, y Marketing & Automatización. Soluciones prácticas, medibles y escalables para empresas en México."
+        canonicalPath="/servicios"
+      />
 
       <Navigation />
       
@@ -35,7 +26,7 @@ const Servicios = () => {
               Servicios Soncorp
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Soluciones prácticas, medibles y escalables: desde quick wins hasta nivel enterprise.
+              Soluciones prácticas, medibles y escalables: Customer Experience, Consultoría de Negocios, Consultoría y Soluciones TI, y Marketing & Automatización.
             </p>
           </div>
         </section>
@@ -96,12 +87,14 @@ const Servicios = () => {
               ¿Listo para empezar?
             </h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              Agenda una llamada de diagnóstico sin costo y descubre cómo podemos ayudarte.
+              Solicite una evaluación inicial sin compromiso y conozca cómo podemos ayudarle.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" className="gap-2" onClick={scrollToContact}>
-                <Calendar className="h-4 w-4" />
-                Agendar diagnóstico
+              <Button size="lg" className="gap-2" asChild>
+                <Link to="/#contacto">
+                  <Calendar className="h-4 w-4" />
+                  Solicitar evaluación inicial
+                </Link>
               </Button>
               <Button variant="outline" size="lg" className="gap-2" asChild>
                 <Link to="/#contacto">

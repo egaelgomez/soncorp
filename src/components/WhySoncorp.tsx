@@ -4,7 +4,7 @@ import AnimatedSection from "./AnimatedSection";
 const whyCards = [
   {
     icon: Target,
-    title: "Marco probado",
+    title: "Marcos y estándares",
     headline: "Metodología + estándares operativos.",
     chips: ["Six Pillars", "SLAs"],
   },
@@ -17,13 +17,13 @@ const whyCards = [
   {
     icon: Wrench,
     title: "Ejecución hands-on",
-    headline: "Implementamos contigo, no solo consultamos.",
+    headline: "Implementamos junto a su equipo, no solo consultamos.",
     chips: ["Playbooks", "Training"],
   },
   {
     icon: Layers,
     title: "Visión integral",
-    headline: "CX + TI + Marketing + Finanzas.",
+    headline: "CX + Negocios + TI + Marketing.",
     chips: ["Menos proveedores"],
   },
   {
@@ -50,7 +50,7 @@ const WhySoncorp = () => {
             ¿Por qué elegir Soncorp?
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Desde Hermosillo, Sonora, llevamos método, ejecución y métricas a cada proyecto.
+            Consultoría empresarial en México con método, ejecución y métricas en cada proyecto.
           </p>
         </AnimatedSection>
 

@@ -1,5 +1,5 @@
 import { Mail, Phone, MapPin } from "lucide-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import soncorpLogo from "@/assets/soncorp-logo.png";
 import { CONTACT_INFO } from "@/lib/constants";
 import AnimatedSection from "./AnimatedSection";
@@ -55,12 +55,12 @@ const Footer = () => {
                   </li>
                 ))}
                 <li>
-                  <a
-                    href="/servicios/customer-experience"
+                  <Link
+                    to="/servicios/customer-experience"
                     className="nav-link-underline text-muted-foreground hover:text-secondary transition-colors duration-200"
                   >
                     Soncorp CX
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
