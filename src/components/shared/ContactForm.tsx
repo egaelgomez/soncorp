@@ -4,6 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { MessageSquare, Check, Loader2 } from "lucide-react";
 import { CONTACT_INFO } from "@/lib/constants";
+import { buildLeadAttributionPayload } from "@/lib/lead-attribution";
 import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
@@ -75,8 +76,25 @@ const ContactForm = ({
     setSending(true);
 
     try {
+      const attribution = buildLeadAttributionPayload();
       const { error } = await supabase.functions.invoke("send-contact-email", {
-        body: { ...formData, serviceName },
+        body: {
+          ...result.data,
+          serviceName,
+          attribution: {
+            landingPath: attribution.landingPath,
+            formPath: attribution.formPath,
+            referrer: attribution.referrer,
+            utmSource: attribution.utmSource,
+            utmMedium: attribution.utmMedium,
+            utmCampaign: attribution.utmCampaign,
+            utmTerm: attribution.utmTerm,
+            utmContent: attribution.utmContent,
+            gclid: attribution.gclid,
+            gbraid: attribution.gbraid,
+            wbraid: attribution.wbraid,
+          },
+        },
       });
 
       if (error) throw error;
