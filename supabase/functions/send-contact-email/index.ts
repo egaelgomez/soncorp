@@ -8,33 +8,6 @@ const corsHeaders = {
 
 const TAMANO_VALUES = new Set(["1-10", "11-50", "51-200", "201+"]);
 
-interface AttributionInput {
-  landingPath?: string;
-  formPath?: string;
-  referrer?: string;
-  utmSource?: string;
-  utmMedium?: string;
-  utmCampaign?: string;
-  utmTerm?: string;
-  utmContent?: string;
-  gclid?: string;
-  gbraid?: string;
-  wbraid?: string;
-}
-
-interface ContactPayload {
-  nombre?: string;
-  empresa?: string;
-  rol?: string;
-  email?: string;
-  telefono?: string;
-  tamano?: string;
-  reto?: string;
-  mensaje?: string;
-  serviceName?: string;
-  attribution?: AttributionInput;
-}
-
 interface ValidatedContact {
   nombre: string;
   empresa: string;
@@ -73,11 +46,14 @@ const MAX_REFERRER_LENGTH = 2000;
 const MAX_UTM_LENGTH = 200;
 const MAX_CLICK_ID_LENGTH = 200;
 
-function trimMax(value: unknown, max: number): string | null {
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function trimString(value: unknown): string | null {
   if (typeof value !== "string") return null;
   const trimmed = value.trim();
-  if (!trimmed) return null;
-  return trimmed.length > max ? trimmed.slice(0, max) : trimmed;
+  return trimmed || null;
 }
 
 function stripControlChars(value: string): string {
@@ -93,26 +69,26 @@ function stripControlChars(value: string): string {
 }
 
 function normalizeAttributionText(value: unknown, max: number): string | null {
-  const trimmed = trimMax(value, max);
+  const trimmed = trimString(value);
   if (!trimmed) return null;
   const sanitized = stripControlChars(trimmed);
-  if (!sanitized) return null;
-  return sanitized.length > max ? sanitized.slice(0, max) : sanitized;
+  if (!sanitized || sanitized.length > max) return null;
+  return sanitized;
 }
 
 /** Accept only path-like values starting with "/"; strip query and fragment. */
 function normalizePath(value: unknown, max = MAX_PATH_LENGTH): string | null {
-  const trimmed = trimMax(value, max);
+  const trimmed = trimString(value);
   if (!trimmed || !trimmed.startsWith("/")) return null;
 
   const path = trimmed.split("#", 1)[0].split("?", 1)[0].trim();
-  if (!path.startsWith("/")) return null;
-  return path.length > max ? path.slice(0, max) : path;
+  if (!path.startsWith("/") || path.length > max) return null;
+  return path;
 }
 
 /** Accept only HTTP(S) referrers; store origin + pathname without query, hash, or credentials. */
 function normalizeReferrer(value: unknown, max = MAX_REFERRER_LENGTH): string | null {
-  const trimmed = trimMax(value, max);
+  const trimmed = trimString(value);
   if (!trimmed) return null;
 
   try {
@@ -120,18 +96,31 @@ function normalizeReferrer(value: unknown, max = MAX_REFERRER_LENGTH): string | 
     if (url.protocol !== "http:" && url.protocol !== "https:") return null;
     if (url.username || url.password) return null;
     const sanitized = `${url.origin}${url.pathname}`;
-    return sanitized.length > max ? sanitized.slice(0, max) : sanitized;
+    if (sanitized.length > max) return null;
+    return sanitized;
   } catch {
     return null;
   }
 }
 
 function requireField(value: unknown, max: number, fieldName: string): string | Response {
-  const normalized = trimMax(value, max);
-  if (!normalized) {
+  const trimmed = trimString(value);
+  if (!trimmed) {
     return jsonResponse({ error: `Campo requerido: ${fieldName}` }, 400);
   }
-  return normalized;
+  if (trimmed.length > max) {
+    return jsonResponse({ error: `Campo demasiado largo: ${fieldName}` }, 400);
+  }
+  return trimmed;
+}
+
+function optionalField(value: unknown, max: number, fieldName: string): string | null | Response {
+  const trimmed = trimString(value);
+  if (!trimmed) return null;
+  if (trimmed.length > max) {
+    return jsonResponse({ error: `Campo demasiado largo: ${fieldName}` }, 400);
+  }
+  return trimmed;
 }
 
 function isValidEmail(email: string): boolean {
@@ -157,7 +146,7 @@ function deriveTrafficSource(attribution: Omit<ValidatedContact["attribution"], 
   return "direct";
 }
 
-function validatePayload(raw: ContactPayload): ValidatedContact | Response {
+function validatePayload(raw: Record<string, unknown>): ValidatedContact | Response {
   const nombreResult = requireField(raw.nombre, 100, "nombre");
   if (nombreResult instanceof Response) return nombreResult;
 
@@ -182,7 +171,16 @@ function validatePayload(raw: ContactPayload): ValidatedContact | Response {
   const retoResult = requireField(raw.reto, 100, "reto");
   if (retoResult instanceof Response) return retoResult;
 
-  const attr = raw.attribution ?? {};
+  const rolResult = optionalField(raw.rol, 100, "rol");
+  if (rolResult instanceof Response) return rolResult;
+
+  const mensajeResult = optionalField(raw.mensaje, 1000, "mensaje");
+  if (mensajeResult instanceof Response) return mensajeResult;
+
+  const serviceNameResult = optionalField(raw.serviceName, 200, "serviceName");
+  if (serviceNameResult instanceof Response) return serviceNameResult;
+
+  const attr = isRecord(raw.attribution) ? raw.attribution : {};
   const formPath = normalizePath(attr.formPath);
   const landingPath = normalizePath(attr.landingPath) ?? formPath;
 
@@ -203,13 +201,13 @@ function validatePayload(raw: ContactPayload): ValidatedContact | Response {
   return {
     nombre: nombreResult,
     empresa: empresaResult,
-    rol: trimMax(raw.rol, 100),
+    rol: rolResult,
     email: emailResult.toLowerCase(),
     telefono: telefonoResult,
     tamano: tamanoResult,
     reto: retoResult,
-    mensaje: trimMax(raw.mensaje, 1000),
-    serviceName: trimMax(raw.serviceName, 200),
+    mensaje: mensajeResult,
+    serviceName: serviceNameResult,
     attribution: {
       ...attributionBase,
       trafficSource: deriveTrafficSource(attributionBase),
@@ -296,9 +294,23 @@ Deno.serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  if (req.method !== "POST") {
+    return jsonResponse({ error: "Method not allowed" }, 405);
+  }
+
   try {
-    const rawPayload: ContactPayload = await req.json();
-    const validated = validatePayload(rawPayload);
+    let rawBody: unknown;
+    try {
+      rawBody = await req.json();
+    } catch {
+      return jsonResponse({ error: "Invalid JSON payload" }, 400);
+    }
+
+    if (!isRecord(rawBody)) {
+      return jsonResponse({ error: "Invalid JSON payload" }, 400);
+    }
+
+    const validated = validatePayload(rawBody);
     if (validated instanceof Response) return validated;
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
@@ -345,42 +357,51 @@ Deno.serve(async (req) => {
     }
 
     const leadId = leadRow.id as string;
-    const shortId = leadShortId(leadId);
+    let notificationSent = false;
 
-    const resendApiKey = Deno.env.get("RESEND_API_KEY");
-    if (!resendApiKey) {
-      console.error("Missing RESEND_API_KEY after lead persisted:", leadId);
-      return jsonResponse({ success: true, notificationSent: false, leadId }, 200);
+    try {
+      const resendApiKey = Deno.env.get("RESEND_API_KEY");
+      if (!resendApiKey) {
+        console.error("Missing RESEND_API_KEY after lead persisted:", leadId);
+      } else {
+        const shortId = leadShortId(leadId);
+        const empresaPart = sanitizeSubjectPart(validated.empresa);
+        const servicePart = validated.serviceName ? sanitizeSubjectPart(validated.serviceName) : null;
+        const subject = servicePart
+          ? `Nuevo lead [${shortId}] – ${servicePart} – ${empresaPart}`
+          : `Nuevo lead [${shortId}] – ${empresaPart}`;
+
+        const htmlBody = buildEmailHtml(validated, leadId);
+
+        const res = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${resendApiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: "Soncorp Web <noreply@soncorp.com.mx>",
+            to: ["hola@soncorp.com.mx"],
+            subject,
+            html: htmlBody,
+          }),
+        });
+
+        if (!res.ok) {
+          console.error(`Resend API error [${res.status}] for lead ${leadId}`);
+        } else {
+          notificationSent = true;
+        }
+      }
+    } catch (error) {
+      console.error(
+        "Notification delivery failed for lead",
+        leadId,
+        error instanceof Error ? error.message : "unknown",
+      );
     }
 
-    const empresaPart = sanitizeSubjectPart(validated.empresa);
-    const servicePart = validated.serviceName ? sanitizeSubjectPart(validated.serviceName) : null;
-    const subject = servicePart
-      ? `Nuevo lead [${shortId}] – ${servicePart} – ${empresaPart}`
-      : `Nuevo lead [${shortId}] – ${empresaPart}`;
-
-    const htmlBody = buildEmailHtml(validated, leadId);
-
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${resendApiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: "Soncorp Web <noreply@soncorp.com.mx>",
-        to: ["hola@soncorp.com.mx"],
-        subject,
-        html: htmlBody,
-      }),
-    });
-
-    if (!res.ok) {
-      console.error(`Resend API error [${res.status}] for lead ${leadId}`);
-      return jsonResponse({ success: true, notificationSent: false, leadId }, 200);
-    }
-
-    return jsonResponse({ success: true, notificationSent: true, leadId }, 200);
+    return jsonResponse({ success: true, notificationSent, leadId }, 200);
   } catch (err) {
     console.error("Error processing contact submission:", err instanceof Error ? err.message : "unknown");
     return jsonResponse({ error: "Error al enviar el mensaje" }, 500);
