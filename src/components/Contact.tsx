@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, MessageCircle, Lock } from "lucide-react";
 import { CONTACT_INFO } from "@/lib/constants";
 import ContactForm from "@/components/shared/ContactForm";
 import AnimatedSection from "./AnimatedSection";
+import { pushAnalyticsEvent } from "@/lib/analytics";
 
 const generalChallengeOptions = [
   { value: "cx", label: "Experiencia del cliente (CX)" },
@@ -15,6 +16,11 @@ const generalChallengeOptions = [
 
 const Contact = () => {
   const handleWhatsAppClick = () => {
+    pushAnalyticsEvent({
+      event: "whatsapp_click",
+      placement: "homepage_contact_section",
+      page_path: window.location.pathname,
+    });
     window.open(
       `https://wa.me/${CONTACT_INFO.whatsappNumber}?text=${encodeURIComponent(CONTACT_INFO.whatsappMessage)}`,
       "_blank"
