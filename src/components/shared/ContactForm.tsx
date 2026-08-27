@@ -7,6 +7,7 @@ import { CONTACT_INFO } from "@/lib/constants";
 import { buildLeadAttributionPayload } from "@/lib/lead-attribution";
 import { supabase } from "@/integrations/supabase/client";
 import TurnstileWidget from "@/components/shared/TurnstileWidget";
+import { pushAnalyticsEvent } from "@/lib/analytics";
 
 const formSchema = z.object({
   nombre: z.string().trim().min(1, "Nombre requerido").max(100),
