@@ -1,26 +1,9 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
 
-const DEFAULT_ALLOWED_ORIGINS = [
-  "https://soncorp.com.mx",
-  "https://www.soncorp.com.mx",
-  "https://soncorp.lovable.app",
-];
-const DEFAULT_TURNSTILE_HOSTNAMES = [
-  "soncorp.com.mx",
-  "www.soncorp.com.mx",
-  "soncorp.lovable.app",
-];
-const TURNSTILE_ACTION = "contact_form";
-const TURNSTILE_SITEVERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
-const MAX_REQUEST_BYTES = 32_768;
-const RATE_LIMIT_WINDOW_SECONDS = 600;
-const RATE_LIMIT_MAX_REQUESTS = 5;
-
-const baseCorsHeaders = {
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Max-Age": "86400",
 };
 
 const TAMANO_VALUES = new Set(["1-10", "11-50", "51-200", "201+"]);
@@ -51,61 +34,10 @@ interface ValidatedContact {
   };
 }
 
-interface ValidationFailure {
-  error: string;
-}
-
-interface TurnstileSiteverifyResponse {
-  success?: boolean;
-  hostname?: string;
-  action?: string;
-  "error-codes"?: string[];
-}
-
-type TurnstileCheck =
-  | { ok: true }
-  | { ok: false; unavailable: boolean };
-
-type RateLimitCheck = "allowed" | "limited" | "unavailable";
-
-function parseCsvEnv(name: string, defaults: string[]): Set<string> {
-  const configured = Deno.env.get(name);
-  const values = configured ? configured.split(",") : defaults;
-  return new Set(values.map((value) => value.trim()).filter(Boolean));
-}
-
-function corsHeadersForRequest(req: Request): Record<string, string> {
-  const headers: Record<string, string> = { ...baseCorsHeaders };
-  const origin = req.headers.get("origin");
-  const allowedOrigins = parseCsvEnv("CONTACT_ALLOWED_ORIGINS", DEFAULT_ALLOWED_ORIGINS);
-
-  if (origin && allowedOrigins.has(origin)) {
-    headers["Access-Control-Allow-Origin"] = origin;
-    headers.Vary = "Origin";
-  }
-
-  return headers;
-}
-
-function isOriginAllowed(req: Request): boolean {
-  const origin = req.headers.get("origin");
-  if (!origin) return true;
-  return parseCsvEnv("CONTACT_ALLOWED_ORIGINS", DEFAULT_ALLOWED_ORIGINS).has(origin);
-}
-
-function jsonResponse(
-  req: Request,
-  body: Record<string, unknown>,
-  status: number,
-  extraHeaders?: Record<string, string>,
-): Response {
+function jsonResponse(body: Record<string, unknown>, status: number): Response {
   return new Response(JSON.stringify(body), {
     status,
-    headers: {
-      ...corsHeadersForRequest(req),
-      "Content-Type": "application/json",
-      ...extraHeaders,
-    },
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
 }
 
@@ -171,34 +103,22 @@ function normalizeReferrer(value: unknown, max = MAX_REFERRER_LENGTH): string | 
   }
 }
 
-function validationFailure(error: string): ValidationFailure {
-  return { error };
-}
-
-function isValidationFailure(value: unknown): value is ValidationFailure {
-  return isRecord(value) && typeof value.error === "string";
-}
-
-function requireField(value: unknown, max: number, fieldName: string): string | ValidationFailure {
+function requireField(value: unknown, max: number, fieldName: string): string | Response {
   const trimmed = trimString(value);
   if (!trimmed) {
-    return validationFailure(`Campo requerido: ${fieldName}`);
+    return jsonResponse({ error: `Campo requerido: ${fieldName}` }, 400);
   }
   if (trimmed.length > max) {
-    return validationFailure(`Campo demasiado largo: ${fieldName}`);
+    return jsonResponse({ error: `Campo demasiado largo: ${fieldName}` }, 400);
   }
   return trimmed;
 }
 
-function optionalField(
-  value: unknown,
-  max: number,
-  fieldName: string,
-): string | null | ValidationFailure {
+function optionalField(value: unknown, max: number, fieldName: string): string | null | Response {
   const trimmed = trimString(value);
   if (!trimmed) return null;
   if (trimmed.length > max) {
-    return validationFailure(`Campo demasiado largo: ${fieldName}`);
+    return jsonResponse({ error: `Campo demasiado largo: ${fieldName}` }, 400);
   }
   return trimmed;
 }
@@ -226,39 +146,39 @@ function deriveTrafficSource(attribution: Omit<ValidatedContact["attribution"], 
   return "direct";
 }
 
-function validatePayload(raw: Record<string, unknown>): ValidatedContact | ValidationFailure {
+function validatePayload(raw: Record<string, unknown>): ValidatedContact | Response {
   const nombreResult = requireField(raw.nombre, 100, "nombre");
-  if (isValidationFailure(nombreResult)) return nombreResult;
+  if (nombreResult instanceof Response) return nombreResult;
 
   const empresaResult = requireField(raw.empresa, 100, "empresa");
-  if (isValidationFailure(empresaResult)) return empresaResult;
+  if (empresaResult instanceof Response) return empresaResult;
 
   const emailResult = requireField(raw.email, 255, "email");
-  if (isValidationFailure(emailResult)) return emailResult;
+  if (emailResult instanceof Response) return emailResult;
   if (!isValidEmail(emailResult)) {
-    return validationFailure("Email inválido");
+    return jsonResponse({ error: "Email inválido" }, 400);
   }
 
   const telefonoResult = requireField(raw.telefono, 20, "telefono");
-  if (isValidationFailure(telefonoResult)) return telefonoResult;
+  if (telefonoResult instanceof Response) return telefonoResult;
 
   const tamanoResult = requireField(raw.tamano, 20, "tamano");
-  if (isValidationFailure(tamanoResult)) return tamanoResult;
+  if (tamanoResult instanceof Response) return tamanoResult;
   if (!TAMANO_VALUES.has(tamanoResult)) {
-    return validationFailure("Tamaño de empresa inválido");
+    return jsonResponse({ error: "Tamaño de empresa inválido" }, 400);
   }
 
   const retoResult = requireField(raw.reto, 100, "reto");
-  if (isValidationFailure(retoResult)) return retoResult;
+  if (retoResult instanceof Response) return retoResult;
 
   const rolResult = optionalField(raw.rol, 100, "rol");
-  if (isValidationFailure(rolResult)) return rolResult;
+  if (rolResult instanceof Response) return rolResult;
 
   const mensajeResult = optionalField(raw.mensaje, 1000, "mensaje");
-  if (isValidationFailure(mensajeResult)) return mensajeResult;
+  if (mensajeResult instanceof Response) return mensajeResult;
 
   const serviceNameResult = optionalField(raw.serviceName, 200, "serviceName");
-  if (isValidationFailure(serviceNameResult)) return serviceNameResult;
+  if (serviceNameResult instanceof Response) return serviceNameResult;
 
   const attr = isRecord(raw.attribution) ? raw.attribution : {};
   const formPath = normalizePath(attr.formPath);
@@ -293,103 +213,6 @@ function validatePayload(raw: Record<string, unknown>): ValidatedContact | Valid
       trafficSource: deriveTrafficSource(attributionBase),
     },
   };
-}
-
-function getClientIp(req: Request): string | null {
-  const cfConnectingIp = trimString(req.headers.get("cf-connecting-ip"));
-  if (cfConnectingIp) return cfConnectingIp.slice(0, 128);
-
-  const forwardedFor = trimString(req.headers.get("x-forwarded-for"));
-  if (forwardedFor) {
-    const first = forwardedFor.split(",", 1)[0].trim();
-    if (first) return first.slice(0, 128);
-  }
-
-  const realIp = trimString(req.headers.get("x-real-ip"));
-  return realIp ? realIp.slice(0, 128) : null;
-}
-
-async function sha256Hex(value: string): Promise<string> {
-  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
-  return Array.from(new Uint8Array(digest))
-    .map((byte) => byte.toString(16).padStart(2, "0"))
-    .join("");
-}
-
-async function checkRateLimit(
-  req: Request,
-  supabase: ReturnType<typeof createClient>,
-): Promise<RateLimitCheck> {
-  const clientIp = getClientIp(req);
-  if (!clientIp) {
-    console.warn("Contact rate limit skipped because client IP was unavailable");
-    return "allowed";
-  }
-
-  const keyHash = await sha256Hex(`soncorp-contact-v1:${clientIp}`);
-  const { data, error } = await supabase.rpc("consume_contact_submission_rate_limit", {
-    p_key_hash: keyHash,
-    p_window_seconds: RATE_LIMIT_WINDOW_SECONDS,
-    p_max_requests: RATE_LIMIT_MAX_REQUESTS,
-  });
-
-  if (error) {
-    console.error("Contact rate limit check failed:", error.code ?? "unknown");
-    return "unavailable";
-  }
-
-  return data === true ? "allowed" : "limited";
-}
-
-async function verifyTurnstile(
-  token: string,
-  secretKey: string,
-  clientIp: string | null,
-): Promise<TurnstileCheck> {
-  try {
-    const response = await fetch(TURNSTILE_SITEVERIFY_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        secret: secretKey,
-        response: token,
-        ...(clientIp ? { remoteip: clientIp } : {}),
-      }),
-    });
-
-    if (!response.ok) {
-      console.error(`Turnstile Siteverify HTTP error: ${response.status}`);
-      return { ok: false, unavailable: true };
-    }
-
-    const result = await response.json() as TurnstileSiteverifyResponse;
-    if (!result.success) {
-      console.warn("Turnstile verification rejected:", result["error-codes"]?.join(",") ?? "unknown");
-      return { ok: false, unavailable: false };
-    }
-
-    if (result.action !== TURNSTILE_ACTION) {
-      console.warn("Turnstile verification rejected because action did not match");
-      return { ok: false, unavailable: false };
-    }
-
-    const allowedHostnames = parseCsvEnv(
-      "TURNSTILE_ALLOWED_HOSTNAMES",
-      DEFAULT_TURNSTILE_HOSTNAMES,
-    );
-    if (!result.hostname || !allowedHostnames.has(result.hostname)) {
-      console.warn("Turnstile verification rejected because hostname was not allowed");
-      return { ok: false, unavailable: false };
-    }
-
-    return { ok: true };
-  } catch (error) {
-    console.error(
-      "Turnstile verification unavailable:",
-      error instanceof Error ? error.message : "unknown",
-    );
-    return { ok: false, unavailable: true };
-  }
 }
 
 function sanitizeSubjectPart(value: string): string {
@@ -468,86 +291,36 @@ function buildEmailHtml(lead: ValidatedContact, leadId: string): string {
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
-    return new Response(null, { status: 204, headers: corsHeadersForRequest(req) });
+    return new Response(null, { headers: corsHeaders });
   }
 
   if (req.method !== "POST") {
-    return jsonResponse(req, { error: "Method not allowed" }, 405);
-  }
-
-  if (!isOriginAllowed(req)) {
-    return jsonResponse(req, { error: "Origin not allowed" }, 403);
+    return jsonResponse({ error: "Method not allowed" }, 405);
   }
 
   try {
-    const contentLength = Number(req.headers.get("content-length"));
-    if (Number.isFinite(contentLength) && contentLength > MAX_REQUEST_BYTES) {
-      return jsonResponse(req, { error: "Payload too large" }, 413);
-    }
-
     let rawBody: unknown;
     try {
-      const rawText = await req.text();
-      if (new TextEncoder().encode(rawText).byteLength > MAX_REQUEST_BYTES) {
-        return jsonResponse(req, { error: "Payload too large" }, 413);
-      }
-      rawBody = JSON.parse(rawText);
+      rawBody = await req.json();
     } catch {
-      return jsonResponse(req, { error: "Invalid JSON payload" }, 400);
+      return jsonResponse({ error: "Invalid JSON payload" }, 400);
     }
 
     if (!isRecord(rawBody)) {
-      return jsonResponse(req, { error: "Invalid JSON payload" }, 400);
-    }
-
-    // Honeypot: pretend success so automated fillers receive no useful signal.
-    if (trimString(rawBody.website)) {
-      return jsonResponse(req, { success: true, notificationSent: false }, 200);
-    }
-
-    const turnstileTokenResult = requireField(rawBody.turnstileToken, 2048, "turnstileToken");
-    if (isValidationFailure(turnstileTokenResult)) {
-      return jsonResponse(req, { error: "Verificación de seguridad requerida" }, 403);
-    }
-
-    const supabaseUrl = Deno.env.get("SUPABASE_URL");
-    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-    const turnstileSecretKey = Deno.env.get("TURNSTILE_SECRET_KEY");
-    if (!supabaseUrl || !supabaseServiceKey || !turnstileSecretKey) {
-      console.error("Missing server security configuration");
-      return jsonResponse(req, { error: "Server configuration error" }, 500);
-    }
-
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
-    const rateLimit = await checkRateLimit(req, supabase);
-    if (rateLimit === "unavailable") {
-      return jsonResponse(req, { error: "Servicio temporalmente no disponible" }, 503);
-    }
-    if (rateLimit === "limited") {
-      return jsonResponse(
-        req,
-        { error: "Demasiados intentos. Intente nuevamente en unos minutos." },
-        429,
-        { "Retry-After": String(RATE_LIMIT_WINDOW_SECONDS) },
-      );
-    }
-
-    const turnstile = await verifyTurnstile(
-      turnstileTokenResult,
-      turnstileSecretKey,
-      getClientIp(req),
-    );
-    if (!turnstile.ok) {
-      return turnstile.unavailable
-        ? jsonResponse(req, { error: "Verificación de seguridad temporalmente no disponible" }, 503)
-        : jsonResponse(req, { error: "Verificación de seguridad inválida" }, 403);
+      return jsonResponse({ error: "Invalid JSON payload" }, 400);
     }
 
     const validated = validatePayload(rawBody);
-    if (isValidationFailure(validated)) {
-      return jsonResponse(req, { error: validated.error }, 400);
+    if (validated instanceof Response) return validated;
+
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error("Missing Supabase server credentials");
+      return jsonResponse({ error: "Server configuration error" }, 500);
     }
+
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     const { data: leadRow, error: insertError } = await supabase
       .from("leads")
@@ -580,7 +353,7 @@ Deno.serve(async (req) => {
 
     if (insertError || !leadRow?.id) {
       console.error("Lead insert failed:", insertError?.code ?? "unknown");
-      return jsonResponse(req, { error: "Error al guardar la solicitud" }, 500);
+      return jsonResponse({ error: "Error al guardar la solicitud" }, 500);
     }
 
     const leadId = leadRow.id as string;
@@ -628,10 +401,10 @@ Deno.serve(async (req) => {
       );
     }
 
-    return jsonResponse(req, { success: true, notificationSent, leadId }, 200);
+    return jsonResponse({ success: true, notificationSent, leadId }, 200);
   } catch (err) {
     console.error("Error processing contact submission:", err instanceof Error ? err.message : "unknown");
-    return jsonResponse(req, { error: "Error al enviar el mensaje" }, 500);
+    return jsonResponse({ error: "Error al enviar el mensaje" }, 500);
   }
 });
 
