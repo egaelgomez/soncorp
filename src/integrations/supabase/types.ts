@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      contact_submission_rate_limits: {
+        Row: {
+          key_hash: string
+          request_count: number
+          updated_at: string
+          window_started_at: string
+        }
+        Insert: {
+          key_hash: string
+          request_count?: number
+          updated_at?: string
+          window_started_at?: string
+        }
+        Update: {
+          key_hash?: string
+          request_count?: number
+          updated_at?: string
+          window_started_at?: string
+        }
+        Relationships: []
+      }
       email_send_log: {
         Row: {
           created_at: string
@@ -223,6 +244,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      consume_contact_submission_rate_limit: {
+        Args: {
+          p_key_hash: string
+          p_max_requests?: number
+          p_window_seconds?: number
+        }
+        Returns: boolean
+      }
       delete_email: {
         Args: { message_id: number; queue_name: string }
         Returns: boolean
