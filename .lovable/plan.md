@@ -1,20 +1,31 @@
+# UAT de producción: Edge Function `send-contact-email`
 
+Verificación de runtime únicamente. Sin cambios en código, migraciones, esquema, frontend ni archivos del repositorio.
 
-## Plan: Corregir simetría de cards en Soluciones
+## Qué se hará
 
-### Problema
-Las cards tienen alturas diferentes porque el contenido varía en longitud. El grid CSS no fuerza alturas iguales porque los hijos internos (AnimatedSection → TiltCard) no heredan `h-full`.
+1. **Un solo POST** a la función desplegada `send-contact-email` (vía herramienta de prueba de Edge Functions) con este lead QA exacto:
+   - nombre: `P0B QA Test`
+   - empresa: `Soncorp QA`
+   - rol: `QA`
+   - email: `qa+p0b@soncorp.com.mx`
+   - telefono: `6620000000`
+   - tamano: `1-10`
+   - reto: `Prueba UAT P0B`
+   - mensaje: `Automated production UAT — safe to delete later`
+   - serviceName: `P0B QA`
+   - attribution: `{ landingPath: '/', formPath: '/servicios/customer-experience', referrer: null, utmSource: 'p0b_test', utmMedium: 'qa', utmCampaign: 'p0b_launch', utmTerm: null, utmContent: null, gclid: null, gbraid: null, wbraid: null }`
 
-### Solución — `src/components/SolutionsSection.tsx`
+2. **Reportar** el HTTP status y el JSON de respuesta (`success`, `notificationSent`, `leadId`).
 
-Agregar `h-full` en cascada para que cada card ocupe toda la altura de su celda:
+3. **Verificación de solo lectura (opcional, no destructiva):** consultar `public.leads` para confirmar que el registro QA quedó insertado con los campos de atribución correctos (`utm_source='p0b_test'`, `status='new'`).
 
-1. `AnimatedSection` → agregar `className="h-full"`
-2. `TiltCard` → agregar `h-full flex flex-col` a su className
-3. El contenido intermedio (chips/result) puede usar `flex-grow` para empujar el CTA "Ver detalles" al fondo de todas las cards por igual
+## Reglas
 
-Esto hace que CSS Grid iguale las alturas por fila y el contenido interno se distribuya uniformemente.
+- Exactamente **una** petición POST. Sin reintentos si la respuesta no es 2xx.
+- Si algo falla, se reporta el fallo tal cual — **no se edita código** para corregirlo.
+- No se toca `verify_jwt`, migraciones, ni ningún otro archivo.
 
-### Archivos
-- 1 archivo editado: `src/components/SolutionsSection.tsx` (~3 líneas cambiadas)
+## Nota
 
+El POST insertará una fila real en `public.leads` (marcada claramente como QA, segura de borrar después) y disparará el envío de email vía Resend a `hola@soncorp.com.mx` si `RESEND_API_KEY` está configurada.
