@@ -7,6 +7,7 @@ import { CONTACT_INFO } from "@/lib/constants";
 import { buildLeadAttributionPayload } from "@/lib/lead-attribution";
 import { supabase } from "@/integrations/supabase/client";
 import TurnstileWidget from "@/components/shared/TurnstileWidget";
+import { pushAnalyticsEvent } from "@/lib/analytics";
 
 const formSchema = z.object({
   nombre: z.string().trim().min(1, "Nombre requerido").max(100),
@@ -64,6 +65,12 @@ const ContactForm = ({
   }, []);
 
   const handleWhatsAppClick = () => {
+    pushAnalyticsEvent({
+      event: "whatsapp_click",
+      placement: submitted ? "contact_form_success" : "contact_form",
+      ...(serviceName ? { service_name: serviceName } : {}),
+      page_path: window.location.pathname,
+    });
     window.open(
       `https://wa.me/${CONTACT_INFO.whatsappLink}?text=${encodeURIComponent(CONTACT_INFO.whatsappMessage)}`,
       "_blank"
@@ -128,6 +135,13 @@ const ContactForm = ({
       });
 
       if (error) throw error;
+
+      pushAnalyticsEvent({
+        event: "generate_lead",
+        lead_method: "contact_form",
+        ...(serviceName ? { service_name: serviceName } : {}),
+        form_path: window.location.pathname,
+      });
 
       setSubmitted(true);
       toast({
