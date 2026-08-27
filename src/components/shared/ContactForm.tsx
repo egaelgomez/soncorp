@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
@@ -6,6 +6,7 @@ import { MessageSquare, Check, Loader2 } from "lucide-react";
 import { CONTACT_INFO } from "@/lib/constants";
 import { buildLeadAttributionPayload } from "@/lib/lead-attribution";
 import { supabase } from "@/integrations/supabase/client";
+import TurnstileWidget from "@/components/shared/TurnstileWidget";
 
 const formSchema = z.object({
   nombre: z.string().trim().min(1, "Nombre requerido").max(100),
@@ -53,6 +54,14 @@ const ContactForm = ({
   const [submitted, setSubmitted] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [sending, setSending] = useState(false);
+  const [website, setWebsite] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
+  const turnstileSiteKey = (import.meta.env.VITE_TURNSTILE_SITE_KEY ?? "").trim();
+
+  const handleTurnstileToken = useCallback((token: string | null) => {
+    setTurnstileToken(token);
+  }, []);
 
   const handleWhatsAppClick = () => {
     window.open(
@@ -72,6 +81,25 @@ const ContactForm = ({
       setErrors(fieldErrors);
       return;
     }
+
+    if (!turnstileSiteKey) {
+      toast({
+        title: "Verificación no disponible",
+        description: "La verificación de seguridad no está configurada. Intente de nuevo más tarde.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!turnstileToken) {
+      toast({
+        title: "Verificación requerida",
+        description: "Espere a que finalice la verificación de seguridad e intente nuevamente.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setErrors({});
     setSending(true);
 
@@ -81,6 +109,8 @@ const ContactForm = ({
         body: {
           ...result.data,
           serviceName,
+          website,
+          turnstileToken,
           attribution: {
             landingPath: attribution.landingPath,
             formPath: attribution.formPath,
@@ -106,6 +136,8 @@ const ContactForm = ({
       });
     } catch (err) {
       console.error("Error sending contact email:", err);
+      setTurnstileToken(null);
+      setTurnstileResetKey((value) => value + 1);
       toast({
         title: "Error al enviar",
         description: "Hubo un problema. Intente de nuevo o escríbanos por WhatsApp.",
@@ -149,6 +181,18 @@ const ContactForm = ({
   return (
     <form onSubmit={handleSubmit} className="space-y-5 p-8 rounded-xl bg-card border border-border/50">
       {serviceName && <input type="hidden" name="service" value={serviceName} />}
+      <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="contact-website">Website</label>
+        <input
+          id="contact-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+        />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
           <label className={labelClass}>Nombre completo *</label>
@@ -251,11 +295,24 @@ const ContactForm = ({
           />
         </div>
       )}
+      <div>
+        {turnstileSiteKey ? (
+          <TurnstileWidget
+            siteKey={turnstileSiteKey}
+            onToken={handleTurnstileToken}
+            resetKey={turnstileResetKey}
+          />
+        ) : (
+          <p className="text-sm text-destructive">
+            La verificación de seguridad no está configurada.
+          </p>
+        )}
+      </div>
       <div className="flex flex-col sm:flex-row gap-4 pt-2">
         <Button
           type="submit"
           size="lg"
-          disabled={sending}
+          disabled={sending || !turnstileSiteKey || !turnstileToken}
           className="bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold flex-1"
         >
           {sending ? <><Loader2 className="h-4 w-4 animate-spin mr-2" />Enviando...</> : submitLabel}
