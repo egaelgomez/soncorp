@@ -13,7 +13,7 @@ CREATE TABLE public.contact_submission_rate_limits (
 
 ALTER TABLE public.contact_submission_rate_limits ENABLE ROW LEVEL SECURITY;
 
-REVOKE ALL ON public.contact_submission_rate_limits FROM anon, authenticated;
+REVOKE ALL ON public.contact_submission_rate_limits FROM PUBLIC, anon, authenticated;
 GRANT SELECT, INSERT, UPDATE, DELETE ON public.contact_submission_rate_limits TO service_role;
 
 CREATE INDEX idx_contact_submission_rate_limits_updated_at
@@ -79,3 +79,7 @@ REVOKE ALL ON FUNCTION public.consume_contact_submission_rate_limit(TEXT, INTEGE
   FROM PUBLIC, anon, authenticated;
 GRANT EXECUTE ON FUNCTION public.consume_contact_submission_rate_limit(TEXT, INTEGER, INTEGER)
   TO service_role;
+
+-- Close the mutable-search-path warning carried forward from the P0B trigger helper.
+ALTER FUNCTION public.set_leads_updated_at()
+  SET search_path = public, pg_temp;
