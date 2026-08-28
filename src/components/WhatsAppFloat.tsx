@@ -1,4 +1,5 @@
 import { CONTACT_INFO } from "@/lib/constants";
+import { pushAnalyticsEvent } from "@/lib/analytics";
 
 const WHATSAPP_MESSAGE = encodeURIComponent(
   "Hola, me interesa conocer más sobre los servicios de Soncorp"
@@ -6,7 +7,11 @@ const WHATSAPP_MESSAGE = encodeURIComponent(
 
 const WhatsAppFloat = () => {
   const handleClick = () => {
-    (window as any).dataLayer?.push({ event: "whatsapp_click", label: "whatsapp_float_global" });
+    pushAnalyticsEvent({
+      event: "whatsapp_click",
+      placement: "floating_global",
+      page_path: window.location.pathname,
+    });
     window.open(`https://wa.me/${CONTACT_INFO.whatsappNumber}?text=${WHATSAPP_MESSAGE}`, "_blank");
   };
 
