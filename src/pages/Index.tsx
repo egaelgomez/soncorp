@@ -6,7 +6,6 @@ import SolutionsSection from "@/components/SolutionsSection";
 import WhySoncorp from "@/components/WhySoncorp";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import CursorGlow from "@/components/CursorGlow";
 import SEO from "@/components/SEO";
 
 const Index = () => {
@@ -28,7 +27,6 @@ const Index = () => {
         description="Consultoría empresarial en México: experiencia del cliente, consultoría de negocios, soluciones TI y marketing con automatización. Solicite una evaluación inicial sin compromiso."
         canonicalPath="/"
       />
-      <CursorGlow />
       <Navigation />
       <main>
         <Hero />

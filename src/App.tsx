@@ -13,6 +13,7 @@ import ConsultoriaTIPage from "./pages/ConsultoriaTIPage";
 import MarketingAutomatizacionPage from "./pages/MarketingAutomatizacionPage";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
+import CursorGlow from "./components/CursorGlow";
 import WhatsAppFloat from "./components/WhatsAppFloat";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+          <CursorGlow />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/servicios" element={<Servicios />} />
