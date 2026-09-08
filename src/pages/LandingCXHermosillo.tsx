@@ -141,7 +141,7 @@ const LandingCXHermosillo = () => {
           </Link>
           <button
             type="button"
-            onClick={() => openWhatsApp("lp_cx_header_whatsapp")}
+            onClick={() => openWhatsApp("lp_cx_header_whatsapp", "landing_header")}
             className="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:text-secondary/80 transition-colors"
           >
             <MessageSquare className="h-4 w-4" />
@@ -196,7 +196,7 @@ const LandingCXHermosillo = () => {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => openWhatsApp("lp_cx_hero_whatsapp")}
+                onClick={() => openWhatsApp("lp_cx_hero_whatsapp", "landing_hero")}
                 className="gap-2 border-secondary/50 text-secondary hover:bg-secondary/10"
               >
                 <MessageSquare className="h-4 w-4" />
