@@ -105,8 +105,14 @@ const LandingCXHermosillo = () => {
     document.getElementById("cta-final")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const openWhatsApp = (label: string) => {
+  const openWhatsApp = (label: string, placement: string) => {
     trackCta(label);
+    pushAnalyticsEvent({
+      event: "whatsapp_click",
+      placement,
+      service_name: SERVICE_NAME,
+      page_path: window.location.pathname,
+    });
     window.open(
       `https://wa.me/${CONTACT_INFO.whatsappNumber}?text=${encodeURIComponent(WHATSAPP_TEXT)}`,
       "_blank"
