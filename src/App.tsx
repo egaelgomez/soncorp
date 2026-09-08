@@ -11,6 +11,7 @@ import CustomerExperiencePage from "./pages/CustomerExperiencePage";
 import ConsultoriaDeNegociosPage from "./pages/ConsultoriaDeNegociosPage";
 import ConsultoriaTIPage from "./pages/ConsultoriaTIPage";
 import MarketingAutomatizacionPage from "./pages/MarketingAutomatizacionPage";
+import LandingCXHermosillo from "./pages/LandingCXHermosillo";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import CursorGlow from "./components/CursorGlow";
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/servicios/mesa-ingenieria-ti-por-tickets" element={<Navigate to="/servicios/consultoria-soluciones-ti" replace />} />
             <Route path="/servicios/marketing-automatizacion" element={<MarketingAutomatizacionPage />} />
             <Route path="/servicios/:slug" element={<ServicioDetalle />} />
+            <Route path="/consultoria-experiencia-cliente-hermosillo" element={<LandingCXHermosillo />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
         </Routes>
