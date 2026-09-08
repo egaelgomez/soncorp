@@ -7,12 +7,14 @@ interface MobileStickyCTAProps {
   targetId?: string;
   serviceName?: string;
   whatsappMessage?: string;
+  primaryLabel?: string;
 }
 
 const MobileStickyCTA = ({
   targetId = "cta-final",
   serviceName,
   whatsappMessage = CONTACT_INFO.whatsappMessage,
+  primaryLabel = "Solicitar asesoría",
 }: MobileStickyCTAProps) => {
   const [hidden, setHidden] = useState(false);
 
