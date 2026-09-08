@@ -402,7 +402,7 @@ const CustomerExperiencePage = () => {
                 }}
                 className="gap-2 bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold">
                 
-                Agendar asesoría inicial de entrenamiento
+                Solicitar asesoría inicial de entrenamiento
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>
@@ -488,7 +488,7 @@ const CustomerExperiencePage = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl mx-auto">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 text-center">
-              Agende su asesoría inicial
+              Solicite su asesoría inicial
             </h2>
             <p className="text-muted-foreground mb-10 text-center">
               Cuéntenos sobre su organización y sus retos. Sin compromiso.
@@ -498,7 +498,7 @@ const CustomerExperiencePage = () => {
               challengeLabel="¿Qué desea mejorar? *"
               challengeOptions={cxChallengeOptions}
               defaultChallenge={defaultChallenge}
-              submitLabel="Agendar asesoría inicial"
+              submitLabel="Solicitar asesoría inicial"
               serviceName="Customer Experience"
             />
 
