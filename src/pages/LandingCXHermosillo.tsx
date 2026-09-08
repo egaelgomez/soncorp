@@ -90,15 +90,12 @@ const faqSchema = {
 };
 
 const trackCta = (label: string) => {
-  try {
-    (window as any).dataLayer?.push({
-      event: "cta_click",
-      label,
-      page_path: window.location.pathname,
-    });
-  } catch {
-    /* analytics must never block */
-  }
+  pushAnalyticsEvent({
+    event: "cta_click",
+    label,
+    service_name: SERVICE_NAME,
+    page_path: window.location.pathname,
+  });
 };
 
 const LandingCXHermosillo = () => {

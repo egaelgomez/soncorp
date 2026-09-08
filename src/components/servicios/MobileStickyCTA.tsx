@@ -46,6 +46,12 @@ const MobileStickyCTA = ({
       ...(serviceName ? { service_name: serviceName } : {}),
       page_path: window.location.pathname,
     });
+    pushAnalyticsEvent({
+      event: "whatsapp_click",
+      placement: "mobile_sticky_cta",
+      ...(serviceName ? { service_name: serviceName } : {}),
+      page_path: window.location.pathname,
+    });
     window.open(
       `https://wa.me/${CONTACT_INFO.whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,
       "_blank"
