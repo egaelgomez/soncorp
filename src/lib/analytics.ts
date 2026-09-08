@@ -12,7 +12,25 @@ export type WhatsAppClickEvent = {
   page_path: string;
 };
 
-export type AnalyticsEvent = GenerateLeadEvent | WhatsAppClickEvent;
+export type FormStartEvent = {
+  event: "form_start";
+  form_type: "contact_form";
+  service_name?: string;
+  page_path: string;
+};
+
+export type StickyCtaClickEvent = {
+  event: "sticky_cta_click";
+  cta: "solicitar_asesoria" | "whatsapp";
+  service_name?: string;
+  page_path: string;
+};
+
+export type AnalyticsEvent =
+  | GenerateLeadEvent
+  | WhatsAppClickEvent
+  | FormStartEvent
+  | StickyCtaClickEvent;
 
 export type GtmBootstrapEvent = {
   "gtm.start": number;

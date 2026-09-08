@@ -39,6 +39,7 @@ import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
 import { CONTACT_INFO } from "@/lib/constants";
 import ContactForm from "@/components/shared/ContactForm";
+import MobileStickyCTA from "@/components/servicios/MobileStickyCTA";
 
 const faqItems = [
 { question: "¿La consultoría en Experiencia del Cliente sirve para cualquier tipo de empresa?", answer: "Sí. Adaptamos el alcance y profundidad al tamaño y madurez de cada organización. Desde negocios con 5 empleados hasta corporativos con cientos." },
@@ -125,7 +126,7 @@ const CustomerExperiencePage = () => {
 
 
   const solutions = [
-  { icon: Search, title: "Diagnóstico de journey", desc: "Mapeo de puntos de contacto e identificación de oportunidades de mejora." },
+  { icon: Search, title: "Diagnóstico del recorrido del cliente", desc: "Mapeo del recorrido del cliente (Customer Journey): puntos de contacto e identificación de oportunidades de mejora." },
   { icon: BarChart3, title: "Medición", desc: "Implementación de indicadores como CSAT, NPS y CES para tomar decisiones basadas en datos." },
   { icon: Settings, title: "Procesos y estándares", desc: "Diseño de protocolos de servicio consistentes y escalables." },
   { icon: GraduationCap, title: "Cultura y capacitación", desc: "Desarrollo de habilidades y mentalidad orientada al cliente en su equipo." },
@@ -181,10 +182,11 @@ const CustomerExperiencePage = () => {
               </h1>
             </div>
 
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-4 max-w-3xl">Fortalezca la retención, satisfacción y recomendación de sus clientes externos e internos, impulsa la eficiencia operativa de su organización. Un enfoque integral que conecta cada punto de contacto con resultados empresariales concretos.
-
-
-
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-4 max-w-3xl">
+              Fortalezca la retención, satisfacción y recomendación de sus clientes externos e internos, e impulse la eficiencia operativa de su organización. Un enfoque integral que conecta cada punto de contacto con resultados empresariales concretos.
+            </p>
+            <p className="text-sm text-muted-foreground mb-4 max-w-3xl">
+              Consultoría para empresas en todo México, con atención presencial en Hermosillo, Sonora.
             </p>
             <p className="text-sm md:text-base text-muted-foreground/80 italic mb-8 max-w-3xl">
               La atención al cliente es parte de la Experiencia del Cliente; nuestro enfoque es integral y abarca tanto al cliente interno como al externo.
@@ -205,7 +207,7 @@ const CustomerExperiencePage = () => {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" onClick={scrollToCTA} className="gap-2 bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold">
-                Agendar asesoría inicial
+                Solicitar asesoría inicial
                 <ChevronRight className="h-4 w-4" />
               </Button>
               <Button variant="outline" size="lg" onClick={handleWhatsAppClick} className="gap-2 border-secondary/50 text-secondary hover:bg-secondary/10">
@@ -401,7 +403,7 @@ const CustomerExperiencePage = () => {
                 }}
                 className="gap-2 bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold">
                 
-                Agendar asesoría inicial de entrenamiento
+                Solicitar asesoría inicial de entrenamiento
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>
@@ -474,7 +476,7 @@ const CustomerExperiencePage = () => {
             <p className="text-sm uppercase tracking-wider text-muted-foreground mb-6">¿Sabía que…?</p>
             <div className="text-7xl md:text-8xl lg:text-9xl font-bold text-secondary mb-6 silver-text-glow">80%</div>
             <p className="text-xl md:text-2xl text-foreground leading-relaxed mb-6 max-w-2xl mx-auto">
-              de los clientes afirma que la experiencia de atención es tan importante como la calidad del producto o servicio.
+              de los clientes considera que la experiencia que ofrece una empresa es tan importante como sus productos o servicios.
             </p>
             <p className="text-sm text-muted-foreground">Fuente: Salesforce (State of the Connected Consumer)</p>
           </div>
@@ -487,7 +489,7 @@ const CustomerExperiencePage = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl mx-auto">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 text-center">
-              Agende su asesoría inicial
+              Solicite su asesoría inicial
             </h2>
             <p className="text-muted-foreground mb-10 text-center">
               Cuéntenos sobre su organización y sus retos. Sin compromiso.
@@ -497,7 +499,7 @@ const CustomerExperiencePage = () => {
               challengeLabel="¿Qué desea mejorar? *"
               challengeOptions={cxChallengeOptions}
               defaultChallenge={defaultChallenge}
-              submitLabel="Agendar asesoría inicial"
+              submitLabel="Solicitar asesoría inicial"
               serviceName="Customer Experience"
             />
 
@@ -510,7 +512,8 @@ const CustomerExperiencePage = () => {
       </section>
 
       <Footer />
-      
+
+      <MobileStickyCTA serviceName="Customer Experience" />
     </>);
 
 };

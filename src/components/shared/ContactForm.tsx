@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
@@ -58,7 +58,24 @@ const ContactForm = ({
   const [website, setWebsite] = useState("");
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [turnstileResetKey, setTurnstileResetKey] = useState(0);
+  const formStarted = useRef(false);
   const turnstileSiteKey = (import.meta.env.VITE_TURNSTILE_SITE_KEY ?? "").trim();
+
+  const handleFirstInteraction = (e: React.SyntheticEvent) => {
+    if (formStarted.current) return;
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+    if (target.closest("[data-analytics-ignore]")) return;
+    const tag = target.tagName;
+    if (tag !== "INPUT" && tag !== "SELECT" && tag !== "TEXTAREA") return;
+    formStarted.current = true;
+    pushAnalyticsEvent({
+      event: "form_start",
+      form_type: "contact_form",
+      ...(serviceName ? { service_name: serviceName } : {}),
+      page_path: window.location.pathname,
+    });
+  };
 
   const handleTurnstileToken = useCallback((token: string | null) => {
     setTurnstileToken(token);
@@ -193,9 +210,15 @@ const ContactForm = ({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5 p-8 rounded-xl bg-card border border-border/50">
+    <form
+      onSubmit={handleSubmit}
+      onFocusCapture={handleFirstInteraction}
+      onInputCapture={handleFirstInteraction}
+      onChangeCapture={handleFirstInteraction}
+      className="space-y-5 p-8 rounded-xl bg-card border border-border/50"
+    >
       {serviceName && <input type="hidden" name="service" value={serviceName} />}
-      <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+      <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true" data-analytics-ignore>
         <label htmlFor="contact-website">Website</label>
         <input
           id="contact-website"
@@ -309,7 +332,7 @@ const ContactForm = ({
           />
         </div>
       )}
-      <div>
+      <div data-analytics-ignore>
         {turnstileSiteKey ? (
           <TurnstileWidget
             siteKey={turnstileSiteKey}
