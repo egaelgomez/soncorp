@@ -24,6 +24,7 @@ import {
 import ContactForm from "@/components/shared/ContactForm";
 import MobileStickyCTA from "@/components/servicios/MobileStickyCTA";
 import { CONTACT_INFO } from "@/lib/constants";
+import { pushAnalyticsEvent } from "@/lib/analytics";
 import logo from "@/assets/soncorp-logo.png";
 
 const SERVICE_NAME = "Customer Experience - Hermosillo Ads";
