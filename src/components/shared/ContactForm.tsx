@@ -332,7 +332,7 @@ const ContactForm = ({
           />
         </div>
       )}
-      <div>
+      <div data-analytics-ignore>
         {turnstileSiteKey ? (
           <TurnstileWidget
             siteKey={turnstileSiteKey}

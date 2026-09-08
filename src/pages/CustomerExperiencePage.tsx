@@ -125,7 +125,7 @@ const CustomerExperiencePage = () => {
 
 
   const solutions = [
-  { icon: Search, title: "Diagnóstico de journey", desc: "Mapeo de puntos de contacto e identificación de oportunidades de mejora." },
+  { icon: Search, title: "Diagnóstico del recorrido del cliente", desc: "Mapeo del recorrido del cliente (Customer Journey): puntos de contacto e identificación de oportunidades de mejora." },
   { icon: BarChart3, title: "Medición", desc: "Implementación de indicadores como CSAT, NPS y CES para tomar decisiones basadas en datos." },
   { icon: Settings, title: "Procesos y estándares", desc: "Diseño de protocolos de servicio consistentes y escalables." },
   { icon: GraduationCap, title: "Cultura y capacitación", desc: "Desarrollo de habilidades y mentalidad orientada al cliente en su equipo." },
@@ -181,10 +181,11 @@ const CustomerExperiencePage = () => {
               </h1>
             </div>
 
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-4 max-w-3xl">Fortalezca la retención, satisfacción y recomendación de sus clientes externos e internos, impulsa la eficiencia operativa de su organización. Un enfoque integral que conecta cada punto de contacto con resultados empresariales concretos.
-
-
-
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-4 max-w-3xl">
+              Fortalezca la retención, satisfacción y recomendación de sus clientes externos e internos, e impulse la eficiencia operativa de su organización. Un enfoque integral que conecta cada punto de contacto con resultados empresariales concretos.
+            </p>
+            <p className="text-sm text-muted-foreground mb-4 max-w-3xl">
+              Consultoría para empresas en todo México, con atención presencial en Hermosillo, Sonora.
             </p>
             <p className="text-sm md:text-base text-muted-foreground/80 italic mb-8 max-w-3xl">
               La atención al cliente es parte de la Experiencia del Cliente; nuestro enfoque es integral y abarca tanto al cliente interno como al externo.
