@@ -68,7 +68,7 @@ const MobileStickyCTA = ({
             onClick={handleForm}
             className="flex-1 inline-flex items-center justify-center gap-1 rounded-lg bg-secondary text-secondary-foreground font-semibold text-sm py-3 hover:bg-accent-hover transition-colors"
           >
-            Solicitar asesoría
+            {primaryLabel}
             <ChevronRight className="h-4 w-4" />
           </button>
           <button
