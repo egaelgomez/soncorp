@@ -58,7 +58,24 @@ const ContactForm = ({
   const [website, setWebsite] = useState("");
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [turnstileResetKey, setTurnstileResetKey] = useState(0);
+  const formStarted = useRef(false);
   const turnstileSiteKey = (import.meta.env.VITE_TURNSTILE_SITE_KEY ?? "").trim();
+
+  const handleFirstInteraction = (e: React.SyntheticEvent) => {
+    if (formStarted.current) return;
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+    if (target.closest("[data-analytics-ignore]")) return;
+    const tag = target.tagName;
+    if (tag !== "INPUT" && tag !== "SELECT" && tag !== "TEXTAREA") return;
+    formStarted.current = true;
+    pushAnalyticsEvent({
+      event: "form_start",
+      form_type: "contact_form",
+      ...(serviceName ? { service_name: serviceName } : {}),
+      page_path: window.location.pathname,
+    });
+  };
 
   const handleTurnstileToken = useCallback((token: string | null) => {
     setTurnstileToken(token);
