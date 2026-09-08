@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
@@ -210,9 +210,15 @@ const ContactForm = ({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5 p-8 rounded-xl bg-card border border-border/50">
+    <form
+      onSubmit={handleSubmit}
+      onFocusCapture={handleFirstInteraction}
+      onInputCapture={handleFirstInteraction}
+      onChangeCapture={handleFirstInteraction}
+      className="space-y-5 p-8 rounded-xl bg-card border border-border/50"
+    >
       {serviceName && <input type="hidden" name="service" value={serviceName} />}
-      <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+      <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true" data-analytics-ignore>
         <label htmlFor="contact-website">Website</label>
         <input
           id="contact-website"
