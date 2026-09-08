@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
@@ -60,6 +60,13 @@ const ContactForm = ({
   const [turnstileResetKey, setTurnstileResetKey] = useState(0);
   const formStarted = useRef(false);
   const turnstileSiteKey = (import.meta.env.VITE_TURNSTILE_SITE_KEY ?? "").trim();
+
+  // Parent may change the preselected challenge after mount (e.g. a section CTA).
+  useEffect(() => {
+    if (!defaultChallenge) return;
+    setFormData((prev) => ({ ...prev, reto: defaultChallenge }));
+    setErrors((prev) => (prev.reto ? { ...prev, reto: "" } : prev));
+  }, [defaultChallenge]);
 
   const handleFirstInteraction = (e: React.SyntheticEvent) => {
     if (formStarted.current) return;
