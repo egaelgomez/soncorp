@@ -39,6 +39,7 @@ import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
 import { CONTACT_INFO } from "@/lib/constants";
 import ContactForm from "@/components/shared/ContactForm";
+import MobileStickyCTA from "@/components/servicios/MobileStickyCTA";
 
 const faqItems = [
 { question: "¿La consultoría en Experiencia del Cliente sirve para cualquier tipo de empresa?", answer: "Sí. Adaptamos el alcance y profundidad al tamaño y madurez de cada organización. Desde negocios con 5 empleados hasta corporativos con cientos." },
@@ -206,7 +207,7 @@ const CustomerExperiencePage = () => {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" onClick={scrollToCTA} className="gap-2 bg-secondary text-secondary-foreground hover:bg-accent-hover font-semibold">
-                Agendar asesoría inicial
+                Solicitar asesoría inicial
                 <ChevronRight className="h-4 w-4" />
               </Button>
               <Button variant="outline" size="lg" onClick={handleWhatsAppClick} className="gap-2 border-secondary/50 text-secondary hover:bg-secondary/10">
@@ -475,7 +476,7 @@ const CustomerExperiencePage = () => {
             <p className="text-sm uppercase tracking-wider text-muted-foreground mb-6">¿Sabía que…?</p>
             <div className="text-7xl md:text-8xl lg:text-9xl font-bold text-secondary mb-6 silver-text-glow">80%</div>
             <p className="text-xl md:text-2xl text-foreground leading-relaxed mb-6 max-w-2xl mx-auto">
-              de los clientes afirma que la experiencia de atención es tan importante como la calidad del producto o servicio.
+              de los clientes considera que la experiencia que ofrece una empresa es tan importante como sus productos o servicios.
             </p>
             <p className="text-sm text-muted-foreground">Fuente: Salesforce (State of the Connected Consumer)</p>
           </div>
@@ -511,7 +512,8 @@ const CustomerExperiencePage = () => {
       </section>
 
       <Footer />
-      
+
+      <MobileStickyCTA serviceName="Customer Experience" />
     </>);
 
 };
