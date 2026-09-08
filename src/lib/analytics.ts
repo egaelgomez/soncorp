@@ -26,7 +26,15 @@ export type StickyCtaClickEvent = {
   page_path: string;
 };
 
+export type CtaClickEvent = {
+  event: "cta_click";
+  label: string;
+  service_name?: string;
+  page_path: string;
+};
+
 export type AnalyticsEvent =
+  | CtaClickEvent
   | GenerateLeadEvent
   | WhatsAppClickEvent
   | FormStartEvent

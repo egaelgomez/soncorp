@@ -24,6 +24,7 @@ import {
 import ContactForm from "@/components/shared/ContactForm";
 import MobileStickyCTA from "@/components/servicios/MobileStickyCTA";
 import { CONTACT_INFO } from "@/lib/constants";
+import { pushAnalyticsEvent } from "@/lib/analytics";
 import logo from "@/assets/soncorp-logo.png";
 
 const SERVICE_NAME = "Customer Experience - Hermosillo Ads";
@@ -90,15 +91,12 @@ const faqSchema = {
 };
 
 const trackCta = (label: string) => {
-  try {
-    (window as any).dataLayer?.push({
-      event: "cta_click",
-      label,
-      page_path: window.location.pathname,
-    });
-  } catch {
-    /* analytics must never block */
-  }
+  pushAnalyticsEvent({
+    event: "cta_click",
+    label,
+    service_name: SERVICE_NAME,
+    page_path: window.location.pathname,
+  });
 };
 
 const LandingCXHermosillo = () => {
@@ -107,8 +105,14 @@ const LandingCXHermosillo = () => {
     document.getElementById("cta-final")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const openWhatsApp = (label: string) => {
+  const openWhatsApp = (label: string, placement: string) => {
     trackCta(label);
+    pushAnalyticsEvent({
+      event: "whatsapp_click",
+      placement,
+      service_name: SERVICE_NAME,
+      page_path: window.location.pathname,
+    });
     window.open(
       `https://wa.me/${CONTACT_INFO.whatsappNumber}?text=${encodeURIComponent(WHATSAPP_TEXT)}`,
       "_blank"
@@ -137,7 +141,7 @@ const LandingCXHermosillo = () => {
           </Link>
           <button
             type="button"
-            onClick={() => openWhatsApp("lp_cx_header_whatsapp")}
+            onClick={() => openWhatsApp("lp_cx_header_whatsapp", "landing_header")}
             className="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:text-secondary/80 transition-colors"
           >
             <MessageSquare className="h-4 w-4" />
@@ -192,7 +196,7 @@ const LandingCXHermosillo = () => {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => openWhatsApp("lp_cx_hero_whatsapp")}
+                onClick={() => openWhatsApp("lp_cx_hero_whatsapp", "landing_hero")}
                 className="gap-2 border-secondary/50 text-secondary hover:bg-secondary/10"
               >
                 <MessageSquare className="h-4 w-4" />
